@@ -60,8 +60,8 @@
             MX6QDL_PAD_DISP0_DAT22__GPIO5_IO16   0x80000000  // {{external-gpio-45}}
             MX6QDL_PAD_DISP0_DAT23__GPIO5_IO17   0x80000000  // {{external-gpio-46}}
             MX6QDL_PAD_EIM_D25__GPIO3_IO25       0x80000000  // {{external-gpio-47}}
-            MX6QDL_PAD_KEY_ROW1__GPIO4_IO09      0x80000000  // {{external-gpio-48}}
-            MX6QDL_PAD_KEY_COL1__GPIO4_IO08      0x80000000  // {{external-gpio-49}}
+            //MX6QDL_PAD_KEY_ROW1__GPIO4_IO09      0x80000000  // {{external-gpio-48}}
+            //MX6QDL_PAD_KEY_COL1__GPIO4_IO08      0x80000000  // {{external-gpio-49}}
             MX6QDL_PAD_EIM_OE__GPIO2_IO25        0x80000000  // {{external-gpio-50}}
             MX6QDL_PAD_EIM_CS1__GPIO2_IO24       0x80000000  // {{external-gpio-51}}
             MX6QDL_PAD_EIM_CS0__GPIO2_IO23       0x80000000  // {{external-gpio-52}}

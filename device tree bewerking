@@ -1,0 +1,3 @@
+aanpassingen aan device tree imx6q-udoo-hdmi.dts in linux_kernel(udoo kernel)
+
+Deze aanpassingen activeren i2c1 en uart5, maar er kan geen output gegenereerd worden op de pins
