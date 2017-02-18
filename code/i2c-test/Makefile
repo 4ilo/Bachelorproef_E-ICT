@@ -8,7 +8,7 @@ $(TARGET): $(SOURCE)
 
 
 install: $(TARGET)
-	scp $(TARGET) olivier@192.168.2.3:/home/olivier
+	scp $(TARGET) olivier@192.168.0.108:/home/olivier
 
 clean:
 	-rm $(TARGET)

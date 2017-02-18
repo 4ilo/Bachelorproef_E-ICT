@@ -13,7 +13,7 @@ int main(void)
 {
 
 	int file;
-	char * filename = "/dev/i2c-1";
+	char * filename = "/dev/i2c-0";
 
 
 	if ((file == open(filename, O_RDWR)) < 0)
@@ -24,11 +24,11 @@ int main(void)
 
 	int addr = 0b00101001;
 
-	if(ioctl(file, I2C_SLAVE, addr) < 0)
-	{
-		printf("Geen verbingeng met slave mogelijk\n");
-		exit(2);
-	}
+	//if(ioctl(file, I2C_SLAVE, addr) < 0)
+	//{
+	//	printf("Geen verbingeng met slave mogelijk\n");
+	//	exit(2);
+	//}
 	
 	int buf = 0b10101010;
 
