@@ -16,11 +16,13 @@ int main(void)
 	char * filename = "/dev/i2c-0";
 
 
-	if ((file == open(filename, O_RDWR)) < 0)
+	if ((file == open("/dev/i2c-0", O_RDWR)) < 0)
 	{
 		printf("fout bij openen i2c interface\n");
 		exit(1);
 	}
+
+	printf("i2c device: %d\n",file);
 
 	int addr = 0b00101001;
 

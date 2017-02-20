@@ -95,6 +95,13 @@
 			>;
 		};
 
+		pinctrl_uart5: uart5grp {
+		    fsl,pins = <
+		    MX6QDL_PAD_CSI0_DAT14__UART5_TX_DATA      0x1b0b1
+		    MX6QDL_PAD_CSI0_DAT15__UART5_RX_DATA      0x1b0b1
+		    >;
+		};
+
 		pinctrl_usdhc3: usdhc3grp {
 			fsl,pins = <
 				MX6QDL_PAD_SD3_CMD__SD3_CMD		0x17059
@@ -115,6 +122,12 @@
 &uart2 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart2>;
+	status = "okay";
+};
+
+&uart5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart5>;
 	status = "okay";
 };
 
