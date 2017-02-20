@@ -1,0 +1,56 @@
+baudrate=115200                                                                 
+board_rev=MX6Q                                                                  
+boot_fdt=try                                                                    
+bootcmd=mmc dev ${mmcdev}; if mmc rescan; then if run loadbootscript; then run b
+ootscript; fi; udooinit; if run loadimage; then run mmcboot; else run netboot; f
+i; else run netboot; fi                                                         
+bootdelay=3  
+
+bootscript=echo Running bootscript from mmc ...; env import -t ${loadaddr}
+${filesize};                                                                         
+
+console=ttymxc1                                                                 
+ethact=FEC                                                                      
+ethaddr=00:c0:08:88:1b:c4                                                       
+ethprime=FEC                                                                    
+fdt_addr=0x18000000                                                             
+fdt_file=dts/test.dtb                                                           
+fdt_high=0xffffffff                                                             
+image=zImage                                                                    
+initrd_high=0xffffffff                                                          
+ip_dyn=yes                                                                      
+loadaddr=0x12000000
+
+loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};
+
+loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}                
+loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
+
+mmcargs=setenv bootargs console=${console},${baudrate} ${video} ${memory} root=$
+{mmcroot} 
+
+mmcboot=echo Booting from mmc ...; run mmcargs; if test ${boot_fdt} = yes || tes
+t ${boot_fdt} = try; then if run loadfdt; then bootz ${loadaddr} - ${fdt_addr}; 
+else if test ${boot_fdt} = try; then bootz; else echo WARN: Cannot load the DT; 
+fi; fi; else bootz; fi;  
+
+
+mmcdev=0                                                                        
+mmcpart=1                                                                       
+mmcroot=/dev/mmcblk0p2 rootwait rw
+
+                                              
+netargs=setenv bootargs console=${console},${baudrate} root=/dev/nfs ip=dhcp nfs
+root=${serverip}:${nfsroot},v3,tcp                                              
+netboot=echo Booting from net ...; run netargs; if test ${ip_dyn} = yes; then se
+tenv get_cmd dhcp; else setenv get_cmd tftp; fi; ${get_cmd} ${image}; if test ${
+boot_fdt} = yes || test ${boot_fdt} = try; then if ${get_cmd} ${fdt_addr} ${fdt_
+file}; then bootz ${loadaddr} - ${fdt_addr}; else if test ${boot_fdt} = try; the
+n bootz; else echo WARN: Cannot load the DT; fi; fi; else bootz; fi;            
+script=uEnv.txt                                                                 
+splashpos=m,m                                                                   
+update_sd_firmware=if test ${ip_dyn} = yes; then setenv get_cmd dhcp; else seten
+v get_cmd tftp; fi; if mmc dev ${mmcdev}; then if ${get_cmd} ${update_sd_firmwar
+e_filename}; then setexpr fw_sz ${filesize} / 0x200; setexpr fw_sz ${fw_sz} + 1;
+ mmc write ${loadaddr} 0x2 ${fw_sz}; fi; fi                                     
+update_sd_firmware_filename=u-boot.imx             
