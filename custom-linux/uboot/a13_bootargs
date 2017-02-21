@@ -1,0 +1,54 @@
+autoboot=run loadkernel && run setargs && true && bootm 0x48000000              
+baudrate=115200                                                                 
+boot_ram=saved_stdout=$stdout;setenv stdout nc;if iminfo 0x41000000; then true; 
+setenv stdout $saved_stdout; source 0x41000000;else setenv stdout $saved_stdout;
+fi                                                                              
+bootargs=console=ttyS0,115200 hdmi.audio=EDID:0 disp.screen0_output_mode=EDID:12
+80x1024p60 root=/dev/mmcblk0p2 rootwait panic=10
+
+bootcmd=if run loadbootenv; then echo Loaded environment from ${bootenv};env imp
+ort -t ${scriptaddr} ${filesize};fi;if test -n "${uenvcmd}"; then echo Running u
+envcmd ...;run uenvcmd;fi;if run loadbootscr; then echo Jumping to ${bootscr};so
+urce ${scriptaddr};fi;run autoboot;  
+
+
+bootdelay=3
+
+bootenv=uEnv.txt
+
+bootscr=boot.scr
+                                                                
+console=ttyS0,115200                                                            
+device=mmc                                                                      
+ethact=emac                                                                     
+ethaddr=02:07:0b:02:a7:38                                                       
+kernel=uImage                                                                   
+
+loadbootenv=fatload $device $partition $scriptaddr ${bootenv} || ext2load $devic
+e $partition $scriptaddr boot/${bootenv} || ext2load $device $partition $scripta
+ddr ${bootenv}
+
+loadbootscr=fatload $device $partition $scriptaddr ${bootscr} || ext2load $devic
+e $partition $scriptaddr boot/${bootscr} ||ext2load $device $partition $scriptad
+dr ${bootscr}
+
+loadkernel=if bootpath=/boot/ && ext2load $device $partition 0x43000000 ${bootpa
+th}script.bin && ext2load $device $partition 0x48000000 ${bootpath}${kernel};the
+n true; elif bootpath=/ && fatload $device $partition 0x43000000 script.bin && f
+atload $device $partition 0x48000000 ${kernel};then true; elif bootpath=/ && ext
+2load $device $partition 0x43000000 ${bootpath}script.bin && ext2load $device $p
+artition 0x48000000 ${bootpath}${kernel};then true; else false;fi               
+loglevel=8                                                                      
+panicarg=panic=10                                                               
+partition=0:1
+
+scriptaddr=0x44000000
+
+serial#=162542070b02a738                                                        
+setargs=if test -z \\"$root\\"; then if test \\"$bootpath\\" = "/boot/"; then ro
+ot="/dev/mmcblk0p1 rootwait"; else root="/dev/mmcblk0p2 rootwait"; fi; fi; seten
+v bootargs console=${console} root=${root} loglevel=${loglevel} ${panicarg} ${ex
+traargs}                                                                        
+stderr=serial                                                                   
+stdin=serial                                                                    
+stdout=serial               

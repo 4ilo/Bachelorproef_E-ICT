@@ -1,3 +1,4 @@
+echo test
 fatload mmc 0 0x12000000 zImage
 fatload mmc 0 0x18000000 dts/test.dtb
 setenv bootargs "console=ttymxc1,115200 root=/dev/mmcblk0p2 rootwait panic=10"
