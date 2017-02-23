@@ -6,6 +6,7 @@
 #define SIM_KNX_COMMANDO_H
 
 #include <string>
+#include <iostream>
 #include "Response.h"
 
 using namespace std;
@@ -31,6 +32,7 @@ public:
     Commando(const char * command, bool hasParam = 0, bool hasData = 0);
     void setParameter(int param);
     void setData(int data);
+    void setData(string data);
     bool send(void);
     Response get(void);
     Response response(void);

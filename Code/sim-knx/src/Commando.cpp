@@ -2,8 +2,7 @@
 // Created by olivier on 23/02/17.
 //
 
-#include <iostream>
-#include "Commando.h"
+#include "../inc/Commando.h"
 
 Commando::Commando(const char *command, bool hasParam, bool hasData)
 {
@@ -46,6 +45,11 @@ void Commando::setParameter(int param)
 void Commando::setData(int data)
 {
     m_data = to_string(data);
+}
+
+void Commando::setData(string data)
+{
+    m_data = data;
 }
 
 bool Commando::send(void)

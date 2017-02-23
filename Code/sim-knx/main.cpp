@@ -1,18 +1,13 @@
 #include <iostream>
-#include "Commando.h"
-
-#define GET_PHY_ADDR "dag"
-#define SET_PHY_ADDR "das", 0, 1
-#define SET_OBJECT_DATA "ods", 1, 1
+#include "inc/Object.h"
 
 int main()
 {
-    Commando command(SET_OBJECT_DATA);
-    Commando command2(GET_PHY_ADDR);
+    Object object1(1);
 
-    command.setParameter(0);
-    command.setData(0b00000001);
-    command.send();
+    object1.setData(50);
+    object1.setSendingAddr("1/2/3");
+    object1.send();
+    cout << object1.getData();
 
-    cout << command2.get().data() << endl;
 }
