@@ -11,6 +11,9 @@
 
 using namespace std;
 
+/**
+ * Classe voor de communicatie met communicatie objecten in de sim-knx module
+ */
 class Object {
 
 private:

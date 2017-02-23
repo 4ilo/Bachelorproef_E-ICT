@@ -4,6 +4,12 @@
 
 #include "../inc/Commando.h"
 
+/**
+ * Commando constructor dient ingevuld te worden met 1 van de defines in commands.h
+ * @param const char * command
+ * @param bool hasParam
+ * @param bool hasData
+ */
 Commando::Commando(const char *command, bool hasParam, bool hasData)
 {
     m_command = command;
@@ -11,7 +17,10 @@ Commando::Commando(const char *command, bool hasParam, bool hasData)
     m_hasData = hasData;
 }
 
-
+/**
+ * Check if parameters are required and if filled
+ * @return bool
+ */
 bool Commando::isParamSet(void)
 {
     if (m_hasParam == 0)
@@ -25,6 +34,10 @@ bool Commando::isParamSet(void)
 
 }
 
+/**
+ * Check if data is required and filled
+ * @return bool
+ */
 bool Commando::isDataSet(void)
 {
     if (m_hasData == 0)
@@ -37,22 +50,37 @@ bool Commando::isDataSet(void)
     exit(1);
 }
 
+/**
+ * Set the parameter property
+ * @param int param
+ */
 void Commando::setParameter(int param)
 {
     m_parameter = to_string(param);
 }
 
+/**
+ * Set the data property with a integer
+ * @param int data
+ */
 void Commando::setData(int data)
 {
     m_data = to_string(data);
 }
 
+/**
+ * Set the data property with a string (knx group addr => 1/2/3)
+ * @param string data
+ */
 void Commando::setData(string data)
 {
     m_data = data;
 }
 
-bool Commando::send(void)
+/**
+ * Send the command
+ */
+void Commando::send(void)
 {
     string output;
 
@@ -71,6 +99,10 @@ bool Commando::send(void)
     cout << output << endl;
 }
 
+/**
+ * Send the command and wait for the response
+ * @return Response
+ */
 Response Commando::get(void)
 {
     send();
@@ -80,12 +112,4 @@ Response Commando::get(void)
     m_response.parse(data);
 
     return m_response;
-}
-
-Response Commando::response(void)
-{
-    if(!m_response.isEmpty())
-        return m_response;
-
-    cerr << m_command << ": Nog geen response ontvangen";
 }

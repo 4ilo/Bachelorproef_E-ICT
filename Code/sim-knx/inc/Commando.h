@@ -11,6 +11,9 @@
 
 using namespace std;
 
+/**
+ * Klasse die verantwoordelijk is voor het opbouwen van een commando
+ */
 class Commando {
 
 private:
@@ -33,9 +36,8 @@ public:
     void setParameter(int param);
     void setData(int data);
     void setData(string data);
-    bool send(void);
+    void send(void);
     Response get(void);
-    Response response(void);
 };
 
 

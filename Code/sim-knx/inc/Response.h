@@ -11,6 +11,9 @@
 
 using namespace std;
 
+/**
+ * Classe voor het verwerken van responses van de sim-knx
+ */
 class Response {
 
 private:
