@@ -1,0 +1,32 @@
+//
+// Created by olivier on 23/02/17.
+//
+
+#ifndef SIM_KNX_RESPONSE_H
+#define SIM_KNX_RESPONSE_H
+
+#include <iostream>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+class Response {
+
+private:
+    string m_rawData;
+    int toInt(string data);
+
+public:
+    Response(string data = "");
+
+    void parse(string);
+    string raw(void);
+    int data(void);
+
+    bool isEmpty(void);
+
+};
+
+
+#endif //SIM_KNX_RESPONSE_H
