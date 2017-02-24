@@ -44,7 +44,6 @@
 
 
 // Commands in transparant mode
-#define DEVICE_TRANSPRNT_SET "dts", 0, 1
 #define TRANSPARANT_DATA_SEND "tds", 1, 1
 #define TRANSPARANT_RESPONSE_SEND "tes", 1, 1
 #define TRANSPARANT_READ_REQUEST "trs", 1

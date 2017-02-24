@@ -77,3 +77,12 @@ int Response::data()
         return toInt(substr);
     }
 }
+
+/**
+ * Get the response status true of false
+ * @return bool
+ */
+bool Response::mode(void)
+{
+    return (bool)data();
+}
