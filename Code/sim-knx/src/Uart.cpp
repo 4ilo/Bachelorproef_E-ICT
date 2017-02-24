@@ -97,3 +97,10 @@ string Uart::readData(void)
 
     return data;
 }
+
+Uart::~Uart()
+{
+#ifndef DEBUG
+    close(m_file);
+#endif
+}

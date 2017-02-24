@@ -1,6 +1,8 @@
 #include <iostream>
 #include "inc/Object.h"
 
+//#define DEBUG
+
 int main()
 {
     Object object1(1);
