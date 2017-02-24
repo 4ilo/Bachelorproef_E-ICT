@@ -35,6 +35,9 @@ public:
     void addReveiveAddr(string addr);
     void deleteAddr(string addr);
 
+    void setRaw(int objectType);
+    void setInteroperability(int dpt);
+
     void setConfiguration(void);
     void setDpt(int dpt);
     void setObjectType(int type);

@@ -93,7 +93,7 @@ void Object::setDpt(int dpt)
 {
     if((dpt > 0 && dpt < 20) || dpt == 200 || dpt == 201)
     {
-        m_dpt = dpt;
+        m_dpt = to_string(dpt);
         return;
     }
 
@@ -108,7 +108,7 @@ void Object::setObjectType(int type)
 {
     if((type > 0 && type < 14))
     {
-        m_objectType = type;
+        m_objectType = to_string(type);
         return;
     }
 
@@ -123,7 +123,7 @@ void Object::setComFlags(int flags)
 {
     if((flags&0b00100000) != 0)
     {
-        m_comFlags = flags;
+        m_comFlags = to_string(flags);
         return;
     }
 
@@ -138,7 +138,7 @@ void Object::setSendConfig(int sendConfig)
 {
     if((sendConfig & 0b00111000) != 0)
     {
-        m_sendConfig = sendConfig;
+        m_sendConfig = to_string(sendConfig);
         return;
     }
 
@@ -151,7 +151,7 @@ void Object::setSendConfig(int sendConfig)
  */
 void Object::setRecvConfig(int recvConfig)
 {
-    m_recvConfig = recvConfig;
+    m_recvConfig = to_string(recvConfig);
 }
 
 /**
@@ -161,7 +161,7 @@ void Object::setRecvConfig(int recvConfig)
  */
 void Object::setTime(int time)
 {
-    m_time = time;
+    m_time = to_string(time);
 }
 
 void Object::setConfiguration(void)
@@ -178,4 +178,24 @@ void Object::setConfiguration(void)
             .setData(m_time);
 
     commando.send();
+}
+
+/**
+ * Configure the object in raw mode
+ * @param int objectType        Type from defines
+ */
+void Object::setRaw(int objectType)
+{
+    m_dpt = "0";
+    m_objectType = to_string(objectType);
+}
+
+/**
+ * Configure the object in Interoperability mode
+ * @param int dpt       Type from defines
+ */
+void Object::setInteroperability(int dpt)
+{
+    m_dpt = dpt;
+    m_objectType = "0";
 }

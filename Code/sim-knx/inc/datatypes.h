@@ -4,6 +4,9 @@
 // van SIM-KNX op pagina 44-45
 //
 
+//
+//  Knx DPT standaard datatypes
+//
 #define DPT1_BOOLEAN 1
 #define DPT2_1_BIT_CONTROLLED 2
 #define DPT3_3_BIT_CONTROLLED 3
@@ -23,3 +26,23 @@
 #define DPT16_STRING 16
 #define DPT18_SCENE_CONTROL 18
 #define DPT19_DATE_TIME19
+
+
+//
+//  ObjectTypes voor raw mode
+//
+#define OBJ_1_BIT 0
+#define OBJ_2_BIT 1
+#define OBJ_3_BIT 2
+#define OBJ_4_BIT 3
+#define OBJ_5_BIT 4
+#define OBJ_6_BIT 5
+#define OBJ_7_BIT 6
+#define OBJ_1_BYTE 7
+#define OBJ_2_BYTE 8
+#define OBJ_3_BYTE 9
+#define OBJ_4_BYTE 10
+#define OBJ_6_BYTE 11
+#define OBJ_8_BYTE 12
+#define OBJ_10_BYTE 13
+#define OBJ_14_BYTE 14
