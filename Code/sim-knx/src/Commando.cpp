@@ -15,6 +15,16 @@ Commando::Commando(const char *command, int hasParam, int hasData)
     m_command = command;
     m_hasParam = hasParam;
     m_hasData = hasData;
+
+    m_uart = new Uart(SIM_KNX_UART,SIM_KNX_BAUD,0);
+}
+
+/**
+ * Command destructor
+ */
+Commando::~Commando()
+{
+    delete m_uart;
 }
 
 /**
@@ -94,9 +104,9 @@ void Commando::send(void)
         output += " " + m_data;
     }
 
-    output += '\r';
+    output += "\n\r";
 
-    cout << output << endl;
+    m_uart->writeData(output);
 }
 
 /**
@@ -107,8 +117,8 @@ Response Commando::get(void)
 {
     send();
     string data;
-    cin >> data;
 
+    data = m_uart->readData();
     m_response.parse(data);
 
     return m_response;

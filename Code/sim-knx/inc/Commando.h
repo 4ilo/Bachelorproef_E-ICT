@@ -8,6 +8,8 @@
 #include <string>
 #include <iostream>
 #include "Response.h"
+#include "Uart.h"
+#include "config.h"
 
 using namespace std;
 
@@ -27,6 +29,8 @@ private:
 
     Response m_response;
 
+    Uart * m_uart;
+
     bool isParamSet(void);
     bool isDataSet(void);
 
@@ -38,6 +42,8 @@ public:
     void setData(string data);
     void send(void);
     Response get(void);
+
+    ~Commando();
 };
 
 
