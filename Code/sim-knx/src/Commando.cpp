@@ -64,27 +64,30 @@ bool Commando::isDataSet(void)
  * Set the parameter property
  * @param int param
  */
-void Commando::setParameter(int param)
+Commando& Commando::setParameter(int param)
 {
     m_parameter += to_string(param) + " ";
+    return *this;
 }
 
 /**
  * Set the data property with a integer
  * @param int data
  */
-void Commando::setData(int data)
+Commando& Commando::setData(int data)
 {
     m_data += to_string(data) + " ";
+    return *this;
 }
 
 /**
  * Set the data property with a string (knx group addr => 1/2/3)
  * @param string data
  */
-void Commando::setData(string data)
+Commando& Commando::setData(string data)
 {
     m_data += data + " ";
+    return *this;
 }
 
 /**

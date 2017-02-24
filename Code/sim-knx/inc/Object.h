@@ -19,6 +19,13 @@ class Object {
 private:
     int m_nummer = 0;
 
+    string m_dpt = "*";
+    string m_objectType = "*";
+    string m_comFlags = "*";
+    string m_sendConfig = "*";
+    string m_recvConfig = "*";
+    string m_time = "*";
+
 public:
     Object(int nummer);
     void setData(int data);
@@ -27,6 +34,14 @@ public:
     void setSendingAddr(string addr);
     void addReveiveAddr(string addr);
     void deleteAddr(string addr);
+
+    void setConfiguration(void);
+    void setDpt(int dpt);
+    void setObjectType(int type);
+    void setComFlags(int flags);
+    void setSendConfig(int sendConfig);
+    void setRecvConfig(int recvConfig);
+    void setTime(int time);
 };
 
 

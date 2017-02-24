@@ -37,9 +37,9 @@ private:
 
 public:
     Commando(const char * command, int hasParam = 0, int hasData = 0);
-    void setParameter(int param);
-    void setData(int data);
-    void setData(string data);
+    Commando& setParameter(int param);
+    Commando& setData(int data);
+    Commando& setData(string data);
     void send(void);
     Response get(void);
 

@@ -21,10 +21,9 @@ Object::Object(int nummer)
 void Object::setData(int data)
 {
     Commando command(SET_OBJECT_DATA);
-    command.setParameter(m_nummer);
-    command.setData(data);
-
-    command.send();
+    command.setParameter(m_nummer)
+           .setData(data)
+           .send();
 }
 
 /**
@@ -45,8 +44,8 @@ int Object::getData(void)
 void Object::send(void)
 {
     Commando commando(SEND_GROUP_TELEGRAM);
-    commando.setParameter(m_nummer);
-    commando.send();
+    commando.setParameter(m_nummer)
+            .send();
 }
 
 /**
@@ -56,9 +55,9 @@ void Object::send(void)
 void Object::setSendingAddr(string addr)
 {
     Commando commando(SET_SENDING_GROUP_ADDR);
-    commando.setParameter(m_nummer);
-    commando.setData(addr);
-    commando.send();
+    commando.setParameter(m_nummer)
+            .setData(addr)
+            .send();
 }
 
 /**
@@ -68,9 +67,9 @@ void Object::setSendingAddr(string addr)
 void Object::addReveiveAddr(string addr)
 {
     Commando commando(ADD_GROUP_ADDR);
-    commando.setParameter(m_nummer);
-    commando.setData(addr);
-    commando.send();
+    commando.setParameter(m_nummer)
+            .setData(addr)
+            .send();
 }
 
 /**
@@ -80,7 +79,103 @@ void Object::addReveiveAddr(string addr)
 void Object::deleteAddr(string addr)
 {
     Commando commando(DELETE_GROUP_ADDR);
+    commando.setParameter(m_nummer)
+            .setData(addr)
+            .send();
+}
+
+/**
+ * Set the Data Point Type with one of the defined standaard DPT
+ * Used for interoperability mode
+ * @param int dpt
+ */
+void Object::setDpt(int dpt)
+{
+    if((dpt > 0 && dpt < 20) || dpt == 200 || dpt == 201)
+    {
+        m_dpt = dpt;
+        return;
+    }
+
+    cerr << "obj " << m_nummer << ": Fout dpt type." << endl;
+}
+
+/**
+ * Set the group object type for raw mode
+ * @param int type
+ */
+void Object::setObjectType(int type)
+{
+    if((type > 0 && type < 14))
+    {
+        m_objectType = type;
+        return;
+    }
+
+    cerr << "obj " << m_nummer << ": Fout object type." << endl;
+}
+
+/**
+ * Set the configuration flags
+ * @param flags
+ */
+void Object::setComFlags(int flags)
+{
+    if((flags&0b00100000) != 0)
+    {
+        m_comFlags = flags;
+        return;
+    }
+
+    cerr << "obj " << m_nummer << ": Foute comFlag." << endl;
+}
+
+/**
+ * Set the configuration settings for sending objects
+ * @param int sendConfig    Binary
+ */
+void Object::setSendConfig(int sendConfig)
+{
+    if((sendConfig & 0b00111000) != 0)
+    {
+        m_sendConfig = sendConfig;
+        return;
+    }
+
+    cerr << "obj " << m_nummer << ": Foute sendconfiguratie." << endl;
+}
+
+/**
+ * Set the configuration settings for receiving objects
+ * @param int recvConfig    Binary
+ */
+void Object::setRecvConfig(int recvConfig)
+{
+    m_recvConfig = recvConfig;
+}
+
+/**
+ * Set the send/receive delay
+ * Minutes/seconds needs to be configured via send/recv-configuration
+ * @param int time
+ */
+void Object::setTime(int time)
+{
+    m_time = time;
+}
+
+void Object::setConfiguration(void)
+{
+    Commando commando(SET_OBJECT_CONFIG);
     commando.setParameter(m_nummer);
-    commando.setData(addr);
+
+    commando.setData(m_dpt)
+            .setData(m_objectType)
+            .setData(m_comFlags)
+            .setData(m_sendConfig)
+            .setData(m_sendConfig)
+            .setData(m_recvConfig)
+            .setData(m_time);
+
     commando.send();
 }
