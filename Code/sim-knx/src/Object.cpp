@@ -60,3 +60,27 @@ void Object::setSendingAddr(string addr)
     commando.setData(addr);
     commando.send();
 }
+
+/**
+ * Add a group address to the listning list for the object
+ * @param string addr   Group address in knx-format
+ */
+void Object::addReveiveAddr(string addr)
+{
+    Commando commando(ADD_GROUP_ADDR);
+    commando.setParameter(m_nummer);
+    commando.setData(addr);
+    commando.send();
+}
+
+/**
+ * Delete a group address from the reveive list
+ * @param string addr   Group address in knx-format or "all"
+ */
+void Object::deleteAddr(string addr)
+{
+    Commando commando(DELETE_GROUP_ADDR);
+    commando.setParameter(m_nummer);
+    commando.setData(addr);
+    commando.send();
+}

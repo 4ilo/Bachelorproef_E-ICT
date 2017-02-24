@@ -25,6 +25,8 @@ public:
     int getData(void);
     void send(void);
     void setSendingAddr(string addr);
+    void addReveiveAddr(string addr);
+    void deleteAddr(string addr);
 };
 
 
