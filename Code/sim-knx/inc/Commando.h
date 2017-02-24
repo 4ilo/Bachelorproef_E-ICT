@@ -23,7 +23,7 @@ private:
     int m_hasParam = 0;
 
     string m_data;
-    bool m_hasData = 0;
+    int m_hasData = 0;
 
     Response m_response;
 
@@ -32,7 +32,7 @@ private:
 
 
 public:
-    Commando(const char * command, bool hasParam = 0, bool hasData = 0);
+    Commando(const char * command, int hasParam = 0, int hasData = 0);
     void setParameter(int param);
     void setData(int data);
     void setData(string data);

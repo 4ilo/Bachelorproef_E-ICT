@@ -17,7 +17,9 @@
 #define GET_VERSION "dvg"
 #define DEVICE_TRANSPARANT_SET "dts", 0, 1
 #define FACTORY_RESET "gci"
-#define PARAMETER_DATA_GET "pdg", 1
+#define PARAMETER_DATA_GET "pdg", 2
+#define SET_INTERFACE_OBJECT_DATA "ids", 2, 1
+#define GET_INTERFACE_OBJECT_DATA "idg", 2
 
 // Commands in normal mode
 #define SET_OBJECT_DATA "ods", 1, 1
@@ -31,8 +33,8 @@
 #define ADD_GROUP_ADDR "oga", 1, 1
 #define DELETE_GROUP_ADDR "ogd", 1, 1
 #define GET_GROUP_ADDRS "ogg", 1
-//#define SET_OBJECT_CONFIG ""
-//#define GET_OBJECT_CONFIG "ocg", 1
+#define SET_OBJECT_CONFIG "ocs", 1, 6
+#define GET_OBJECT_CONFIG "ocg", 1
 #define SET_EVENT_GENERATION "dus"
 #define GET_UPDATE_FLAGS "gug"
 #define GET_VALUECHANGED_FLAGS "gcg"
@@ -40,7 +42,28 @@
 //#define SEND_GLOBAL_UPDATE_FLAG "gui"
 #define SEND_UPDATE_FLAG "oui"
 
+
 // Commands in transparant mode
+#define DEVICE_TRANSPRNT_SET "dts", 0, 1
+#define TRANSPARANT_DATA_SEND "tds", 1, 1
+#define TRANSPARANT_RESPONSE_SEND "tes", 1, 1
+#define TRANSPARANT_READ_REQUEST "trs", 1
+//#define TRANSPARANT_READ_INDICATION "tri", 2
+//#define TRANSPARANT_DATA_INDICATION "tdi", 3, 1
+//#define TRANSPARANT_RESPONSE_INDICATION "tei", 3, 1
+//#define TRANSPARANT_READ_CONFIRMATION "trc", 2
+//#define TRANSPARANT_DATA_CONFIRMATION "tdc", 3, 1
+//#define TRANSPARANT_RESPONSE_CONFIRMATION "tec", 3, 1
+//#define TRANSPARANT_READ_NEGATIVE_CONFIRMATION "trn", 2
+//#define TRANSPARANT_DATA_NEGATIVE_CONFIRMATION "tdn", 3, 1
+//#define TRANSPARANT_RESPONSE_NEGATIVE_CONFIRMATION "ten", 3, 1
+
+
+
+
+
+
+
 
 
 

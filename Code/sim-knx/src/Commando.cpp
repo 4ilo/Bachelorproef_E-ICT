@@ -10,7 +10,7 @@
  * @param bool hasParam
  * @param bool hasData
  */
-Commando::Commando(const char *command, bool hasParam, bool hasData)
+Commando::Commando(const char *command, int hasParam, int hasData)
 {
     m_command = command;
     m_hasParam = hasParam;
@@ -56,7 +56,7 @@ bool Commando::isDataSet(void)
  */
 void Commando::setParameter(int param)
 {
-    m_parameter = to_string(param);
+    m_parameter += to_string(param) + " ";
 }
 
 /**
@@ -65,7 +65,7 @@ void Commando::setParameter(int param)
  */
 void Commando::setData(int data)
 {
-    m_data = to_string(data);
+    m_data += to_string(data) + " ";
 }
 
 /**
@@ -74,7 +74,7 @@ void Commando::setData(int data)
  */
 void Commando::setData(string data)
 {
-    m_data = data;
+    m_data += data + " ";
 }
 
 /**
