@@ -104,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/test/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="416">
-              <caret line="13" column="63" lean-forward="false" selection-start-line="13" selection-start-column="63" selection-end-line="13" selection-end-column="63" />
+              <caret line="13" column="59" lean-forward="false" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -658,7 +658,7 @@
       <workItem from="1487936531545" duration="4065000" />
       <workItem from="1487940799300" duration="6696000" />
       <workItem from="1488184445489" duration="27000" />
-      <workItem from="1488199903687" duration="6301000" />
+      <workItem from="1488199903687" duration="6653000" />
     </task>
     <servers />
   </component>
@@ -695,7 +695,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42476000" />
+    <option name="totallyTimeSpent" value="42828000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="356" y="27" width="1400" height="947" extended-state="0" />
@@ -1079,7 +1079,7 @@
     <entry file="file://$PROJECT_DIR$/test/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
-          <caret line="13" column="63" lean-forward="false" selection-start-line="13" selection-start-column="63" selection-end-line="13" selection-end-column="63" />
+          <caret line="13" column="59" lean-forward="false" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
           <folding />
         </state>
       </provider>
