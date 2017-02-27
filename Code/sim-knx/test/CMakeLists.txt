@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
+set(CMAKE_CXX_STANDARD 11)
+
 project(Test)
 project(Example)
 
@@ -16,7 +18,7 @@ download_project(
 
 add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR} EXCLUDE_FROM_ALL)
 
-set(test_SRCS command_tests.cpp)
+set(test_SRCS ../sim-knx/inc/Commando.h Commando_tests.cpp)
 add_executable(runUnitTests gtest.cpp ${test_SRCS})
-target_link_libraries(runUnitTests gtest gmock)
+target_link_libraries(runUnitTests gtest gmock sim_knx_source)
 #add_test(runUnitTests runUnutTests)

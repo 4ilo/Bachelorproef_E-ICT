@@ -4,7 +4,4 @@
 
 #include "gtest/gtest.h"
 
-TEST(command_tests, test_test)
-{
-    ASSERT_EQ(1,2);
-}
+

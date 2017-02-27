@@ -126,3 +126,16 @@ Response Commando::get(void)
 
     return m_response;
 }
+
+Response Commando::get(string testing)
+{
+#ifdef DEBUG
+    send();
+    m_response.parse(testing);
+
+    return m_response;
+#else
+    cerr << "Gebruik normaal get commando als niet in debug mode!" << endl;
+    exit(3);
+#endif
+}
