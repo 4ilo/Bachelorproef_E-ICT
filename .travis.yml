@@ -6,7 +6,7 @@ language:
 script:
   - cd Code/sim-knx
   - mkdir build
-  - cd mkdir
+  - cd build
   - cmake
   - make
   - cd test
