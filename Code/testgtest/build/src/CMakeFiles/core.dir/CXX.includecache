@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/olivier/Documents/School/Bachelorproef/Code/testgtest/src/file.cpp
+file.h
+/home/olivier/Documents/School/Bachelorproef/Code/testgtest/src/file.h
+
+/home/olivier/Documents/School/Bachelorproef/Code/testgtest/src/file.h
+
+/home/olivier/Documents/School/Bachelorproef/Code/testgtest/src/main.cpp
+iostream
+-
+file.h
+/home/olivier/Documents/School/Bachelorproef/Code/testgtest/src/file.h
+
