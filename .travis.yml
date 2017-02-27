@@ -5,8 +5,8 @@ language:
 
 script:
   - cd Code/sim-knx
-  - mkdir build
-  - cd build
+  - mkdir build-travis
+  - cd build-travis
   - cmake
   - make
   - cd test
