@@ -1,0 +1,13 @@
+sudo: false
+
+language:
+  - cpp
+
+script:
+  - cd Code/sim-knx
+  - mkdir build
+  - cd mkdir
+  - cmake
+  - make
+  - cd test
+  - ./runUnitTests
