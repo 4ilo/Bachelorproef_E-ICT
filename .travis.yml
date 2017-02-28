@@ -1,4 +1,4 @@
-sudo: true
+sudo: false
 
 language:
   - cpp
@@ -13,8 +13,10 @@ addons:
       - cmake-data
       - g++-5
 
+install:
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
+
 script:
-  - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
   - cmake --version
   - cd Code/sim-knx
   - mkdir build-travis
