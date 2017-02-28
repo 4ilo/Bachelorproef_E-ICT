@@ -12,6 +12,7 @@ addons:
       - cmake-data
 
 script:
+  - cmake --version
   - cd Code/sim-knx
   - mkdir build-travis
   - cd build-travis
