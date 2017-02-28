@@ -18,6 +18,7 @@ class Object {
 
 private:
     int m_nummer = 0;
+    bool m_isRaw = false;
 
     string m_dpt = "*";
     string m_objectType = "*";

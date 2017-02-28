@@ -20,7 +20,14 @@ Object::Object(int nummer)
  */
 void Object::setData(int data)
 {
-    Commando command(SET_OBJECT_DATA);
+    Commando command(SET_OBJECT_VALUE);
+
+    if(m_isRaw)
+    {
+        command.changeConfig(SET_OBJECT_DATA);
+    }
+
+
     command.setParameter(m_nummer)
            .setData(data)
            .send();
@@ -32,7 +39,13 @@ void Object::setData(int data)
  */
 int Object::getData(void)
 {
-    Commando commando(GET_OBJECT_DATA);
+    Commando commando(GET_OBJECT_VALUE);
+
+    if(m_isRaw)
+    {
+        commando.changeConfig(GET_OBJECT_DATA);
+    }
+
     commando.setParameter(m_nummer);
 
     return commando.get().data();
@@ -136,7 +149,7 @@ void Object::setComFlags(int flags)
  */
 void Object::setSendConfig(int sendConfig)
 {
-    if((sendConfig & 0b00111000) != 0)
+    if((sendConfig & 0b00111000) == 0)
     {
         m_sendConfig = to_string(sendConfig);
         return;
@@ -173,7 +186,6 @@ void Object::setConfiguration(void)
             .setData(m_objectType)
             .setData(m_comFlags)
             .setData(m_sendConfig)
-            .setData(m_sendConfig)
             .setData(m_recvConfig)
             .setData(m_time);
 
@@ -186,6 +198,7 @@ void Object::setConfiguration(void)
  */
 void Object::setRaw(int objectType)
 {
+    m_isRaw = true;
     m_dpt = "0";
     m_objectType = to_string(objectType);
 }
@@ -196,6 +209,7 @@ void Object::setRaw(int objectType)
  */
 void Object::setInteroperability(int dpt)
 {
-    m_dpt = dpt;
+    m_isRaw = false;
+    m_dpt = to_string(dpt);
     m_objectType = "0";
 }

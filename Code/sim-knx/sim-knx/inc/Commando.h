@@ -37,6 +37,8 @@ private:
 
 public:
     Commando(const char * command, int hasParam = 0, int hasData = 0);
+    void changeConfig(const char * command, int hasParam = 0, int hasData = 0);
+
     Commando& setParameter(int param);
     Commando& setData(int data);
     Commando& setData(string data);

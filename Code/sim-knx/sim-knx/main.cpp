@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unistd.h>
 
 #include "inc/Object.h"
 #include "inc/Device.h"
@@ -6,16 +7,23 @@
 
 int main()
 {
-
+    //cout << DEBUG << endl;
     Device sim_knx;
     sim_knx.setAddr(0xffff);        // Set device physical addr
 
-    Object object1(1);
-    object1.setData(50);
-    object1.setRaw(OBJ_2_BIT);
-    object1.setConfiguration();
-    object1.setSendingAddr("1/2/3");
-    object1.send();
-    //cout << object1.getData();
+    Object testObject(1);
+    testObject.setInteroperability(DPT1_BOOLEAN);
+    testObject.setSendConfig(0b000000001);      // Autosend when value changed
+    testObject.setTime(0);                      // Geen delay
+    testObject.setConfiguration();
+
+    testObject.setSendingAddr("1/1/1");
+    testObject.addReveiveAddr("1/1/2");         // Send on 1/1/1 + receive on 1/1/2
+
+    testObject.setData(1);      // Send 1
+
+    usleep(1000);
+
+    testObject.setData(0);      // Send 0
 
 }

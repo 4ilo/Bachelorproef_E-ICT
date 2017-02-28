@@ -15,7 +15,7 @@
  */
 Uart::Uart(string device, int speed, int pariteit)
 {
-#ifndef DEBUG
+#if DEBUG == 0
     if((m_file = open(device.c_str(), O_RDWR | O_NOCTTY | O_SYNC)) < 0)
     {
         cerr << "Uart kan niet worden geopend." << endl;
@@ -28,7 +28,7 @@ Uart::Uart(string device, int speed, int pariteit)
     m_pariteit = pariteit;
     m_speed = speed;
 
-#ifndef DEBUG
+#if DEBUG == 0
     setAttributes();
 #endif
 }
@@ -100,7 +100,7 @@ string Uart::readData(void)
 
 Uart::~Uart()
 {
-#ifndef DEBUG
+#if DEBUG == 0
     close(m_file);
 #endif
 }

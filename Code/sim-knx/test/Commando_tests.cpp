@@ -11,9 +11,6 @@ protected:
 
 };
 
-
-#define DEBUG
-
 TEST(Commando_tests, commando_can_build_object_with_constructor)
 {
     ASSERT_NO_THROW(Commando testCommando("test"));

@@ -139,3 +139,10 @@ Response Commando::get(string testing)
     exit(3);
 #endif
 }
+
+void Commando::changeConfig(const char *command, int hasParam, int hasData)
+{
+    m_command = command;
+    m_hasParam = hasParam;
+    m_hasData = hasData;
+}

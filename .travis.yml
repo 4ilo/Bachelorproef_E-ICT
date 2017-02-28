@@ -19,6 +19,7 @@ install:
 script:
   - cmake --version
   - cd Code/sim-knx
+  - mv CMakeLists.testing.txt CMakeLists.txt
   - mkdir build-travis
   - cd build-travis
   - cmake ..
