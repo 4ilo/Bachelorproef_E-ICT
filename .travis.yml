@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 
 language:
   - cpp
@@ -7,11 +7,14 @@ addons:
   apt:
     sources:
       - george-edison55-precise-backports
+      - ubuntu-toolchain-r-test
     packages:
       - cmake
       - cmake-data
+      - g++-5
 
 script:
+  - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
   - cmake --version
   - cd Code/sim-knx
   - mkdir build-travis
