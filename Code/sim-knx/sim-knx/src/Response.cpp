@@ -76,6 +76,10 @@ int Response::data()
         string substr = m_rawData.substr(1);
         return toInt(substr);
     }
+    else
+    {
+        return toInt(m_rawData);
+    }
 }
 
 /**

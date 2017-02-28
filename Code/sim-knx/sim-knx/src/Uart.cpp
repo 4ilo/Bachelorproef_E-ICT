@@ -38,6 +38,8 @@ Uart::Uart(string device, int speed, int pariteit)
  */
 void Uart::setAttributes(void)
 {
+    //tcflush(m_file,TCIOFLUSH);
+
     struct termios tty;
 
     cfsetospeed(&tty, m_speed);		// Set rx baud
@@ -52,13 +54,14 @@ void Uart::setAttributes(void)
     tty.c_cflag |= m_pariteit;
     tty.c_cflag &= ~CSTOPB;
     tty.c_cflag &= ~CRTSCTS;
+    tty.c_cc[VMIN] = 1;     // 0,5s blocking mode
+    tty.c_cc[VTIME] = 0,5;
 
     if(tcsetattr(m_file, TCSANOW, &tty) != 0)
     {
         cerr << "Instellen uart parameters mislukt." << endl;
         exit(2);
     }
-
 }
 
 /**
