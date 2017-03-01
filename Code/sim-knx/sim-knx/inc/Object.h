@@ -60,6 +60,8 @@ public:
     float getTemp(void);
     void sendPercentage(int value);
     int getPercentage(void);
+    void sendScene(int scene);
+    void sendSceneLearn(int scene);
 
 };
 

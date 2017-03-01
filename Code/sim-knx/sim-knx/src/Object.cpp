@@ -357,3 +357,23 @@ int Object::getPercentage(void)
 {
     return (int) this->getData();
 }
+
+/**
+ * Activate a scene
+ * @param int scene-number
+ */
+void Object::sendScene(int scene)
+{
+    this->setData(0,scene);
+    this->send();
+}
+
+/**
+ * Send the scene learn command
+ * @param int scene-number
+ */
+void Object::sendSceneLearn(int scene)
+{
+    this->setData(1,scene);
+    this->send();
+}
