@@ -119,7 +119,7 @@ TEST(Commando_tests, a_commando_can_accept_more_data)
     ASSERT_STREQ(output.c_str(), "test 5 1/2/3 \n\r");
 }
 
-TEST(Commando_test, a_commando_can_get_some_data_and_return_this_raw)
+TEST(Commando_tests, a_commando_can_get_some_data_and_return_this_raw)
 {
     // Capture cout
     testing::internal::CaptureStdout();

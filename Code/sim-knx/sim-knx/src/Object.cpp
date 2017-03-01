@@ -222,6 +222,9 @@ void Object::setTime(int time)
     m_time = to_string(time);
 }
 
+/**
+ * Send al the configuration parameters to the object
+ */
 void Object::sendConfiguration(void)
 {
     Commando commando(SET_OBJECT_CONFIG);

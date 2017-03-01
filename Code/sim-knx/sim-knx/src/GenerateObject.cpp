@@ -4,6 +4,11 @@
 
 #include "../inc/GenerateObject.h"
 
+/**
+ * Generate a boolean object
+ * @param objectNumber
+ * @return Pointer naar het object
+ */
 Object* GenerateObject::boolean(int objectNumber)
 {
     Object *obj = new Object(objectNumber);
@@ -15,10 +20,15 @@ Object* GenerateObject::boolean(int objectNumber)
     return obj;
 }
 
+/**
+ * Generate a dimmer object
+ * @param objectNumber
+ * @return Pointer to the object
+ */
 Object* GenerateObject::dimmer(int objectNumber)
 {
     Object *obj = new Object(objectNumber);
-    obj->setInteroperability(DPT3_3_BIT_CONTROLLED);  // A boolean object
+    obj->setInteroperability(DPT3_3_BIT_CONTROLLED);  // A dimminh object
     obj->setSendConfig(0b000000000);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
@@ -26,10 +36,15 @@ Object* GenerateObject::dimmer(int objectNumber)
     return obj;
 }
 
+/**
+ * Generate a object with percentage value's
+ * @param objectNumber
+ * @return Pointer to the object
+ */
 Object* GenerateObject::absoluteValue(int objectNumber)
 {
     Object *obj = new Object(objectNumber);
-    obj->setInteroperability(DPT5_8_BIT_SCALING);  // A boolean object
+    obj->setInteroperability(DPT5_8_BIT_SCALING);  // A percentage object
     obj->setSendConfig(0b000000000);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
@@ -37,10 +52,15 @@ Object* GenerateObject::absoluteValue(int objectNumber)
     return obj;
 }
 
+/**
+ * Generate a scene object
+ * @param objectNumber
+ * @return Pointer to the object
+ */
 Object* GenerateObject::scene(int objectNumber)
 {
     Object *obj = new Object(objectNumber);
-    obj->setInteroperability(DPT18_SCENE_CONTROL);  // A boolean object
+    obj->setInteroperability(DPT18_SCENE_CONTROL);  // A scene object
     obj->setSendConfig(0b000000000);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
