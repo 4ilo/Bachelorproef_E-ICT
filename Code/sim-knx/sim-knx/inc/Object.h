@@ -58,6 +58,9 @@ public:
     void getDim(bool *status, int *value);
     void sendTemp(float temp);
     float getTemp(void);
+    void sendPercentage(int value);
+    int getPercentage(void);
+
 };
 
 

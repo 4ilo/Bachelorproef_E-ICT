@@ -301,7 +301,6 @@ void Object::getDim(bool *status, int *value)
     if(m_isRaw)
     {
         cerr << "Object: " << m_nummer << " Functie getDim niet ondersteund in raw mode." << endl;
-
     }
 
     commando.setParameter(m_nummer);
@@ -325,7 +324,36 @@ void Object::sendTemp(float temp)
     this->send();
 }
 
+/**
+ * Get the temp from the object
+ * @return float temperature
+ */
 float Object::getTemp(void)
 {
     return this->getData();
+}
+
+/**
+ * Send a percentage to the bus via a object
+ * @param value
+ */
+void Object::sendPercentage(int value)
+{
+    if(value < 0 || value > 100)
+    {
+        cerr << "Object: " << m_nummer << " Gelieve een percentage te geven" << endl;
+        return;
+    }
+
+    this->setData(value);
+    this->send();
+}
+
+/**
+ * Get a percentage from the object
+ * @return int percentage
+ */
+int Object::getPercentage(void)
+{
+    return (int) this->getData();
 }
