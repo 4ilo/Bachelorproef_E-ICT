@@ -18,7 +18,7 @@ class Response {
 
 private:
     string m_rawData;
-    int toInt(string data);
+    int HexToInt(string data);
 
 public:
     Response(string data = "");

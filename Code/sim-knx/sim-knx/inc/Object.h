@@ -8,6 +8,7 @@
 #include <string>
 #include "Commando.h"
 #include "commands.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -27,11 +28,14 @@ private:
     string m_recvConfig = "*";
     string m_time = "*";
 
-public:
-    Object(int nummer);
     void setData(int data);
+    void setData(bool onof, int value);
     int getData(void);
     void send(void);
+
+public:
+    Object(int nummer);
+
     void setSendingAddr(string addr);
     void addReveiveAddr(string addr);
     void deleteAddr(string addr);
@@ -46,6 +50,11 @@ public:
     void setSendConfig(int sendConfig);
     void setRecvConfig(int recvConfig);
     void setTime(int time);
+
+    void sendBool(bool value);
+    void sendDim(bool status, int value);
+    bool getBool(void);
+    void getDim(bool *status, int *value);
 };
 
 

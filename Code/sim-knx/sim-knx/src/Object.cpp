@@ -34,6 +34,32 @@ void Object::setData(int data)
 }
 
 /**
+ * Set object data voor dimmer value
+ * @param int data
+ */
+void Object::setData(bool onof, int value)
+{
+    Commando command(SET_OBJECT_VALUE);
+
+    if(m_isRaw)
+    {
+        cerr << "Object: " << m_nummer << " Functie setData niet ondersteund in raw mode." << endl;
+        return;
+    }
+
+    if(value > 7)
+    {
+        cerr << "Object: " << m_nummer << " Value is te groot." << endl;
+        return;
+    }
+
+    command.setParameter(m_nummer)
+           .setData(onof)
+           .setData(value)
+           .send();
+}
+
+/**
  * Get the object data in raw mode
  * @return int
  */
@@ -212,4 +238,60 @@ void Object::setInteroperability(int dpt)
     m_isRaw = false;
     m_dpt = to_string(dpt);
     m_objectType = "0";
+}
+
+/**
+ * Send a boolean value to the bus
+ * @param value
+ */
+void Object::sendBool(bool value)
+{
+    this->setData(value);
+    this->send();
+}
+
+/**
+ * Send a dimming commando to the bus
+ * @param status On/Of
+ * @param value The dimming value
+ */
+void Object::sendDim(bool status, int value)
+{
+    this->setData(status, value);
+    this->send();
+}
+
+/**
+ * Get the value of a boolean object
+ * @return bool
+ */
+bool Object::getBool(void)
+{
+    return (bool) this->getData();
+}
+
+/**
+ * Get the data from a dimming object
+ * @param status pointer to a status boolean
+ * @param value pointer to a value int
+ */
+void Object::getDim(bool *status, int *value)
+{
+    Commando commando(GET_OBJECT_VALUE);
+
+    if(m_isRaw)
+    {
+        cerr << "Object: " << m_nummer << " Functie getDim niet ondersteund in raw mode." << endl;
+
+    }
+
+    commando.setParameter(m_nummer);
+
+    // Er zit een spatie in de response, deze halen we weg
+    string data = commando.get().raw();
+
+    // We pakken de waardes, en zetten deze om naar ints
+    *status = (bool) stoi(data.substr(0,1));
+    *value =  stoi(data.substr(2,1));
+
 }

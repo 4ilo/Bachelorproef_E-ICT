@@ -54,7 +54,7 @@ string Response::raw(void)
  * @param string data
  * @return int
  */
-int Response::toInt(string data)
+int Response::HexToInt(string data)
 {
     stringstream stream;
     int intval;
@@ -73,19 +73,19 @@ int Response::data()
 {
     if (m_rawData.front() == '$') {
         string substr = m_rawData.substr(1);
-        return toInt(substr);
+        return HexToInt(substr);
     }
     else if(m_rawData.front() == '!')
     {
         // Het is een error
         string substr = m_rawData.substr(8,5);      // Haal !error eraf, en parse de nummer
-        int error = toInt(substr);
+        int error = HexToInt(substr);
         cerr << "error: 0x" << hex << error << endl;
         return -1;
     }
     else
     {
-        return toInt(m_rawData);
+        return stoi(m_rawData);
     }
 }
 
