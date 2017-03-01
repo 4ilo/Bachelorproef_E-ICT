@@ -11,7 +11,7 @@ int main()
     sim_knx.setAddr(0x1102);        // Set device physical addr
 
     Object testObject(1);
-    testObject.setInteroperability(DPT3_3_BIT_CONTROLLED);
+    testObject.setInteroperability(DPT9_2_BYTE_FLOAT);
     //testObject.setSendConfig(0b000000000);      // Autosend when value changed
     //testObject.setTime(0);                      // Geen delay
     testObject.setConfiguration();
@@ -25,10 +25,9 @@ int main()
 
     usleep(1000000);
 
-    bool status;
-    int value;
-    testObject.getDim(&status,&value);
-    cout << "status: " << status << " value: " << value << endl;
+    testObject.sendTemp(21.5);
+    float test = testObject.getTemp();
+    cout << "temp: " << test;
 
     //testObject.setData(0,4);      // Send 0
     //testObject.send();

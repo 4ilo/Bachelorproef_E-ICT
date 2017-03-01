@@ -41,7 +41,9 @@ public:
 
     Commando& setParameter(int param);
     Commando& setData(int data);
+    Commando& setData(float data);
     Commando& setData(string data);
+
     void send(void);
     Response get(void);
     Response get(string testing);   // Only for testing in debug mode

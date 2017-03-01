@@ -29,8 +29,9 @@ private:
     string m_time = "*";
 
     void setData(int data);
+    void setData(float data);
     void setData(bool onof, int value);
-    int getData(void);
+    float getData(void);
     void send(void);
 
 public:
@@ -52,9 +53,11 @@ public:
     void setTime(int time);
 
     void sendBool(bool value);
-    void sendDim(bool status, int value);
     bool getBool(void);
+    void sendDim(bool status, int value);
     void getDim(bool *status, int *value);
+    void sendTemp(float temp);
+    float getTemp(void);
 };
 
 

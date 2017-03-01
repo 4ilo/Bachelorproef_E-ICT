@@ -81,6 +81,16 @@ Commando& Commando::setData(int data)
 }
 
 /**
+ * Set the data property with a integer
+ * @param int data
+ */
+Commando& Commando::setData(float data)
+{
+    m_data += to_string(data) + " ";
+    return *this;
+}
+
+/**
  * Set the data property with a string (knx group addr => 1/2/3)
  * @param string data
  */

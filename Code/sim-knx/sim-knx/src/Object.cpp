@@ -15,10 +15,29 @@ Object::Object(int nummer)
 }
 
 /**
- * Set object data in raw mode
+ * Set object data
  * @param int data
  */
 void Object::setData(int data)
+{
+    Commando command(SET_OBJECT_VALUE);
+
+    if(m_isRaw)
+    {
+        command.changeConfig(SET_OBJECT_DATA);
+    }
+
+
+    command.setParameter(m_nummer)
+           .setData(data)
+           .send();
+}
+
+/**
+ * Set object data
+ * @param float data
+ */
+void Object::setData(float data)
 {
     Commando command(SET_OBJECT_VALUE);
 
@@ -63,7 +82,7 @@ void Object::setData(bool onof, int value)
  * Get the object data in raw mode
  * @return int
  */
-int Object::getData(void)
+float Object::getData(void)
 {
     Commando commando(GET_OBJECT_VALUE);
 
@@ -294,4 +313,19 @@ void Object::getDim(bool *status, int *value)
     *status = (bool) stoi(data.substr(0,1));
     *value =  stoi(data.substr(2,1));
 
+}
+
+/**
+ * Send a temp for a temperature object
+ * @param float temp
+ */
+void Object::sendTemp(float temp)
+{
+    this->setData(temp);
+    this->send();
+}
+
+float Object::getTemp(void)
+{
+    return this->getData();
 }

@@ -69,11 +69,11 @@ int Response::HexToInt(string data)
  * Get the integer representation of the response data
  * @return int
  */
-int Response::data()
+float Response::data()
 {
     if (m_rawData.front() == '$') {
         string substr = m_rawData.substr(1);
-        return HexToInt(substr);
+        return (float) HexToInt(substr);
     }
     else if(m_rawData.front() == '!')
     {
@@ -85,7 +85,7 @@ int Response::data()
     }
     else
     {
-        return stoi(m_rawData);
+        return stof(m_rawData);
     }
 }
 

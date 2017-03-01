@@ -25,7 +25,7 @@ public:
 
     void parse(string);
     string raw(void);
-    int data(void);
+    float data(void);
     bool mode(void);
 
     bool isEmpty(void);
