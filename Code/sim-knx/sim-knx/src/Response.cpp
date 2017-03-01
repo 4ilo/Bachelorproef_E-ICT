@@ -71,10 +71,17 @@ int Response::toInt(string data)
  */
 int Response::data()
 {
-    if(m_rawData.front() == '$')
-    {
+    if (m_rawData.front() == '$') {
         string substr = m_rawData.substr(1);
         return toInt(substr);
+    }
+    else if(m_rawData.front() == '!')
+    {
+        // Het is een error
+        string substr = m_rawData.substr(8,5);      // Haal !error eraf, en parse de nummer
+        int error = toInt(substr);
+        cerr << "error: 0x" << hex << error << endl;
+        return -1;
     }
     else
     {
