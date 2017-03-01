@@ -44,7 +44,7 @@ public:
     void setRaw(int objectType);
     void setInteroperability(int dpt);
 
-    void setConfiguration(void);
+    void sendConfiguration(void);
     void setDpt(int dpt);
     void setObjectType(int type);
     void setComFlags(int flags);
