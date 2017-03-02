@@ -1,0 +1,14 @@
+{
+  "webapp":[
+    {
+      "DPT":"test",
+      "recvAddr":"1/1/2",
+      "sendAddr":"1/1/1"
+    },
+    {
+      "DPT":"test2",
+      "recvAddr":"1/1/4",
+      "sendAddr":"1/1/3"
+    }
+  ]
+}
