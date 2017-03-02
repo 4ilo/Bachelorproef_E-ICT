@@ -10,12 +10,16 @@
 
 using json = nlohmann::json;
 
-void addObjects(string file);
+void addObjects(string file, vector<Object *> &objects);
 
 int main()
 {
 
-    addObjects("config.json");
+    vector<Object *> objects;
+    addObjects("config.json", objects);
+
+    objects[0]->sendBool(1);
+
 
 //    Device sim_knx;
 //    sim_knx.setAddr(0x1102);        // Set device physical addr
@@ -31,7 +35,7 @@ int main()
 
 }
 
-void addObjects(string file)
+void addObjects(string file, vector<Object *> &objects)
 {
     ifstream jsonFile(file);
     json data;
@@ -39,7 +43,7 @@ void addObjects(string file)
     jsonFile >> data;
     json json_objects = data["objects"];
 
-    vector<Object *> objects(json_objects.size());
+    objects.resize(json_objects.size());
 
     for(int i = 0; i < json_objects.size(); i++)
     {
