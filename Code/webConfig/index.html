@@ -62,7 +62,7 @@
 				 		<th>Naam</th>
 				 		<th>Data Type</th>
 				 		<th>Zend address</th>
-				 		<th>Ontvangt addressen</th>
+				 		<th>Ontvangst addressen</th>
 				 		<th>Opties</th>
 				 	</tr>
 
@@ -100,7 +100,7 @@
 				 				<input type="text" v-model="SendAddr" placeholder="Zend address" class="input" @keyup="check">
 				 			</td>
 				 			<td>
-				 				<input type="text" v-model="RecvAddr" placeholder="Ontvangt addressen" class="input" @keyup="check">
+				 				<input type="text" v-model="RecvAddr" placeholder="Ontvangst addressen" class="input" @keyup="check">
 				 			</td>
 				 			<td class="has-text-centered">
 				 				<button class="button is-success" :class='{"is-disabled": sendBlocked}' @click="save">
