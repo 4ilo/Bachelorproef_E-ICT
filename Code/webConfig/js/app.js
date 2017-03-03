@@ -10,10 +10,14 @@ var app = new Vue({
 		SendAddr: "",
 		RecvAddr: "",
 		sendBlocked: true,
+		displayConfirm: false,
+		deleteNr: 1,
+		deleteNaam: "",
 	},
 
 	methods: {
 
+		// Convert the Type number to the text version
 		type( nummer ) {
 
 			switch(nummer) {
@@ -25,6 +29,7 @@ var app = new Vue({
 			}
 		},
 
+		// Check if all fields are filled
 		check(){
 
 			if(this.Naam == "" || this.Type == "0" || this.SendAddr == "") {
@@ -36,6 +41,7 @@ var app = new Vue({
 
 		},
 
+		// Save the newly created object
 		save() {
 			
 			axios.post("script.php",{
@@ -58,14 +64,32 @@ var app = new Vue({
 			})
 		},
 
+		// Show the confirmation panel to confirm deletion
 		remove(nummer) {
 
-			axios.get("script.php?remove=" + nummer).then((response) => {
-				
+			this.displayConfirm = true;
+			this.deleteNr = nummer;
+			this.deleteNaam = this.objects[nummer-1].Naam;
+		},
+
+
+		// The user confirmed, delete the object
+		del() {
+
+			axios.get("script.php?remove=" + this.deleteNr).then((response) => {
+			
 				this.objects = response.data.objects;
 			});
+		},
+
+		// Close the confirmation panel
+		close() {
+
+			this.displayConfirm = false;
 		}
 	},
+
+
 
 	created: function() {
 
