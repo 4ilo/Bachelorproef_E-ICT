@@ -1,0 +1,16 @@
+{
+    "objects": [
+        {
+            "Naam": "Licht keuken",
+            "Type": 1,
+            "RecvAddr": "1\/1\/2",
+            "SendAddr": "1\/1\/1"
+        },
+        {
+            "Naam": "Licht kamer2",
+            "Type": 4,
+            "SendAddr": "1\/2\/3",
+            "RecvAddr": "3\/2\/1"
+        }
+    ]
+}

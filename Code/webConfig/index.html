@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>webConfig</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="style/bulma.min.css">
+	<style type="text/css">
+		
+		.tabel {
+
+			margin-top: 20px;
+		}
+
+		.red {
+			color: hsl(14, 100%, 53%);
+		}
+
+	</style>
+</head>
+<body>
+
+	<div id="app">
+		
+		<section class="hero is-medium is-info is-bold">
+			<div class="hero-body">
+		    	<div class="container">
+		      		<h1 class="title">Objecten webConfig</h1>
+		      		<h2 class="subtitle">
+		        		Configureer de beschikbare communiatie objecten 
+		      		</h2>
+		    	</div>
+		  	</div>
+		</section>
+
+
+		<div class="container tabel">
+			<div class="notification">
+				 
+				 <table class="table">
+				 	<tr>
+				 		<th>Object Nr</th>
+				 		<th>Naam</th>
+				 		<th>Data Type</th>
+				 		<th>Zend address</th>
+				 		<th>Ontvangt addressen</th>
+				 		<th>Opties</th>
+				 	</tr>
+
+				 	<tr v-for="(object, index) in objects">
+				 		<td>{{ index + 1 }}</td>
+				 		<td>{{ object.Naam }}</td>
+				 		<td>{{ type(object.Type) }}</td>
+				 		<td>{{ object.SendAddr }}</td>
+				 		<td>{{ object.RecvAddr }}</td>
+				 		<td class="has-text-centered">
+				 			<a href="#" @click="remove(index+1)"><span class="icon red">
+				 				<i class="fa fa-times"></i>
+				 			</span></a>
+				 		</td>
+				 	</tr>
+
+				 	<tfoot>
+				 		<tr>
+				 			<td>#</td>
+				 			<td>
+				 				<input type="text" placeholder="naam" v-model="Naam" class="input" @keyup="check">
+				 			</td>
+				 			<td>
+				 				<span class="select">
+				 				    <select v-model="Type" @change="check">
+				 				    	<option value="0">Select Type</option>
+				 				     	<option value="1">Bool</option>
+				 				     	<option value="2">Dimmer</option>
+				 				     	<option value="3">Percentage</option>
+				 				     	<option value="4">Scene</option>
+				 				    </select>
+				 				 </span>
+				 			</td>
+				 			<td>
+				 				<input type="text" v-model="SendAddr" placeholder="Zend address" class="input" @keyup="check">
+				 			</td>
+				 			<td>
+				 				<input type="text" v-model="RecvAddr" placeholder="Ontvangt addressen" class="input" @keyup="check">
+				 			</td>
+				 			<td class="has-text-centered">
+				 				<button class="button is-success" :class='{"is-disabled": sendBlocked}' @click="save">
+				 					<span class="icon">
+				 						<i class="fa fa-check"></i>
+				 					</span>
+				 				</a>
+				 			</td>
+				 		</tr>
+				 	</tfoot>
+
+				 </table>
+
+			</div>
+		</div>
+
+	</div>
+
+	<script src="js/vue.js"></script>
+	<script src="js/axios.min.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
