@@ -25,10 +25,19 @@
 		$type = getObjectType($object);
 		$request = "";
 
+		echo $status . "\n";
+		setObject($object,$type,$status);
+	}
+
+	function setObject($object, $type, $data1, $data2="", $data3="")
+	{
+		$request = "";
+
+		// Depending on the type we send a different message
 		switch ($type) 
 		{
 			case 'bool':
-				$request = "set" . $object . $status;
+				$request = "set " . $object ." ". $data1;
 				break;
 			
 			default:
@@ -36,16 +45,13 @@
 				break;
 		}
 
-		setObject($message);
-	}
-
-	function setObject($message)
-	{
 		// Create socket
 		$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
 
+		echo $request . "\n";
+
 		// Send the message
-		socket_sendto($socket, $message, strlen($message), 0, "localhost",1234);
+		socket_sendto($socket, $request, strlen($request), 0, "localhost",1234);
 
 		socket_close($socket);
 	}

@@ -9,7 +9,7 @@
 using namespace std;
 
 void parseRequest(char * data, vector<string> & vect);
-string getResponse(vector<string> & request);
+void RespondTo(vector<string> & request, int socket, sockaddr_in remaddr);
 
 int main()
 {
@@ -46,35 +46,35 @@ int main()
 
         recvlen =  recvfrom(sock, buf, 255, 0, (struct sockaddr *)&remaddr, &addrlen);
 
-        cout << "Received " << recvlen << " bytes." << endl;
-        cout << "Data: " << buf << endl;
+        //cout << "Received " << recvlen << " bytes." << endl;
+        //cout << "Data: " << buf << endl;
 
         vector<string> request;
         parseRequest(buf, request);
 
         string response;
-        response = getResponse(request);
-
-        sendto(sock, response.c_str(), response.length(), 0, (struct sockaddr *)&remaddr, addrlen);
+        RespondTo(request, sock, remaddr);
     }
 
     return 0;
 }
 
-string getResponse(vector<string> & request)
+void RespondTo(vector<string> & request, int socket, sockaddr_in remoteAddr)
 {
-    string response;
-
     if(request[0] == "type")
     {
-        response += "bool";
+        string response = "bool";
+
+        // Send the response
+        socklen_t addrlen = sizeof(remoteAddr);
+        sendto(socket, response.c_str(), response.length(), 0, (struct sockaddr *)&remoteAddr, addrlen);
     }
     else if(request[0] == "set")
     {
         cout << "Set object " << request[1] << " to " << request[2] << endl;
     }
 
-    return response;
+
 }
 
 void parseRequest(char * data, vector<string> & vect)
