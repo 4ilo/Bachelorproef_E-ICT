@@ -32,6 +32,12 @@ int initSocket(uint16_t port)
         return 2;
     }
 
+    // Change the read timeout to x seconds
+    struct timeval read_timeout;
+    read_timeout.tv_sec = 10;
+    read_timeout.tv_usec = 0;
+    setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &read_timeout, sizeof(read_timeout));
+
     return sock;
 }
 
