@@ -33,10 +33,10 @@
 				<td>Licht keuken</td>
 				<td>#status</td>
 				<td>
-					<button class="button is-success">Aan</button>
+					<button class="button is-success" @click="send(1,1)">Aan</button>
 				</td>
 				<td>
-					<button class="button is-danger">uit</button>
+					<button class="button is-danger" @click="send(1,0)">uit</button>
 				</td>
 			</tr>
 
@@ -46,6 +46,10 @@
 	</div>
 
 </div>
+
+<script src="js/vue.js"></script>
+<script src="js/axios.min.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>

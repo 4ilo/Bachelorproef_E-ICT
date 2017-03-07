@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/olivier/Documents/School/Bachelorproef/Code/testSocket/main.cpp
+iostream
+-
+sys/socket.h
+-
+netinet/in.h
+-
+string.h
+-
+string
+-
+vector
+-
+

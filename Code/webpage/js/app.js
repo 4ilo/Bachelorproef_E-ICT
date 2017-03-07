@@ -9,6 +9,13 @@ var app = new Vue({
 
 	methods: {
 
+		send(object, status) {
+
+			axios.get("script.php?object="+ object +"&status="+status).then((response) => {
+
+				console.log(response);
+			});
+		}
 
 	},
 
