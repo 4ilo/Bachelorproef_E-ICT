@@ -8,65 +8,120 @@
 #include <fstream>
 #include <vector>
 
-using json = nlohmann::json;
+#include <sys/socket.h>
+#include <netinet/in.h>
+
+
 
 void addObjects(string file, vector<Object *> &objects);
 
-int main()
+int initSocket(uint16_t port);
+void parseRequest(char * data, vector<string> & vect);
+void respondTo(vector<string> & request, int socket, sockaddr_in remaddr);
+
+Device glob_sim_knx;
+
+int main(void)
 {
 
-    vector<Object *> objects;
-    addObjects("config.json", objects);
+    glob_sim_knx.addObjects("config.json");
 
-    objects[0]->sendBool(1);
+    vector<Object *> obs = glob_sim_knx.getObjects();
 
+    int sock = initSocket(1234);
 
-//    Device sim_knx;
-//    sim_knx.setAddr(0x1102);        // Set device physical addr
+    struct sockaddr_in remaddr;
+    socklen_t addrlen = sizeof(remaddr);
+    int recvlen;
+    char buffer[50];
 
-//    Object * test = GenerateObject::boolean(1);
-//    test->setSendingAddr("1/1/1");
-//    test->sendBool(1);
-//
-//    Object * test2 = GenerateObject::scene(2);
-//    test2->setSendingAddr("1/1/2");
-//    test->sendScene(50);
+    vector<string> request;
+
+    while(1)
+    {
+        recvlen = recvfrom(sock, buffer, 50, 0, (struct sockaddr *)&remaddr, &addrlen);
+        if(recvlen != 0)
+        {
+            request.clear();
+            parseRequest(buffer, request);
+            respondTo(request, sock, remaddr);
+            memset(buffer,0,50);
+        }
+
+    }
+
+    return 0;
+}
+
+int initSocket(uint16_t port)
+{
+    int sock;
+
+    // Create a socket
+    if((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+    {
+        cerr << "Cannot create socket!" << endl;
+        return 1;
+    }
+
+    // Set a ip and port to listen on
+    struct sockaddr_in myaddr;
+    myaddr.sin_family = AF_INET;
+    myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    myaddr.sin_port = htons(port);
+
+    if(bind(sock, (struct sockaddr *) &myaddr, sizeof(myaddr)) < 0)
+    {
+        cerr << "Failed to bind socket to port " << port << endl;
+        return 2;
+    }
+
+    return sock;
+}
+
+void respondTo(vector<string> & request, int socket, sockaddr_in remoteAddr)
+{
+    static vector<Object *> objects = glob_sim_knx.getObjects();
+    int objectNr = stoi(request[1]) - 1;
+
+    if(request[0] == "type")
+    {
+        string response = to_string(objects[objectNr]->getType());
+
+        // Send the response
+        socklen_t addrlen = sizeof(remoteAddr);
+        sendto(socket, response.c_str(), response.length(), 0, (struct sockaddr *)&remoteAddr, addrlen);
+    }
+    else if(request[0] == "set")
+    {
+        switch (objects[objectNr]->getType())
+        {
+            case BOOL:
+                objects[objectNr]->sendBool((bool) stoi(request[2]));
+                break;
+            case DIMMER:
+                objects[objectNr]->sendDim((bool) stoi(request[2]), stoi(request[3]));
+                break;
+            case PERCENTAGE:
+                objects[objectNr]->sendPercentage(stoi(request[2]));
+                break;
+            case SCENE:
+                objects[objectNr]->sendScene(stoi(request[2]));
+                break;
+        }
+    }
 
 
 }
 
-void addObjects(string file, vector<Object *> &objects)
+void parseRequest(char * data, vector<string> & vect)
 {
-    ifstream jsonFile(file);
-    json data;
+    char * part;
+    part = strtok(data," ");
 
-    jsonFile >> data;
-    json json_objects = data["objects"];
-
-    objects.resize(json_objects.size());
-
-    for(int i = 0; i < json_objects.size(); i++)
+    while (part != NULL)
     {
-        switch(json_objects[i]["Type"].get<int>())
-        {
-            case 1:
-                objects[i] = GenerateObject::boolean(i);
-                break;
-
-            case 2:
-                objects[i] = GenerateObject::dimmer(i);
-                break;
-
-            case 3:
-                objects[i] = GenerateObject::absoluteValue(i);
-                break;
-
-            case 4:
-                objects[i] = GenerateObject::scene(i);
-                break;
-        }
-
-        objects[i]->setSendingAddr(json_objects[i]["SendAddr"]);
-        objects[i]->addReveiveAddr(json_objects[i]["RecvAddr"]);
+        vect.push_back(string(part));
+        part = strtok(NULL, " ");
     }
 }

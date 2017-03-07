@@ -380,3 +380,13 @@ void Object::sendSceneLearn(int scene)
     this->setData(1,scene);
     this->send();
 }
+
+void Object::setType(int type)
+{
+    m_type = type;
+}
+
+int Object::getType(void)
+{
+    return m_type;
+}

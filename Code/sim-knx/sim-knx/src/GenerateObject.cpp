@@ -16,6 +16,7 @@ Object* GenerateObject::boolean(int objectNumber)
     obj->setSendConfig(0b000000000);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
+    obj->setType(BOOL);
 
     return obj;
 }
@@ -32,6 +33,7 @@ Object* GenerateObject::dimmer(int objectNumber)
     obj->setSendConfig(0b000000000);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
+    obj->setType(DIMMER);
 
     return obj;
 }
@@ -48,6 +50,7 @@ Object* GenerateObject::absoluteValue(int objectNumber)
     obj->setSendConfig(0b000000000);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
+    obj->setType(PERCENTAGE);
 
     return obj;
 }
@@ -64,6 +67,7 @@ Object* GenerateObject::scene(int objectNumber)
     obj->setSendConfig(0b000000000);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
+    obj->setType(SCENE);
 
     return obj;
 }

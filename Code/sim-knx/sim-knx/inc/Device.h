@@ -7,8 +7,19 @@
 
 #include "Commando.h"
 #include "commands.h"
+#include "Object.h"
+#include "GenerateObject.h"
+
+#include <vector>
+#include "json.h"
+#include <fstream>
+
+using json = nlohmann::json;
 
 class Device {
+
+private:
+    vector<Object *> m_objects;
 
 public:
     Device();
@@ -20,6 +31,9 @@ public:
     int getState(void);
     void reset(void);
     void setTransparant(bool status);
+
+    void addObjects(string file);
+    vector<Object *> getObjects(void);
 
 };
 

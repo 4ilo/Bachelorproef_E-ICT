@@ -97,3 +97,44 @@ void Device::setTransparant(bool status)
 
     commando.send();
 }
+
+void Device::addObjects(string file)
+{
+    ifstream jsonFile(file);
+    json data;
+
+    jsonFile >> data;
+    json json_objects = data["objects"];
+
+    m_objects.resize(json_objects.size());
+
+    for(int i = 0; i < json_objects.size(); i++)
+    {
+        switch(json_objects[i]["Type"].get<int>())
+        {
+            case BOOL:
+                m_objects[i] = GenerateObject::boolean(i + 1);
+                break;
+
+            case DIMMER:
+                m_objects[i] = GenerateObject::dimmer(i + 1);
+                break;
+
+            case PERCENTAGE:
+                m_objects[i] = GenerateObject::absoluteValue(i + 1);
+                break;
+
+            case SCENE:
+                m_objects[i] = GenerateObject::scene(i + 1);
+                break;
+        }
+
+        m_objects[i]->setSendingAddr(json_objects[i]["SendAddr"]);
+        m_objects[i]->addReveiveAddr(json_objects[i]["RecvAddr"]);
+    }
+}
+
+vector<Object *> Device::getObjects(void)
+{
+    return m_objects;
+}

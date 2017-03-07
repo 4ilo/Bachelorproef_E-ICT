@@ -5,6 +5,11 @@
 #ifndef SIM_KNX_OBJECT_H
 #define SIM_KNX_OBJECT_H
 
+#define BOOL 1
+#define DIMMER 2
+#define PERCENTAGE 3
+#define SCENE 4
+
 #include <string>
 #include "Commando.h"
 #include "commands.h"
@@ -20,6 +25,8 @@ class Object {
 private:
     int m_nummer = 0;
     bool m_isRaw = false;
+
+    int m_type;
 
     string m_dpt = "*";
     string m_objectType = "*";
@@ -51,6 +58,9 @@ public:
     void setSendConfig(int sendConfig);
     void setRecvConfig(int recvConfig);
     void setTime(int time);
+
+    void setType(int type);
+    int getType(void);
 
     void sendBool(bool value);
     bool getBool(void);
