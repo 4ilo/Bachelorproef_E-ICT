@@ -4,13 +4,18 @@
 #include "inc/Device.h"
 
 #include "inc/udpRequest.h"
-
+#include <unistd.h>
 
 Device glob_sim_knx;
 
 int main(void)
 {
 
+    glob_sim_knx.reset();
+    cout << "resetting" << endl;
+    usleep(1000000);
+    cout << "continu" << endl;
+    glob_sim_knx.setAddr(0x1102);
     glob_sim_knx.addObjects("config.json");
 
     vector<Object *> obs = glob_sim_knx.getObjects();

@@ -6,12 +6,21 @@
 		$status = $_GET["status"];
 		echo "Object: " . $object . " Status: " . $status . "\n";
 
-		
-		$type = getObjectType($object);
-		$request = "";
+		if(isset($_GET["count"]))
+		{
+			setObject($object,2,$status,$_GET["count"]);
+		}
+		else
+		{
+			setObject($object,1,$status);
+		}
 
-		echo $type . "\n";
-		setObject($object,$type,$status);
+		
+		//$type = getObjectType($object);
+		//$request = "";
+
+		//echo $type . "\n";
+		//setObject($object,$type,$status);
 	}
 
 /**
@@ -34,7 +43,7 @@ function setObject($object, $type, $data1, $data2="")
 			break;
 
 		case '2':		// 2 is dimmer
-			$request = "dim" . $object . " " . $data1 . " " . $data2;
+			$request = "set " . $object . " " . $data1 . " " . $data2;
 			break;
 
 		case '3':		// 3 is percentage

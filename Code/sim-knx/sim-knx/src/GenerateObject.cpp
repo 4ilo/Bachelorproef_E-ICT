@@ -13,7 +13,7 @@ Object* GenerateObject::boolean(int objectNumber)
 {
     Object *obj = new Object(objectNumber);
     obj->setInteroperability(DPT1_BOOLEAN);  // A boolean object
-    obj->setSendConfig(0b000000000);         // Autosend when value changed
+    obj->setSendConfig(0b000000001);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
     obj->setType(BOOL);
@@ -30,7 +30,7 @@ Object* GenerateObject::dimmer(int objectNumber)
 {
     Object *obj = new Object(objectNumber);
     obj->setInteroperability(DPT3_3_BIT_CONTROLLED);  // A dimminh object
-    obj->setSendConfig(0b000000000);         // Autosend when value changed
+    obj->setSendConfig(0b000000001);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
     obj->setType(DIMMER);
@@ -47,7 +47,7 @@ Object* GenerateObject::absoluteValue(int objectNumber)
 {
     Object *obj = new Object(objectNumber);
     obj->setInteroperability(DPT5_8_BIT_SCALING);  // A percentage object
-    obj->setSendConfig(0b000000000);         // Autosend when value changed
+    obj->setSendConfig(0b000000001);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
     obj->setType(PERCENTAGE);
@@ -64,7 +64,7 @@ Object* GenerateObject::scene(int objectNumber)
 {
     Object *obj = new Object(objectNumber);
     obj->setInteroperability(DPT18_SCENE_CONTROL);  // A scene object
-    obj->setSendConfig(0b000000000);         // Autosend when value changed
+    obj->setSendConfig(0b000000001);         // Autosend when value changed
     obj->setTime(0);                         // Geen delay
     obj->sendConfiguration();
     obj->setType(SCENE);

@@ -40,6 +40,26 @@
 				</td>
 			</tr>
 
+			<tr>
+				<td>Alles uit</td>
+				<td>#status</td>
+				<td>
+					<button class="button is-success" @click="send(2,1)">Aan</button>
+				</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>Dim licht keuken</td>
+				<td>#status</td>
+				<td>
+					<button class="button is-success" @click="dim(3,1,5)">Aan</button>
+				</td>
+				<td>
+					<button class="button is-danger" @click="dim(3,0,5)">uit</button>
+				</td>
+			</tr>
+
 		</table>
 
 	  	</div>

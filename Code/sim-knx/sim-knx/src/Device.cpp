@@ -3,6 +3,7 @@
 //
 
 #include "../inc/Device.h"
+#include <unistd.h>
 
 Device::Device()
 {
@@ -130,7 +131,8 @@ void Device::addObjects(string file)
         }
 
         m_objects[i]->setSendingAddr(json_objects[i]["SendAddr"]);
-        m_objects[i]->addReveiveAddr(json_objects[i]["RecvAddr"]);
+        //m_objects[i]->addReveiveAddr(json_objects[i]["RecvAddr"]);
+        usleep(1000000);
     }
 }
 

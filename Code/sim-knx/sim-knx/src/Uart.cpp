@@ -71,6 +71,7 @@ void Uart::setAttributes(void)
 void Uart::writeData(string data)
 {
     write(m_file, data.c_str(), data.length());
+    usleep(100000);
 }
 
 /**

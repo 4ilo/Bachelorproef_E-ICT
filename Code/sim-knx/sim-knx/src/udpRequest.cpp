@@ -79,6 +79,7 @@ void respondTo(vector<string> & request, int socket, sockaddr_in remoteAddr)
     }
     else if(request[0] == "set")
     {
+        cout << request[0] << " " << request[1] << " " << request[2] << endl;
         switch (objects[objectNr]->getType())
         {
             case BOOL:

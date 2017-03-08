@@ -117,7 +117,11 @@ void Commando::send(void)
         output += " " + m_data;
     }
 
+#if DEBUG == 0
+    output += "\r";
+#else
     output += "\n\r";
+#endif
 
     m_uart->writeData(output);
 }
