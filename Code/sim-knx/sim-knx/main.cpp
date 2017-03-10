@@ -31,7 +31,7 @@ int main(void)
 
     while(1)
     {
-        cout << "reading" << endl;
+        //cout << "reading" << endl;
         recvlen = recvfrom(sock, buffer, 50, 0, (struct sockaddr *)&remaddr, &addrlen);
         if(recvlen > 0)
         {
