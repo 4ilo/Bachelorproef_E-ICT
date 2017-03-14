@@ -119,21 +119,17 @@ void Device::addObjects(string file)
 
             case DIMMER:
                 m_objects[i] = GenerateObject::dimmer(i + 1);
-                usleep(100000);
                 break;
 
             case PERCENTAGE:
                 m_objects[i] = GenerateObject::absoluteValue(i + 1);
-                usleep(100000);
                 break;
 
             case SCENE:
                 m_objects[i] = GenerateObject::scene(i + 1);
-                usleep(100000);
                 break;
         }
-
-
+        usleep(100000);
         m_objects[i]->setSendingAddr(json_objects[i]["SendAddr"]);
         //m_objects[i]->addReveiveAddr(json_objects[i]["RecvAddr"]);
         usleep(1000000);

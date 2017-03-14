@@ -19,9 +19,7 @@ int main(void)
     signal(SIGINT,exitApplication);
 
     glob_sim_knx.reset();
-    cout << "resetting" << endl;
     usleep(1000000);
-    cout << "continu" << endl;
 
     cout << "setting device phy adress" << endl;
     glob_sim_knx.setAddr(0x1102);
@@ -44,7 +42,6 @@ int main(void)
     cout << "Now waiting for data" << endl;
     while(stop_app != 1)
     {
-        //cout << "reading" << endl;
         recvlen = recvfrom(sock, buffer, 50, 0, (struct sockaddr *)&remaddr, &addrlen);
         if(recvlen > 0)
         {
@@ -56,6 +53,7 @@ int main(void)
 
     }
 
+    // We ontbinden en sluiten de udp-socket
     int one = 1;
     setsockopt(sock,SOL_SOCKET,SO_REUSEADDR,&one,sizeof(int));
     close(sock);
@@ -64,6 +62,10 @@ int main(void)
     return 0;
 }
 
+/**
+ * Signal handler om bij ctrl-c de applicatie mooi af te sluiten
+ * @param sig
+ */
 void exitApplication(int sig)
 {
     stop_app = 1;

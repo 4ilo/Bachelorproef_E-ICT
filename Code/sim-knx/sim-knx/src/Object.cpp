@@ -376,7 +376,6 @@ void Object::sendScene(int scene)
         this->setData(0,scene - 1);
         this->send();
     }
-
 }
 
 /**
