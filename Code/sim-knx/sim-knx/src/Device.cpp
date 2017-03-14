@@ -119,6 +119,7 @@ void Device::addObjects(string file)
 
             case DIMMER:
                 m_objects[i] = GenerateObject::dimmer(i + 1);
+                usleep(100000);
                 break;
 
             case PERCENTAGE:
@@ -129,6 +130,7 @@ void Device::addObjects(string file)
                 m_objects[i] = GenerateObject::scene(i + 1);
                 break;
         }
+
 
         m_objects[i]->setSendingAddr(json_objects[i]["SendAddr"]);
         //m_objects[i]->addReveiveAddr(json_objects[i]["RecvAddr"]);

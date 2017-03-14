@@ -16,8 +16,8 @@ int initSocket(uint16_t port)
     // Create a socket
     if((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
     {
-        cerr << "Cannot create socket!" << endl;
-        return 1;
+        cerr << "Cannot create socket! err: " << sock << endl;
+        exit(1);
     }
 
     // Set a ip and port to listen on
@@ -26,10 +26,12 @@ int initSocket(uint16_t port)
     myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     myaddr.sin_port = htons(port);
 
-    if(bind(sock, (struct sockaddr *) &myaddr, sizeof(myaddr)) < 0)
+    int test;
+
+    if((test = bind(sock, (struct sockaddr *) &myaddr, sizeof(myaddr))) < 0)
     {
-        cerr << "Failed to bind socket to port " << port << endl;
-        return 2;
+        cerr << "Failed to bind socket to port " << port << " err: " << test << endl;
+        exit(2);
     }
 
     // Change the read timeout to x seconds

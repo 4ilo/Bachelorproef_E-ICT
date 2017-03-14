@@ -80,6 +80,8 @@ var app = new Vue({
 			
 				this.objects = response.data.objects;
 			});
+
+			this.displayConfirm = false;
 		},
 
 		// Close the confirmation panel

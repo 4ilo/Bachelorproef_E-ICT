@@ -238,6 +238,10 @@ void Object::sendConfiguration(void)
             .setData(m_time);
 
     commando.send();
+
+    //Commando test(GET_OBJECT_CONFIG);
+    //test.setParameter(m_nummer);
+    //test.send();
 }
 
 /**
