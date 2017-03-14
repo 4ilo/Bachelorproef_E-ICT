@@ -371,8 +371,12 @@ int Object::getPercentage(void)
  */
 void Object::sendScene(int scene)
 {
-    this->setData(0,scene);
-    this->send();
+    if(scene > 0)
+    {
+        this->setData(0,scene - 1);
+        this->send();
+    }
+
 }
 
 /**

@@ -10,6 +10,11 @@
 		{
 			setObject($object,2,$status,$_GET["count"]);
 		}
+		else if(isset($_GET["nummer"]))
+		{
+			echo "ok";
+			setObject($object,4, $_GET["nummer"]);
+		}
 		else
 		{
 			setObject($object,1,$status);

@@ -124,10 +124,12 @@ void Device::addObjects(string file)
 
             case PERCENTAGE:
                 m_objects[i] = GenerateObject::absoluteValue(i + 1);
+                usleep(100000);
                 break;
 
             case SCENE:
                 m_objects[i] = GenerateObject::scene(i + 1);
+                usleep(100000);
                 break;
         }
 

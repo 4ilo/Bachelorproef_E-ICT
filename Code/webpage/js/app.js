@@ -23,6 +23,14 @@ var app = new Vue({
 
 				console.log(response);
 			});
+		},
+
+		scene(object, nummer) {
+
+			axios.get("script.php?object="+ object + "&status="+ nummer).then((response) => {
+
+				console.log(response);
+			});
 		}
 
 	},
