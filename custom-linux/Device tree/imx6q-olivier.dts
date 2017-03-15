@@ -27,6 +27,15 @@
 
 &iomuxc {
 	imx6q-udoo {
+
+		// External Pinout GPIOs
+        external_hog: hoggrp-2 {
+        fsl,pins = <
+            MX6QDL_PAD_CSI0_DAT12__GPIO5_IO30    0x80000000  // {{external-gpio-18}}
+            MX6QDL_PAD_NANDF_D3__GPIO2_IO03      0x80000000  // {{external-gpio-41}} (SEARCH)
+            MX6QDL_PAD_NANDF_D2__GPIO2_IO02      0x80000000  // {{external-gpio-42}} (BACK)
+            >;
+        };
 		
 		pinctrl_enet: enetgrp {
 			fsl,pins = <
