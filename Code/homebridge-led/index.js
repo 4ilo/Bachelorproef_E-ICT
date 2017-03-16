@@ -60,10 +60,18 @@ LedAccessory.prototype.getState = function(callback) {
 LedAccessory.prototype.setState = function(state, callback) {
     this.log("Setting current state to " + state);
 
-    this.state = !this.state
-
-    // Set the led
-    exec("/home/olivier/setgpio/setGpio " + state);
+    if(state == "0" || state == "false")
+    {
+        this.state = 0;
+            // Set the led
+        exec("/home/olivier/setgpio/setGpio 0");
+    }
+    else
+    {
+        this.state = true;
+            // Set the led
+        exec("/home/olivier/setgpio/setGpio 1");
+    }
 
     callback(null);
 }
