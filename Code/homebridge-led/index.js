@@ -24,6 +24,10 @@ function LedAccessory(log, config) {
         .on("get", this.getState.bind(this))
         .on("set", this.setState.bind(this));
 
+    this.service.getCharacteristic(Characteristic.Brightness)
+        .on("get", this.getTest.bind(this))
+        .on("set", this.setTest.bind(this));
+
     // this.service = new Service.LockMechanism(this.name);
 
     // this.service.getCharacteristic(Characteristic.LockCurrentState).on("get", this.getState.bind(this));
@@ -63,3 +67,15 @@ LedAccessory.prototype.setState = function(state, callback) {
 
     callback(null);
 }
+
+LedAccessory.prototype.getTest = function(callback) {
+
+    callback(null, 5);
+}
+
+LedAccessory.prototype.setTest = function(state, callback) {
+
+    this.log("Setting to " + state);
+    callback(null);
+}
+
