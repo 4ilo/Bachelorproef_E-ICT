@@ -5,12 +5,13 @@
 #ifndef SIM_KNX_UART_H
 #define SIM_KNX_UART_H
 
-
-
-#include <string>
-#include <fcntl.h>
+#include <termios.h>
 #include <iostream>
+#include <unistd.h>
+#include <fcntl.h>
+#include <string>
 #include <time.h>
+
 #include "config.h"
 
 using namespace std;

@@ -11,9 +11,11 @@
 #define SCENE 4
 
 #include <string>
+#include <algorithm>
+
 #include "Commando.h"
 #include "commands.h"
-#include <algorithm>
+
 
 using namespace std;
 
@@ -65,7 +67,6 @@ public:
     void sendBool(bool value);
     bool getBool(void);
     void sendDim(bool status, int value);
-    //void getDim(bool *status, int *value);
     void sendTemp(float temp);
     float getTemp(void);
     void sendPercentage(int value);

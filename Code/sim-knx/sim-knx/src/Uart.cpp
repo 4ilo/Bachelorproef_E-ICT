@@ -4,9 +4,6 @@
 
 #include "../inc/Uart.h"
 
-#include <termios.h>
-#include <unistd.h>
-
 /**
  * The uart constructor
  * @param string device     The name of the uart device vb: /dev/ttyUSB0
@@ -71,7 +68,7 @@ void Uart::setAttributes(void)
 void Uart::writeData(string data)
 {
     write(m_file, data.c_str(), data.length());
-    usleep(100000);
+    usleep(10000);
 }
 
 /**
@@ -100,6 +97,7 @@ string Uart::readData(int timeout)
             stop = 1;
         }
 
+        // We stoppen na timeout seconden
         if(time(NULL) > start + timeout)
         {
             stop = 1;

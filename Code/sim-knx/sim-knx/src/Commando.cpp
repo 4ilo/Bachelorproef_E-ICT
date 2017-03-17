@@ -61,7 +61,7 @@ bool Commando::isDataSet(void)
 }
 
 /**
- * Set the parameter property
+ * Add to the parameter property
  * @param int param
  */
 Commando& Commando::setParameter(int param)
@@ -71,7 +71,7 @@ Commando& Commando::setParameter(int param)
 }
 
 /**
- * Set the data property with a integer
+ * Add to the data property with a integer
  * @param int data
  */
 Commando& Commando::setData(int data)
@@ -81,7 +81,7 @@ Commando& Commando::setData(int data)
 }
 
 /**
- * Set the data property with a integer
+ * Add to the data property with a integer
  * @param int data
  */
 Commando& Commando::setData(float data)
@@ -91,7 +91,7 @@ Commando& Commando::setData(float data)
 }
 
 /**
- * Set the data property with a string (knx group addr => 1/2/3)
+ * Add to the data property with a string (knx group addr => 1/2/3)
  * @param string data
  */
 Commando& Commando::setData(string data)
@@ -117,11 +117,7 @@ void Commando::send(void)
         output += " " + m_data;
     }
 
-//#if DEBUG == 0
-//    output += "\r";
-//#else
     output += "\n\r";
-//#endif
 
     m_uart->writeData(output);
 }
@@ -135,7 +131,7 @@ Response Commando::get(void)
     send();             // Send the request
 
     string data;
-    data = m_uart->readData(1);
+    data = m_uart->readData(1);     // Read data with 1s timeout
     m_response.parse(data);
 
     return m_response;

@@ -26,11 +26,9 @@ int initSocket(uint16_t port)
     myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     myaddr.sin_port = htons(port);
 
-    int test;
-
-    if((test = bind(sock, (struct sockaddr *) &myaddr, sizeof(myaddr))) < 0)
+    if(bind(sock, (struct sockaddr *) &myaddr, sizeof(myaddr)) < 0)
     {
-        cerr << "Failed to bind socket to port " << port << " err: " << test << endl;
+        cerr << "Failed to bind socket to port " << port<< endl;
         exit(2);
     }
 
@@ -51,11 +49,11 @@ int initSocket(uint16_t port)
 void parseRequest(char * data, vector<string> & vect)
 {
     char * part;
-    part = strtok(data," ");
+    part = strtok(data," ");       // Splits string op de spaties
 
-    while (part != NULL)
+    while (part != NULL)        // Er is meer data zolang het geen null is
     {
-        vect.push_back(string(part));
+        vect.push_back(string(part));       // We steken de data in een vecor
         part = strtok(NULL, " ");
     }
 }

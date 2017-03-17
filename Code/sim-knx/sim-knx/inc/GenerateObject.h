@@ -6,6 +6,7 @@
 #define SIM_KNX_GENERATEOBJECT_H
 
 #include <iostream>
+
 #include "Object.h"
 #include "datatypes.h"
 
@@ -15,9 +16,9 @@ class GenerateObject {
 
 public:
 
+    static Object* absoluteValue(int objectNumber);
     static Object* boolean(int objectNumber);
     static Object* dimmer(int objectNumber);
-    static Object* absoluteValue(int objectNumber);
     static Object* scene(int objectNumber);
 };
 

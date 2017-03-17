@@ -5,11 +5,12 @@
 #ifndef SIM_KNX_COMMANDO_H
 #define SIM_KNX_COMMANDO_H
 
-#include <string>
 #include <iostream>
+#include <string>
+
 #include "Response.h"
-#include "Uart.h"
 #include "config.h"
+#include "Uart.h"
 
 using namespace std;
 
