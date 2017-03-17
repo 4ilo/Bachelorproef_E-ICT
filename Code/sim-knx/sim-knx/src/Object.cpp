@@ -79,7 +79,7 @@ void Object::setData(bool onof, int value)
 }
 
 /**
- * Get the object data in raw mode
+ * Get the object data
  * @return int
  */
 float Object::getData(void)
@@ -296,30 +296,30 @@ bool Object::getBool(void)
     return (bool) this->getData();
 }
 
-/**
- * Get the data from a dimming object
- * @param status pointer to a status boolean
- * @param value pointer to a value int
- */
-void Object::getDim(bool *status, int *value)
-{
-    Commando commando(GET_OBJECT_VALUE);
-
-    if(m_isRaw)
-    {
-        cerr << "Object: " << m_nummer << " Functie getDim niet ondersteund in raw mode." << endl;
-    }
-
-    commando.setParameter(m_nummer);
-
-    // Er zit een spatie in de response, deze halen we weg
-    string data = commando.get().raw();
-
-    // We pakken de waardes, en zetten deze om naar ints
-    *status = (bool) stoi(data.substr(0,1));
-    *value =  stoi(data.substr(2,1));
-
-}
+///**
+// * Get the data from a dimming object
+// * @param status pointer to a status boolean
+// * @param value pointer to a value int
+// */
+//void Object::getDim(bool *status, int *value)
+//{
+//    Commando commando(GET_OBJECT_VALUE);
+//
+//    if(m_isRaw)
+//    {
+//        cerr << "Object: " << m_nummer << " Functie getDim niet ondersteund in raw mode." << endl;
+//    }
+//
+//    commando.setParameter(m_nummer);
+//
+//    // Er zit een spatie in de response, deze halen we weg
+//    string data = commando.get().raw();
+//
+//    // We pakken de waardes, en zetten deze om naar ints
+//    *status = (bool) stoi(data.substr(0,1));
+//    *value =  stoi(data.substr(2,1));
+//
+//}
 
 /**
  * Send a temp for a temperature object

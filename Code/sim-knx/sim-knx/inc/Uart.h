@@ -10,6 +10,7 @@
 #include <string>
 #include <fcntl.h>
 #include <iostream>
+#include <time.h>
 #include "config.h"
 
 using namespace std;
@@ -30,7 +31,7 @@ public:
     Uart(string device, int speed, int pariteit);
 
     void writeData(string data);
-    string readData(void);
+    string readData(int timeout);
 
     ~Uart();
 };

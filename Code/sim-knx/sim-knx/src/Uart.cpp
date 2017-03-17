@@ -76,13 +76,16 @@ void Uart::writeData(string data)
 
 /**
  * Read a string (to the next \n) from the uart
+ * @param timeout The timeout in seconds
  * @return string
  */
-string Uart::readData(void)
+string Uart::readData(int timeout)
 {
     char tmp;
     string data;
     bool stop = 0;
+
+    time_t start = time(NULL);
 
     do
     {
@@ -94,6 +97,11 @@ string Uart::readData(void)
         else
         {
             //data.pop_back();
+            stop = 1;
+        }
+
+        if(time(NULL) > start + timeout)
+        {
             stop = 1;
         }
 

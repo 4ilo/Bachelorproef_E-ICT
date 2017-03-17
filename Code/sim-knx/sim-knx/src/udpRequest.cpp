@@ -71,15 +71,17 @@ void respondTo(vector<string> & request, int socket, sockaddr_in remoteAddr)
     static vector<Object *> objects = glob_sim_knx.getObjects();
     int objectNr = stoi(request[1]) - 1;
 
+    string response;
+
     if(request[0] == "type")
     {
-        string response = to_string(objects[objectNr]->getType());
+        response = to_string(objects[objectNr]->getType());
 
         // Send the response
         socklen_t addrlen = sizeof(remoteAddr);
         sendto(socket, response.c_str(), response.length(), 0, (struct sockaddr *)&remoteAddr, addrlen);
     }
-    else if(request[0] == "set")
+    else if(request[0] == "set")     // We want to set a value
     {
         cout << request[0] << " " << request[1] << " " << request[2] << endl;
         switch (objects[objectNr]->getType())
@@ -97,5 +99,31 @@ void respondTo(vector<string> & request, int socket, sockaddr_in remoteAddr)
                 objects[objectNr]->sendScene(stoi(request[2]));
                 break;
         }
+    }
+    else if(request[0] == "get")    // We want to get a value
+    {
+        int value;
+
+        cout << request[0] << " " << request[1] << endl;
+        switch (objects[objectNr]->getType())
+        {
+            case BOOL:
+                value = (int) objects[objectNr]->getBool();
+                response = to_string(value);
+                break;
+
+            case PERCENTAGE:
+                value = objects[objectNr]->getPercentage();
+                response = to_string(value);
+                break;
+
+            default:
+                response = "ERR_WRONG_TYPE";
+                break;
+        }
+
+        // Send the response
+        socklen_t addrlen = sizeof(remoteAddr);
+        sendto(socket, response.c_str(), response.length(), 0, (struct sockaddr *)&remoteAddr, addrlen);
     }
 }

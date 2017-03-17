@@ -13,7 +13,6 @@ var app = new Vue({
 
 			axios.get("script.php?object="+ object +"&status="+status).then((response) => {
 
-				console.log(response);
 			});
 		},	
 
@@ -21,7 +20,6 @@ var app = new Vue({
 
 			axios.get("script.php?object="+ object + "&status="+status + "&count=" + count).then((response) => {
 
-				console.log(response);
 			});
 		},
 
@@ -29,7 +27,15 @@ var app = new Vue({
 
 			axios.get("script.php?object="+ object + "&status="+ nummer).then((response) => {
 
-				console.log(response);
+			});
+		},
+
+		get(object) {
+
+			axios.get("script.php?get=1&object="+ object).then((response) => {
+
+				alert(response.data);
+
 			});
 		}
 

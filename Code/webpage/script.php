@@ -28,6 +28,16 @@
 		//setObject($object,$type,$status);
 	}
 
+	if(isset($_GET["get"]) && isset($_GET["object"]))
+	{
+		// We want to get a value
+		$object = $_GET["object"];
+
+		echo "Get object: " . $object . "\n";
+
+		echo getObject($object);
+	}
+
 /**
  * Set data to an object
  *
@@ -102,4 +112,26 @@ function getObjectType($object)
 
 	return $response;
 
+}
+
+function getObject($object)
+{
+	$message = "get " . $object;
+
+	// Create socket and bind it to localhost for a response
+	$socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+	socket_bind($socket, "localhost");
+
+	// Send the message and ask for the object type
+	socket_sendto($socket, $message, strlen($message), 0, "localhost",1234);
+
+	$addr = "";
+	$port = 0;
+	$response = "";
+
+	socket_recvfrom($socket, $response, 10, 0, $addr, $port);
+
+	socket_close($socket);
+
+	return $response;
 }

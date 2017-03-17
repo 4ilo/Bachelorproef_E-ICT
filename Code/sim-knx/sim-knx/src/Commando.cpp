@@ -132,10 +132,10 @@ void Commando::send(void)
  */
 Response Commando::get(void)
 {
-    send();
-    string data;
+    send();             // Send the request
 
-    data = m_uart->readData();
+    string data;
+    data = m_uart->readData(1);
     m_response.parse(data);
 
     return m_response;
