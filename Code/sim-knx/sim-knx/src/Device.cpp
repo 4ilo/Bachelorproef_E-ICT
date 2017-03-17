@@ -138,6 +138,7 @@ void Device::addObjects(string file)
         usleep(100000);
         m_objects[i]->setSendingAddr(json_objects[i]["SendAddr"]);
         //m_objects[i]->addReveiveAddr(json_objects[i]["RecvAddr"]);
+        usleep(1000000);
     }
 }
 
