@@ -33,7 +33,7 @@
 		// We want to get a value
 		$object = $_GET["object"];
 
-		echo "Get object: " . $object . "\n";
+		//echo "Get object: " . $object . "\n";
 
 		echo getObject($object);
 	}

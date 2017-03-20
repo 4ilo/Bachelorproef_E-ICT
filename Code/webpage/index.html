@@ -31,7 +31,7 @@
 			
 			<tr>
 				<td>Licht living</td>
-				<td>#status</td>
+				<td>{{ status.Living }}</td>
 				<td>
 					<button class="button is-success" @click="send(1,1)">Aan</button>
 				</td>
@@ -42,7 +42,7 @@
 
 			<tr>
 				<td>Licht keuken</td>
-				<td>#status</td>
+				<td>{{ status.Keuken }}</td>
 				<td>
 					<button class="button is-success" @click="send(2,1)">Aan</button>
 				</td>
@@ -90,10 +90,10 @@
 			</tr>
 
 			<tr>
-				<td>GetPercentage</td>
+				<td>GetStatuses</td>
 				<td>#status</td>
 				<td>
-					<button class="button is-success" @click="get(2)">Get</button>
+					<button class="button is-success" @click="getStatuses()">Get</button>
 				</td>
 				<td></td>
 			</tr>
