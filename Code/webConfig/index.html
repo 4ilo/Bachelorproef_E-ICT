@@ -62,7 +62,7 @@
 				 		<th>Naam</th>
 				 		<th>Data Type</th>
 				 		<th>Zend address</th>
-				 		<th>Ontvangst addressen</th>
+				 		<th>Homekit</th>
 				 		<th>Opties</th>
 				 	</tr>
 
@@ -71,7 +71,7 @@
 				 		<td>{{ object.Naam }}</td>
 				 		<td>{{ type(object.Type) }}</td>
 				 		<td>{{ object.SendAddr }}</td>
-				 		<td>{{ object.RecvAddr }}</td>
+				 		<td>{{ object.homekit }}</td>
 				 		<td class="has-text-centered">
 				 			<a href="#" @click="remove(index+1)"><span class="icon red">
 				 				<i class="fa fa-times"></i>
@@ -100,7 +100,7 @@
 				 				<input type="text" v-model="SendAddr" placeholder="Zend address" class="input" @keyup="check">
 				 			</td>
 				 			<td>
-				 				<input type="text" v-model="RecvAddr" placeholder="Ontvangst addressen" class="input" @keyup="check">
+				 				<input type="checkbox" v-model="homekit" >
 				 			</td>
 				 			<td class="has-text-centered">
 				 				<button class="button is-success" :class='{"is-disabled": sendBlocked}' @click="save">

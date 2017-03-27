@@ -8,7 +8,7 @@ var app = new Vue({
 		Naam: "",
 		Type: "0",
 		SendAddr: "",
-		RecvAddr: "",
+		homekit: 0,
 		sendBlocked: true,
 		displayConfirm: false,
 		deleteNr: 1,
@@ -48,7 +48,7 @@ var app = new Vue({
 				Naam: this.Naam,
 				Type: this.Type,
 				SendAddr: this.SendAddr,
-				RecvAddr: this.RecvAddr
+				homekit: this.homekit
 			})
 			.then((response) => {
 
@@ -59,7 +59,7 @@ var app = new Vue({
 				this.Naam = "";
 				this.Type = "0";
 				this.SendAddr = "";
-				this.RecvAddr = "";
+				this.homekit = false;
 
 			})
 		},

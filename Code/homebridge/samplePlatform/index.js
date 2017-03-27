@@ -27,7 +27,8 @@ function OliKnx_Platform(log, config, api) {
     this.config = config;
     this.accessories = [];
 
-    this.available = ["keuken", "living", "led"];
+    this.jsonObjects = require('/home/olivier/config.json');
+    this.jsonObjects = this.jsonObjects.objects;
 
     if (api) {
         // Save the API object as plugin needs to register new accessory via this object.
@@ -39,9 +40,10 @@ function OliKnx_Platform(log, config, api) {
         this.api.on('didFinishLaunching', function() {
             platform.log("DidFinishLaunching");
         
-            for(var i = 0; i < this.available.length; i++)
+            for(var i = 0; i < this.jsonObjects.length; i++)
             {
-                this.addAccessory(this.available[i]);
+                if(this.jsonObjects[i].homekit)
+                    this.addCommunicationObject(this.jsonObjects[i].Naam, i, this.jsonObjects[i].Type);
             }
 
         }.bind(this));
@@ -65,11 +67,15 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory) {
         callback();
     });
 
+    this.log("Nummer: " + accessory.context.objectNumber);
+
     if (accessory.getService(Service.Lightbulb)) {
         accessory.getService(Service.Lightbulb)
         .getCharacteristic(Characteristic.On)
         .on('set', function(value, callback) {
             platform.log(accessory.displayName, "Light -> " + value);
+            //platform.log(accessory.displayName, "Nummer: " + accessory.context.objectNumber);
+            //platform.log(accessory.displayName, "Type: " + accessory.context.objectType);
             callback();
         });
     }
@@ -84,36 +90,46 @@ OliKnx_Platform.prototype.configurationRequestHandler = function(context, reques
 }
 
 // Sample function to show how developer can add accessory dynamically from outside event
-OliKnx_Platform.prototype.addAccessory = function(accessoryName) {
-    this.log("Add Accessory");
+OliKnx_Platform.prototype.addCommunicationObject = function(objectName, objectNumber, objectType) {
+    
     var platform = this;
     var uuid;
 
-    uuid = UUIDGen.generate(accessoryName);
+    // Generate unique uuid for each object
+    uuid = UUIDGen.generate(objectName);
 
+    // Check if object is already registered before
     var uuidExists = this.accessories.filter(function(item) {
         return item.UUID == uuid;
     }).length;
 
     if (uuidExists == 0) {
 
-        var newAccessory = new Accessory(accessoryName, uuid);
+        // Object wasn't registered, we add it now
+
+        this.log("CommunicatieObject toevoegen: " + objectName);
+
+        var newAccessory = new Accessory(objectName, uuid);
         newAccessory.on('identify', function(paired, callback) {
             platform.log(accessory.displayName, "Identify!!!");
             callback();
         });
-        // Plugin can save context on accessory
-        // To help restore accessory in configureAccessory()
-        // newAccessory.context.something = "Something"
+
+        // We slagen het type op in het object
+        newAccessory.context.objectType = objectType;
+        newAccessory.context.objectNumber = objectNumber;
         
         // Make sure you provided a name for service otherwise it may not visible in some HomeKit apps.
-        newAccessory.addService(Service.Lightbulb, "Test Light")
+        newAccessory.addService(Service.Lightbulb, objectName)
         .getCharacteristic(Characteristic.On)
         .on('set', function(value, callback) {
             platform.log(newAccessory.displayName, "Light -> " + value);
+            platform.log(newAccessory.displayName, "Nummer: " + newAccessory.context.objectNumber);
+            platform.log(newAccessory.displayName, "Type: " + newAccessory.context.objectType);
             callback();
         });
 
+        // Het object is klaar, we slagen het op
         this.accessories.push(newAccessory);
         this.api.registerPlatformAccessories("homebridge-OliKnx_Platform", "OliKnx_Platform", [newAccessory]);
     }

@@ -28,7 +28,7 @@
 		// Ze willen een nieuw object aanmaken
 		$data = json_decode(file_get_contents("php://input"),true);		// Json data ophalen
 
-		if(!(isset($data["Naam"]) && isset($data["Type"]) && isset($data["SendAddr"]) && isset($data["RecvAddr"])))
+		if(!(isset($data["Naam"]) && isset($data["Type"]) && isset($data["SendAddr"]) && isset($data["homekit"])))
 		{
 			// Niet alle data is er
 			return "error";
@@ -41,7 +41,7 @@
 				"Naam" => $data["Naam"],
 				"Type" => intval($data["Type"]),		// We maken het nieuwe object
 				"SendAddr" => $data["SendAddr"],
-				"RecvAddr" => $data["RecvAddr"]
+				"homekit" => $data["homekit"]
 			]);
 
 		send_json($json);

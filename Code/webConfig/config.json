@@ -3,14 +3,26 @@
         {
             "Naam": "Licht keuken",
             "Type": 1,
-            "RecvAddr": "1\/1\/2",
+            "homekit": false,
             "SendAddr": "1\/1\/1"
         },
         {
             "Naam": "Licht kamer2",
             "Type": 4,
             "SendAddr": "1\/2\/3",
-            "RecvAddr": "3\/2\/1"
+            "homekit": true
+        },
+        {
+            "Naam": "Licht living",
+            "Type": 1,
+            "SendAddr": "1\/1\/2",
+            "homekit": true
+        },
+        {
+            "Naam": "Licht living 2",
+            "Type": 1,
+            "SendAddr": "1\/2\/2",
+            "homekit": false
         }
     ]
 }
