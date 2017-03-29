@@ -18,8 +18,6 @@ module.exports = function(homebridge) {
 }
 
 // Platform constructor
-// config may be null
-// api may be null if launched from old homebridge version
 function OliKnx_Platform(log, config, api) {
     log("OliKnx_Platform Init");
     var platform = this;
@@ -27,8 +25,9 @@ function OliKnx_Platform(log, config, api) {
     this.config = config;
     this.accessories = [];
 
-    this.jsonObjects = require('/home/olivier/config.json');
+    this.jsonObjects = require('/home/olivier/config.json');        // Get the contents of the json config file
     this.jsonObjects = this.jsonObjects.objects;
+
 
     if (api) {
         // Save the API object as plugin needs to register new accessory via this object.
@@ -40,10 +39,11 @@ function OliKnx_Platform(log, config, api) {
         this.api.on('didFinishLaunching', function() {
             platform.log("DidFinishLaunching");
         
+            // Loop over all objects in the config file & only atach the ones with homekit checked
             for(var i = 0; i < this.jsonObjects.length; i++)
             {
                 if(this.jsonObjects[i].homekit)
-                    this.addCommunicationObject(this.jsonObjects[i].Naam, i, this.jsonObjects[i].Type);
+                    this.addCommunicationObject(this.jsonObjects[i], i+1);
             }
 
         }.bind(this));
@@ -57,46 +57,59 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory) {
     this.log(accessory.displayName, "Configure Accessory");
     var platform = this;
 
-    // set the accessory to reachable if plugin can currently process the accessory
-    // otherwise set to false and update the reachability later by invoking 
-    // accessory.updateReachability()
-    accessory.reachable = true;
+    var objectNumber;
 
-    accessory.on('identify', function(paired, callback) {
-        platform.log(accessory.displayName, "Identify!!!");
-        callback();
-    });
+    if((objectNumber = isAvailable(accessory.context.objectUname, this.jsonObjects)))
+    {
+        this.log("Object " + accessory.displayName + " is nog beschikbaar.");
+        // set the accessory to reachable if plugin can currently process the accessory
+        // otherwise set to false and update the reachability later by invoking 
+        // accessory.updateReachability()
+        accessory.reachable = true;
 
-    this.log("Nummer: " + accessory.context.objectNumber);
-
-    if (accessory.getService(Service.Lightbulb)) {
-        accessory.getService(Service.Lightbulb)
-        .getCharacteristic(Characteristic.On)
-        .on('set', function(value, callback) {
-            platform.log(accessory.displayName, "Light -> " + value);
-            //platform.log(accessory.displayName, "Nummer: " + accessory.context.objectNumber);
-            //platform.log(accessory.displayName, "Type: " + accessory.context.objectType);
+        accessory.on('identify', function(paired, callback) {
+            platform.log(accessory.displayName, "Identify!!!");
             callback();
         });
-    }
 
-    this.accessories.push(accessory);
+        accessory.context.objectNumber = objectNumber;      // Update the object number
+
+        if (accessory.getService(Service.Lightbulb)) {
+            accessory.getService(Service.Lightbulb)
+            .getCharacteristic(Characteristic.On)
+            .on('set', function(value, callback) {
+                platform.log(accessory.displayName, "Light -> " + value);
+                //platform.log(accessory.displayName, "Nummer: " + accessory.context.objectNumber);
+                //platform.log(accessory.displayName, "Type: " + accessory.context.objectType);
+                callback();
+            });
+        }
+
+        this.accessories.push(accessory);    
+    }
 }
 
-//Handler will be invoked when user try to config your plugin
-//Callback can be cached and invoke when nessary
-OliKnx_Platform.prototype.configurationRequestHandler = function(context, request, callback) {
-    this.log("Not implemented");
+function isAvailable(uname, objects) {
+
+    for(var i = 0; i < objects.length; i++)
+    {
+        if(objects[i].uname == uname && objects[i].homekit == true)
+        {
+            return i+1;     // Return the current object number, it could be changed in de config file
+        }
+    }
+
+    return false;
 }
 
 // Sample function to show how developer can add accessory dynamically from outside event
-OliKnx_Platform.prototype.addCommunicationObject = function(objectName, objectNumber, objectType) {
+OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber) {
     
     var platform = this;
     var uuid;
 
-    // Generate unique uuid for each object
-    uuid = UUIDGen.generate(objectName);
+    // Generate unique uuid for each object based on uname
+    uuid = UUIDGen.generate(object.uname);
 
     // Check if object is already registered before
     var uuidExists = this.accessories.filter(function(item) {
@@ -107,25 +120,24 @@ OliKnx_Platform.prototype.addCommunicationObject = function(objectName, objectNu
 
         // Object wasn't registered, we add it now
 
-        this.log("CommunicatieObject toevoegen: " + objectName);
+        this.log("CommunicatieObject toevoegen: " + object.Naam);
 
-        var newAccessory = new Accessory(objectName, uuid);
+        var newAccessory = new Accessory(object.Naam, uuid);
         newAccessory.on('identify', function(paired, callback) {
             platform.log(accessory.displayName, "Identify!!!");
             callback();
         });
 
         // We slagen het type op in het object
-        newAccessory.context.objectType = objectType;
+        newAccessory.context.objectType = object.Type;
         newAccessory.context.objectNumber = objectNumber;
+        newAccessory.context.objectUname = object.uname;
         
         // Make sure you provided a name for service otherwise it may not visible in some HomeKit apps.
-        newAccessory.addService(Service.Lightbulb, objectName)
+        newAccessory.addService(Service.Lightbulb, object.Naam)
         .getCharacteristic(Characteristic.On)
         .on('set', function(value, callback) {
-            platform.log(newAccessory.displayName, "Light -> " + value);
-            platform.log(newAccessory.displayName, "Nummer: " + newAccessory.context.objectNumber);
-            platform.log(newAccessory.displayName, "Type: " + newAccessory.context.objectType);
+            platform.log(newAccessory.displayName, "Light -> " + value + " Nummer: " + newAccessory.context.objectNumber + " Type: " + newAccessory.context.objectType);
             callback();
         });
 
@@ -133,4 +145,10 @@ OliKnx_Platform.prototype.addCommunicationObject = function(objectName, objectNu
         this.accessories.push(newAccessory);
         this.api.registerPlatformAccessories("homebridge-OliKnx_Platform", "OliKnx_Platform", [newAccessory]);
     }
+}
+
+//Handler will be invoked when user try to config your plugin
+//Callback can be cached and invoke when nessary
+OliKnx_Platform.prototype.configurationRequestHandler = function(context, request, callback) {
+    this.log("Not implemented");
 }

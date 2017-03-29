@@ -3,26 +3,30 @@
         {
             "Naam": "Licht keuken",
             "Type": 1,
+            "SendAddr": "1\/1\/1",
             "homekit": false,
-            "SendAddr": "1\/1\/1"
+            "uname": "lichtkeuken_1_111"
         },
         {
             "Naam": "Licht kamer2",
             "Type": 4,
             "SendAddr": "1\/2\/3",
-            "homekit": true
+            "homekit": true,
+            "uname": "lichtkamer2_4_123"
         },
         {
             "Naam": "Licht living",
             "Type": 1,
             "SendAddr": "1\/1\/2",
-            "homekit": true
+            "homekit": true,
+            "uname": "lichtliving_1_112"
         },
         {
             "Naam": "Licht living 2",
             "Type": 1,
             "SendAddr": "1\/2\/2",
-            "homekit": false
+            "homekit": false,
+            "uname": "lichtliving2_1_122"
         }
     ]
 }

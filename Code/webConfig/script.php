@@ -36,12 +36,17 @@
 
 		if($data["Type"] == "0")	return "error";			// Het type is niet ingevuld
 
+		$uname = strtolower(str_replace(" ", "", $data["Naam"]));		// We maken een unieke naam in formaat naam_type_sendaddr
+		$uname .= "_" . $data["Type"];
+		$uname .= "_" . str_replace("/", "", $data["SendAddr"]);
+
 		array_push($json["objects"], 
 			[
 				"Naam" => $data["Naam"],
 				"Type" => intval($data["Type"]),		// We maken het nieuwe object
 				"SendAddr" => $data["SendAddr"],
-				"homekit" => $data["homekit"]
+				"homekit" => $data["homekit"],
+				"uname" => $uname
 			]);
 
 		send_json($json);
