@@ -22,10 +22,11 @@ var app = new Vue({
 
 			switch(nummer) {
 
-				case 1: return "Bool";
-				case 2: return "Dimmer";
-				case 3: return "Percentage";
+				case 1: return "Bool/Lamp";
+				case 2: return "Dimmer relatief";
+				case 3: return "Dimmer absoluut";
 				case 4: return "Scene";
+				case 5: return "Rolluik absoluut";
 			}
 		},
 

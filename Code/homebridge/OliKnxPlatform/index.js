@@ -67,10 +67,10 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory) {
         // accessory.updateReachability()
         accessory.reachable = true;
 
-        accessory.on('identify', function(paired, callback) {
+        /*accessory.on('identify', function(paired, callback) {
             platform.log(accessory.displayName, "Identify!!!");
             callback();
-        });
+        });*/
 
         accessory.context.objectNumber = objectNumber;      // Update the object number
         var info = accessory.getService(Service.AccessoryInformation)
@@ -93,6 +93,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory) {
                 info.setCharacteristic(Characteristic.SerialNumber, "Lamp");
 
                 break;
+
             case 3:
                 // Dimmer object --> maakt gebruik van percentages!!
                 accessory.getService(Service.Lightbulb)
@@ -136,6 +137,28 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory) {
 
 
                 info.setCharacteristic(Characteristic.SerialNumber, "Scene");
+
+                break;
+
+            case 5:
+                // Absoluute rolluik sturing
+                accessory.getService(Service.WindowCovering)
+                .getCharacteristic(Characteristic.TargetPosition)
+                .on('set', function(value, callback) {
+                    platform.log("Set target pos to " + value);
+                    callback();
+                });
+
+                accessory.getService(Service.WindowCovering)
+                .getCharacteristic(Characteristic.CurrentPosition)
+                .on('get', function(callback) {
+                    platform.log("Getting current pos");
+                    callback(null, 50);
+                })
+                .on('set', function(value, callback) {
+                    platform.log("Setting current pos to " + value);
+                    callback();
+                })
 
                 break;
         }
@@ -196,6 +219,10 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
         if(object.Type == 1 || object.Type == 3)
         {
             newAccessory.addService(Service.Lightbulb, object.Naam);
+        }
+        else if(object.Type == 5)
+        {
+            newAccessory.addService(Service.WindowCovering, object.Naam);
         }
         else if(object.Type == 4)
         {
