@@ -61,7 +61,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory) {
 
     if((objectNumber = isAvailable(accessory.context.objectUname, this.jsonObjects)))
     {
-        this.log("Object " + accessory.displayName + " is nog beschikbaar.");
+        //this.log("Object " + accessory.displayName + " is nog beschikbaar.");
         // set the accessory to reachable if plugin can currently process the accessory
         // otherwise set to false and update the reachability later by invoking 
         // accessory.updateReachability()
@@ -73,16 +73,71 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory) {
         });
 
         accessory.context.objectNumber = objectNumber;      // Update the object number
+        var info = accessory.getService(Service.AccessoryInformation)
 
-        if (accessory.getService(Service.Lightbulb)) {
-            accessory.getService(Service.Lightbulb)
-            .getCharacteristic(Characteristic.On)
-            .on('set', function(value, callback) {
-                platform.log(accessory.displayName, "Light -> " + value);
-                //platform.log(accessory.displayName, "Nummer: " + accessory.context.objectNumber);
-                //platform.log(accessory.displayName, "Type: " + accessory.context.objectType);
-                callback();
-            });
+        switch(accessory.context.objectType)
+        {
+            case 1:
+                // Boolean licht object
+                accessory.getService(Service.Lightbulb)
+                .getCharacteristic(Characteristic.On)
+                .on('set', function(value, callback) {
+                    platform.log("Set licht -> 1");
+                    callback();
+                })
+                .on('get', function(callback) {
+                    platform.log("Get licht");
+                    callback(null,1);
+                });
+
+                info.setCharacteristic(Characteristic.SerialNumber, "Lamp");
+
+                break;
+            case 3:
+                // Dimmer object --> maakt gebruik van percentages!!
+                accessory.getService(Service.Lightbulb)
+                .getCharacteristic(Characteristic.On)
+                .on('set', function(value, callback) {
+                    platform.log("Set licht -> " + value);
+                    callback();
+                })
+                .on('get', function(callback) {
+                    platform.log("Get licht");
+                    callback(null,1);
+                });
+
+                accessory.getService(Service.Lightbulb)
+                .getCharacteristic(Characteristic.Brightness)
+                .on('set', function(value, callback) {
+                    platform.log("Dimming to " + value);
+                    callback();
+                })
+                .on('get', function(callback) {
+                    platform.log("Get dimming");
+                    callback(null, 50);
+                });
+
+                info.setCharacteristic(Characteristic.SerialNumber, "Dimmer");
+
+                break;
+
+            case 4:
+                // Scene object
+                accessory.getService(Service.Switch)
+                .getCharacteristic(Characteristic.On)
+                .on('set', function(value, callback) {
+                    platform.log("Setting scene to 1");
+                    callback(1);
+                })
+                .on('get', function(callback) {
+                    platform.log("Getting scene state");
+                    callback(null, 0);
+                })
+
+
+                info.setCharacteristic(Characteristic.SerialNumber, "Scene");
+
+                break;
         }
 
         this.accessories.push(accessory);    
@@ -124,7 +179,7 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
 
         var newAccessory = new Accessory(object.Naam, uuid);
         newAccessory.on('identify', function(paired, callback) {
-            platform.log(accessory.displayName, "Identify!!!");
+            //platform.log(accessory.displayName, "Identify!!!");
             callback();
         });
 
@@ -132,17 +187,25 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
         newAccessory.context.objectType = object.Type;
         newAccessory.context.objectNumber = objectNumber;
         newAccessory.context.objectUname = object.uname;
-        
-        // Make sure you provided a name for service otherwise it may not visible in some HomeKit apps.
-        newAccessory.addService(Service.Lightbulb, object.Naam)
-        .getCharacteristic(Characteristic.On)
-        .on('set', function(value, callback) {
-            platform.log(newAccessory.displayName, "Light -> " + value + " Nummer: " + newAccessory.context.objectNumber + " Type: " + newAccessory.context.objectType);
-            callback();
-        });
+
+        // Add info to the objects
+        newAccessory.getService(Service.AccessoryInformation)
+            .setCharacteristic(Characteristic.Manufacturer, "Ovde.be")
+            .setCharacteristic(Characteristic.Model, "Oli-Udoo");
+
+        if(object.Type == 1 || object.Type == 3)
+        {
+            newAccessory.addService(Service.Lightbulb, object.Naam);
+        }
+        else if(object.Type == 4)
+        {
+            newAccessory.addService(Service.Switch, object.Naam);
+        }
+
 
         // Het object is klaar, we slagen het op
-        this.accessories.push(newAccessory);
+        //this.accessories.push(newAccessory);
+        this.configureAccessory(newAccessory);
         this.api.registerPlatformAccessories("homebridge-OliKnx_Platform", "OliKnx_Platform", [newAccessory]);
     }
 }
