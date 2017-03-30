@@ -165,6 +165,11 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory) {
 
         this.accessories.push(accessory);    
     }
+    else
+    {
+        this.log("Removing unused accessery");
+        this.api.unregisterPlatformAccessories("homebridge-OliKnx_Platform", "OliKnx_Platform", [accessory]);
+    }
 }
 
 function isAvailable(uname, objects) {
