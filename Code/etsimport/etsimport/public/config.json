@@ -1,0 +1,58 @@
+{
+    "objects": [
+        {
+            "Naam": "Licht keuken",
+            "Type": 1,
+            "SendAddr": "1\/1\/1",
+            "homekit": true,
+            "homekitNaam": "Licht keuken",
+            "uname": "lichtkeuken_1_111",
+            "Soort": "Lamp"
+        },
+        {
+            "Naam": "Licht kamer",
+            "Type": 1,
+            "SendAddr": "1\/1\/2",
+            "homekit": true,
+            "homekitNaam": "Licht kamer",
+            "uname": "lichtkamer_1_112",
+            "Soort": "Lamp"
+        },
+        {
+            "Naam": "Licht living",
+            "Type": 1,
+            "SendAddr": "1\/1\/3",
+            "homekit": false,
+            "homekitNaam": "Licht living",
+            "uname": "lichtliving_1_113",
+            "Soort": "Lamp"
+        },
+        {
+            "Naam": "Licht Living relatief",
+            "Type": 2,
+            "SendAddr": "1\/2\/1",
+            "homekit": false,
+            "homekitNaam": "Licht Living relatief",
+            "uname": "lichtlivingrelatief_2_121",
+            "Soort": "0"
+        },
+        {
+            "Naam": "Licht living absoluut",
+            "Type": 3,
+            "SendAddr": "1\/2\/2",
+            "homekit": true,
+            "homekitNaam": "Licht living",
+            "uname": "lichtlivingabsoluut_3_122",
+            "Soort": "Dimmer"
+        },
+        {
+            "Naam": "Rolluik kamer",
+            "Type": 1,
+            "SendAddr": "2\/1\/1",
+            "homekit": true,
+            "homekitNaam": "Rolluik kamer",
+            "uname": "rolluikkamer_1_211",
+            "Soort": "Rolluik"
+        }
+    ]
+}

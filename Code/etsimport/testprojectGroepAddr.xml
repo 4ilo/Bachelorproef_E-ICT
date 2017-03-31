@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<GroupAddress-Export xmlns="http://knx.org/xml/ga-export/01">
+  <GroupRange Name="Verlichting" RangeStart="2048" RangeEnd="4095">
+    <GroupRange Name="Schakelen" RangeStart="2304" RangeEnd="2559">
+      <GroupAddress Name="Licht keuken" Address="1/1/1" DPTs="DPST-1-1" />
+      <GroupAddress Name="Licht kamer" Address="1/1/2" DPTs="DPST-1-1" />
+      <GroupAddress Name="Licht living" Address="1/1/3" DPTs="DPST-1-1" />
+    </GroupRange>
+    <GroupRange Name="Dimmen" RangeStart="2560" RangeEnd="2815">
+      <GroupAddress Name="Licht Living relatief" Address="1/2/1" DPTs="DPST-3-7" />
+      <GroupAddress Name="Licht living absoluut" Address="1/2/2" DPTs="DPST-5-1" />
+    </GroupRange>
+    <GroupRange Name="Feedback schakelen" RangeStart="2816" RangeEnd="3071">
+      <GroupAddress Name="Licht keuken" Address="1/3/1" DPTs="DPST-1-1" />
+      <GroupAddress Name="Licht kamer" Address="1/3/2" DPTs="DPST-1-1" />
+      <GroupAddress Name="Licht living" Address="1/3/3" />
+    </GroupRange>
+    <GroupRange Name="Feedback dimmen" RangeStart="3072" RangeEnd="3327">
+      <GroupAddress Name="Licht living" Address="1/4/1" DPTs="DPST-5-1" />
+    </GroupRange>
+  </GroupRange>
+  <GroupRange Name="Rolluiken" RangeStart="4096" RangeEnd="6143">
+    <GroupRange Name="Move" RangeStart="4352" RangeEnd="4607">
+      <GroupAddress Name="Rolluik kamer" Address="2/1/1" DPTs="DPST-1-8" />
+    </GroupRange>
+    <GroupRange Name="Stop" RangeStart="4608" RangeEnd="4863">
+      <GroupAddress Name="Rolluik kamer" Address="2/2/1" DPTs="DPST-1-7" />
+    </GroupRange>
+    <GroupRange Name="Absoluut" RangeStart="4864" RangeEnd="5119">
+      <GroupAddress Name="Rolluik kamer absoluut" Address="2/3/1" DPTs="DPST-5-1" />
+    </GroupRange>
+    <GroupRange Name="Feedback" RangeStart="5120" RangeEnd="5375">
+      <GroupAddress Name="Rolluik kamer" Address="2/4/1" DPTs="DPST-5-1" />
+    </GroupRange>
+  </GroupRange>
+</GroupAddress-Export>
