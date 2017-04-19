@@ -28,7 +28,7 @@ function OliKnx_Platform(log, config, api)
     this.config = config;
     this.accessories = [];
 
-    this.jsonObjects = require('/home/olivier/config.json');        // Get the contents of the json config file
+    this.jsonObjects = require(config.configLocation);        // Get the contents of the json config file
     this.jsonObjects = this.jsonObjects.objects;
 
 
@@ -201,9 +201,13 @@ function isAvailable(uname, objects)
     return false;
 }
 
-//
-//  Sample function to show how developer can add accessory dynamically from outside event
-//
+
+/**
+ * We add a new homekit object based on the object from the config file
+ *
+ * @param       object        The object from de config.json file
+ * @param       objectNumber  The object number
+ */
 OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber) 
 {
     
