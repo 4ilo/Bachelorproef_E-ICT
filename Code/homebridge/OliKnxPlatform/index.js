@@ -98,30 +98,57 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                 break;
 
             case 3:
-                // Dimmer object --> maakt gebruik van percentages!!
-                accessory.getService(Service.Lightbulb)
-                .getCharacteristic(Characteristic.On)
-                .on('set', function(value, callback) {
-                    platform.log("Set licht -> " + value);
-                    callback();
-                })
-                .on('get', function(callback) {
-                    platform.log("Get licht");
-                    callback(null,1);
-                });
+                // Absolute sturing dimmer of rolluik 
+                
+                if(accessory.context.objectSoort == "Dimmer")
+                {
+                    // Dimmer object --> maakt gebruik van percentages!!
+                    accessory.getService(Service.Lightbulb)
+                    .getCharacteristic(Characteristic.On)
+                    .on('set', function(value, callback) {
+                        platform.log("Set licht -> " + value);
+                        callback();
+                    })
+                    .on('get', function(callback) {
+                        platform.log("Get licht");
+                        callback(null,1);
+                    });
 
-                accessory.getService(Service.Lightbulb)
-                .getCharacteristic(Characteristic.Brightness)
-                .on('set', function(value, callback) {
-                    platform.log("Dimming to " + value);
-                    callback();
-                })
-                .on('get', function(callback) {
-                    platform.log("Get dimming");
-                    callback(null, 50);
-                });
+                    accessory.getService(Service.Lightbulb)
+                    .getCharacteristic(Characteristic.Brightness)
+                    .on('set', function(value, callback) {
+                        platform.log("Dimming to " + value);
+                        callback();
+                    })
+                    .on('get', function(callback) {
+                        platform.log("Get dimming");
+                        callback(null, 50);
+                    });
 
-                info.setCharacteristic(Characteristic.SerialNumber, "Dimmer");
+                    info.setCharacteristic(Characteristic.SerialNumber, "Dimmer");
+                }
+                else if(accessory.context.objectSoort == "Rolluik")
+                {
+                    // Absoluute rolluik sturing
+                    accessory.getService(Service.WindowCovering)
+                    .getCharacteristic(Characteristic.TargetPosition)
+                    .on('set', function(value, callback) {
+                        platform.log("Set target pos to " + value);
+                        callback();
+                    });
+
+                    accessory.getService(Service.WindowCovering)
+                    .getCharacteristic(Characteristic.CurrentPosition)
+                    .on('get', function(callback) {
+                        platform.log("Getting current pos");
+                        callback(null, 50);
+                    })
+                    .on('set', function(value, callback) {
+                        platform.log("Setting current pos to " + value);
+                        callback();
+                    })
+                }
+                
 
                 break;
 
@@ -140,28 +167,6 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
 
 
                 info.setCharacteristic(Characteristic.SerialNumber, "Scene");
-
-                break;
-
-            case 5:
-                // Absoluute rolluik sturing
-                accessory.getService(Service.WindowCovering)
-                .getCharacteristic(Characteristic.TargetPosition)
-                .on('set', function(value, callback) {
-                    platform.log("Set target pos to " + value);
-                    callback();
-                });
-
-                accessory.getService(Service.WindowCovering)
-                .getCharacteristic(Characteristic.CurrentPosition)
-                .on('get', function(callback) {
-                    platform.log("Getting current pos");
-                    callback(null, 50);
-                })
-                .on('set', function(value, callback) {
-                    platform.log("Setting current pos to " + value);
-                    callback();
-                })
 
                 break;
         }
@@ -217,7 +222,6 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
     {
 
         // Object wasn't registered, we add it now
-
         this.log("CommunicatieObject toevoegen: " + object.Naam);
 
         var newAccessory = new Accessory(object.Naam, uuid);
@@ -230,6 +234,7 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
         newAccessory.context.objectType = object.Type;
         newAccessory.context.objectNumber = objectNumber;
         newAccessory.context.objectUname = object.uname;
+        newAccessory.context.objectSoort = object.Soort;
 
         // Add info to the objects
         newAccessory.getService(Service.AccessoryInformation)
@@ -238,17 +243,21 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
 
 
         // Generate a new service based on the type
-        if(object.Type == 1 || object.Type == 3)
+        if(object.Type == 1)
         {
             newAccessory.addService(Service.Lightbulb, object.Naam);
         }
-        else if(object.Type == 5)
+        else if(object.Type == 3)
         {
-            newAccessory.addService(Service.WindowCovering, object.Naam);
-        }
-        else if(object.Type == 4)
-        {
-            newAccessory.addService(Service.Switch, object.Naam);
+            // Absoluute sturing (roluik of dimmer)
+            if(object.Soort == "Dimmer")
+            {
+                newAccessory.addService(Service.Lightbulb, object.Naam);
+            }
+            else if(object.Soort == "Rolluik")
+            {
+                newAccessory.addService(Service.WindowCovering, object.Naam);
+            }
         }
 
 

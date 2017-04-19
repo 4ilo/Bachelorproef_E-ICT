@@ -22,7 +22,7 @@
             "Naam": "Licht living",
             "Type": 1,
             "SendAddr": "1\/1\/3",
-            "homekit": false,
+            "homekit": true,
             "homekitNaam": "Licht living",
             "uname": "lichtliving_1_113",
             "Soort": "Lamp"
@@ -41,7 +41,7 @@
             "Type": 3,
             "SendAddr": "1\/2\/2",
             "homekit": true,
-            "homekitNaam": "Licht living",
+            "homekitNaam": "Licht living absoluut",
             "uname": "lichtlivingabsoluut_3_122",
             "Soort": "Dimmer"
         },
@@ -49,9 +49,18 @@
             "Naam": "Rolluik kamer",
             "Type": 1,
             "SendAddr": "2\/1\/1",
-            "homekit": true,
+            "homekit": false,
             "homekitNaam": "Rolluik kamer",
             "uname": "rolluikkamer_1_211",
+            "Soort": "0"
+        },
+        {
+            "Naam": "Rolluik kamer absoluut",
+            "Type": 3,
+            "SendAddr": "2\/3\/1",
+            "homekit": true,
+            "homekitNaam": "Rolluik kamer absoluut",
+            "uname": "rolluikkamerabsoluut_3_231",
             "Soort": "Rolluik"
         }
     ]
