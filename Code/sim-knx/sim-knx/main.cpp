@@ -13,8 +13,20 @@ void exitApplication(int sig);
 
 Device glob_sim_knx;
 
-int main(void)
+int main(int argc, char * argv[])
 {
+    int portNumber;
+    string configFileName;
+
+    if(argc == 3)
+    {
+        portNumber = atoi(argv[1]);
+        configFileName = argv[2];
+
+    } else {
+        portNumber = 1234;
+        configFileName = "config.json";
+    }
 
     signal(SIGINT,exitApplication);
 
@@ -25,12 +37,12 @@ int main(void)
     glob_sim_knx.setAddr(0x1102);
 
     cout << "adding device objects" << endl;
-    glob_sim_knx.addObjects("config.json");
+    glob_sim_knx.addObjects(configFileName);
 
     vector<Object *> obs = glob_sim_knx.getObjects();
 
-    cout << "Opening udp socket" << endl;
-    int sock = initSocket(1234);
+    cout << "Opening udp socket on port " << portNumber << endl;
+    int sock = initSocket(portNumber);
 
     struct sockaddr_in remaddr;
     socklen_t addrlen = sizeof(remaddr);
