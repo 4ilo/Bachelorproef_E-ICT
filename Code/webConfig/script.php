@@ -35,6 +35,23 @@
 		}
 
 		if($data["Type"] == "0")	return "error";			// Het type is niet ingevuld
+		
+
+		switch ($data["Type"]) 
+		{
+			case 3:
+				$soort = "Dimmer";
+				break;
+
+			case 5:
+				$soort = "Rolluik";			// Rolluik en dimmer zijn hetzelfde type, maar een andere soort in homebridge
+				$data["Type"] = 3;
+				break;
+
+			default:
+				$soort = "0";
+				break;
+		}
 
 		$uname = strtolower(str_replace(" ", "", $data["Naam"]));		// We maken een unieke naam in formaat naam_type_sendaddr
 		$uname .= "_" . $data["Type"];
@@ -46,7 +63,9 @@
 				"Type" => intval($data["Type"]),		// We maken het nieuwe object
 				"SendAddr" => $data["SendAddr"],
 				"homekit" => $data["homekit"],
-				"uname" => $uname
+				"homekitNaam" => $data["Naam"],
+				"uname" => $uname,
+				"Soort" => $soort
 			]);
 
 		send_json($json);

@@ -249,18 +249,18 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
         // Generate a new service based on the type
         if(object.Type == 1)
         {
-            newAccessory.addService(Service.Lightbulb, object.Naam);
+            newAccessory.addService(Service.Lightbulb, object.homekitNaam);
         }
         else if(object.Type == 3)
         {
             // Absoluute sturing (roluik of dimmer)
             if(object.Soort == "Dimmer")
             {
-                newAccessory.addService(Service.Lightbulb, object.Naam);
+                newAccessory.addService(Service.Lightbulb, object.homekitNaam);
             }
             else if(object.Soort == "Rolluik")
             {
-                newAccessory.addService(Service.WindowCovering, object.Naam);
+                newAccessory.addService(Service.WindowCovering, object.homekitNaam);
             }
         }
 

@@ -5,28 +5,63 @@
             "Type": 1,
             "SendAddr": "1\/1\/1",
             "homekit": true,
-            "uname": "lichtkeuken_1_111"
+            "homekitNaam": "Licht keuken",
+            "uname": "lichtkeuken_1_111",
+            "Soort": "Lamp"
+        },
+        {
+            "Naam": "Licht kamer",
+            "Type": 1,
+            "SendAddr": "1\/1\/2",
+            "homekit": true,
+            "homekitNaam": "Licht kamer",
+            "uname": "lichtkamer_1_112",
+            "Soort": "Lamp"
         },
         {
             "Naam": "Licht living",
-            "Type": 3,
+            "Type": 1,
+            "SendAddr": "1\/1\/3",
+            "homekit": true,
+            "homekitNaam": "Licht living",
+            "uname": "lichtliving_1_113",
+            "Soort": "Lamp"
+        },
+        {
+            "Naam": "Licht Living relatief",
+            "Type": 2,
             "SendAddr": "1\/2\/1",
-            "homekit": true,
-            "uname": "lichtliving_3_121"
+            "homekit": false,
+            "homekitNaam": "Licht Living relatief",
+            "uname": "lichtlivingrelatief_2_121",
+            "Soort": "0"
         },
         {
-            "Naam": "Rolluik keuken",
-            "Type": 5,
+            "Naam": "Licht living absoluut",
+            "Type": 3,
+            "SendAddr": "1\/2\/2",
+            "homekit": true,
+            "homekitNaam": "Licht living absoluut",
+            "uname": "lichtlivingabsoluut_3_122",
+            "Soort": "Dimmer"
+        },
+        {
+            "Naam": "Rolluik kamer",
+            "Type": 1,
             "SendAddr": "2\/1\/1",
-            "homekit": true,
-            "uname": "rolluikkeuken_5_211"
+            "homekit": false,
+            "homekitNaam": "Rolluik kamer",
+            "uname": "rolluikkamer_1_211",
+            "Soort": "0"
         },
         {
-            "Naam": "Scene",
-            "Type": 4,
-            "SendAddr": "0\/0\/0",
+            "Naam": "Rolluik kamer absoluut",
+            "Type": 3,
+            "SendAddr": "2\/3\/1",
             "homekit": true,
-            "uname": "scene_4_000"
+            "homekitNaam": "Rolluik kamer absoluut",
+            "uname": "rolluikkamerabsoluut_3_231",
+            "Soort": "Rolluik"
         }
     ]
 }
