@@ -226,9 +226,9 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
     {
 
         // Object wasn't registered, we add it now
-        this.log("CommunicatieObject toevoegen: " + object.Naam);
+        this.log("CommunicatieObject toevoegen: " + object.homekitNaam);
 
-        var newAccessory = new Accessory(object.Naam, uuid);
+        var newAccessory = new Accessory(object.homekitNaam, uuid);
         // newAccessory.on('identify', function(paired, callback) {
         //     //platform.log(accessory.displayName, "Identify!!!");
         //     callback();
