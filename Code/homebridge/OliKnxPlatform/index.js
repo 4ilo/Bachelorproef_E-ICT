@@ -1,5 +1,7 @@
 var Accessory, Service, Characteristic, UUIDGen;
 
+var dgram = require("dgram");
+
 module.exports = function(homebridge) 
 {
     console.log("homebridge API version: " + homebridge.version);
@@ -27,6 +29,9 @@ function OliKnx_Platform(log, config, api)
     this.log = log;
     this.config = config;
     this.accessories = [];
+
+    this.udpPort = 1234;
+    this.udpHost = "localhost";
 
     this.jsonObjects = require(config.configLocation);        // Get the contents of the json config file
     this.jsonObjects = this.jsonObjects.objects;
@@ -85,7 +90,8 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                 accessory.getService(Service.Lightbulb)
                 .getCharacteristic(Characteristic.On)
                 .on('set', function(value, callback) {
-                    platform.log("Set licht -> 1");
+                    platform.log("Set licht -> " + value);
+                    sendValue(objectNumber, value);
                     callback();
                 })
                 .on('get', function(callback) {
@@ -107,6 +113,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     .getCharacteristic(Characteristic.On)
                     .on('set', function(value, callback) {
                         platform.log("Set licht -> " + value);
+                        sendValue(objectNumber, value);
                         callback();
                     })
                     .on('get', function(callback) {
@@ -118,6 +125,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     .getCharacteristic(Characteristic.Brightness)
                     .on('set', function(value, callback) {
                         platform.log("Dimming to " + value);
+                        sendValue(objectNumber, value);
                         callback();
                     })
                     .on('get', function(callback) {
@@ -134,6 +142,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     .getCharacteristic(Characteristic.TargetPosition)
                     .on('set', function(value, callback) {
                         platform.log("Set target pos to " + value);
+                        sendValue(objectNumber, value);
                         callback();
                     });
 
@@ -145,6 +154,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     })
                     .on('set', function(value, callback) {
                         platform.log("Setting current pos to " + value);
+                        sendValue(objectNumber, value);
                         callback();
                     })
                 }
@@ -199,6 +209,22 @@ function isAvailable(uname, objects)
     }
 
     return false;
+}
+
+/**
+ * Send a value over udp to sim-knx (boolean or absolute value)
+ *
+ * @param      int  objectNummer  The object nummer
+ * @param      int  value         The value
+ */
+function sendValue(objectNummer, value)
+{
+    var udpPort = 1234;
+    var udpHost = "localhost";
+
+    var message =  "set " + objectNummer + " " + value;
+    var socket = dgram.createSocket("udp4");
+    socket.send(message, 0, message.length, udpPort, udpHost);
 }
 
 
