@@ -131,7 +131,7 @@ Response Commando::get(void)
     send();             // Send the request
 
     string data;
-    data = m_uart->readData(1);     // Read data with 1s timeout
+    data = m_uart->readData(100);     // Read data with 1s timeout
     m_response.parse(data);
 
     return m_response;

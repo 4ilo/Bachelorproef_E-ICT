@@ -30,9 +30,6 @@ function OliKnx_Platform(log, config, api)
     this.config = config;
     this.accessories = [];
 
-    this.udpPort = 1234;
-    this.udpHost = "localhost";
-
     this.jsonObjects = require(config.configLocation);        // Get the contents of the json config file
     this.jsonObjects = this.jsonObjects.objects;
 
@@ -72,6 +69,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
 
     var objectNumber;
 
+    // Get the object number based on the Uname
     if((objectNumber = isAvailable(accessory.context.objectUname, this.jsonObjects)))
     {
 
@@ -85,6 +83,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
 
         switch(accessory.context.objectType)
         {
+            //this.log(this);
             case 1:
                 // Boolean licht object
                 accessory.getService(Service.Lightbulb)
@@ -95,8 +94,29 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     callback();
                 })
                 .on('get', function(callback) {
+
                     platform.log("Get licht");
-                    callback(null,1);
+
+                    //platform.received = 0;
+                    //platform.getValue(objectNumber);
+                    
+                    var udpPort = 1234;
+                    var udpHost = "192.168.2.101";
+
+                    var message = "get " + objectNumber;
+
+                    var socket = dgram.createSocket("udp4");
+                    socket.bind(0, "192.168.2.100");
+
+                    socket.send(message, 0, message.length, udpPort, udpHost);
+
+                    socket.on("message", function(msg, rinfo) {
+                        console.log("in callback"); 
+                        callback(0,msg);
+                    }.bind(this));
+
+                    platform.log("Normale exit");
+                    callback(null,platform.receivedValue);
                 });
 
                 info.setCharacteristic(Characteristic.SerialNumber, "Lamp");
@@ -220,11 +240,35 @@ function isAvailable(uname, objects)
 function sendValue(objectNummer, value)
 {
     var udpPort = 1234;
-    var udpHost = "localhost";
+    var udpHost = "192.168.2.101";
 
     var message =  "set " + objectNummer + " " + value;
     var socket = dgram.createSocket("udp4");
     socket.send(message, 0, message.length, udpPort, udpHost);
+}
+
+/**
+ * Get the value for the object from sim-knx over udp
+ *
+ * @param      Int  objectNumber  The object number
+ * @return     Int  The value for the object.
+ */
+OliKnx_Platform.prototype.getValue = function(objectNumber)
+{
+    var udpPort = 1234;
+    var udpHost = "192.168.2.101";
+
+    var message = "get " + objectNumber;
+
+    var socket = dgram.createSocket("udp4");
+    socket.bind(0, "192.168.2.100");
+
+    socket.send(message, 0, message.length, udpPort, udpHost);
+
+    socket.on("message", (msg, rinfo) => {
+        console.log("in callback");
+        callback(0,msg);
+    });
 }
 
 
