@@ -116,7 +116,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                         callback();
                     })
                     /*.on('get', function(callback) {
-                        platform.log("Get licht");                      // !!!! todo -> absoluut object koppelen aan schakelobject!
+                        platform.log("Get licht");                      // !!!! todo -> absoluut object koppelen aan schakelobject
                         platform.askValue(objectNumber,callback);
                     });*/
 
@@ -137,25 +137,28 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                 else if(accessory.context.objectSoort == "Rolluik")
                 {
                     // Absoluute rolluik sturing
-                    accessory.getService(Service.WindowCovering)
-                    .getCharacteristic(Characteristic.TargetPosition)
+                    var service = accessory.getService(Service.WindowCovering);
+                    
+                    service.getCharacteristic(Characteristic.TargetPosition)
                     .on('set', function(value, callback) {
                         platform.log("Set target pos to " + value);
                         platform.sendValue(objectNumber, value);
+
+                        service.setCharacteristic(Characteristic.PositionState, Characteristic.PositionState.STOPPED);
+                        service.setCharacteristic(Characteristic.CurrentPosition, value);
+
                         callback();
                     });
 
-                    accessory.getService(Service.WindowCovering)
-                    .getCharacteristic(Characteristic.CurrentPosition)
+                    service.getCharacteristic(Characteristic.CurrentPosition)
                     .on('get', function(callback) {
                         platform.log("Getting current pos");
-                        platform.askValue(objectNumber, callback);
-                    })
-                    .on('set', function(value, callback) {
-                        platform.log("Setting current pos to " + value);
-                        platform.sendValue(objectNumber, value);
-                        callback();
-                    })
+                        service.setCharacteristic(Characteristic.CurrentPosition, 30);
+                        service.setCharacteristic(Characteristic.PositionState, Characteristic.PositionState.STOPPED);
+                        //service.setCharacteristic(Characteristic.TargetPosition, 30);
+                        //platform.askValue(objectNumber, callback);
+                        callback(null,30);
+                    });
                 }
                 
 
