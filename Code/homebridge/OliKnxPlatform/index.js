@@ -83,7 +83,6 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
 
         switch(accessory.context.objectType)
         {
-            //this.log(this);
             case 1:
                 // Boolean licht object
                 accessory.getService(Service.Lightbulb)
@@ -96,11 +95,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                 .on('get', function(callback) {
 
                     platform.log("Get licht");
-
-                    getValue(objectNumber, callback);
-                    
-                    platform.log("Normale exit");
-                    //callback(null,1);
+                    getValue(objectNumber, callback);       // Get the value over udp from sim-knx
                 });
 
                 info.setCharacteristic(Characteristic.SerialNumber, "Lamp");
@@ -252,11 +247,19 @@ function getValue(objectNumber, callback)
     socket.on("message", makeResponseHandler(callback));
 }
 
-function makeResponseHandler(callback) {
-    return function(msg, rinfo) {
-        // Deal with response
-        console.log("In responsehandler: " + msg);
-        callback(null, parseInt(msg));
+/**
+ * Function creates responsehandler for socket.on that can use the homebridge callback function when finiched
+ *
+ * @param      {Function}  callback  A homebridge provided callback function
+ * @return     {<type>}    The callback that will be passed to the socket.on method
+ */
+function makeResponseHandler(callback) 
+{
+    return function(msg, rinfo) 
+    {
+        // Deal with response here
+        var value = parseInt(msg);
+        callback(null,  value);         // Return value to homebridge
     }
 }
 
