@@ -97,26 +97,10 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
 
                     platform.log("Get licht");
 
-                    //platform.received = 0;
-                    //platform.getValue(objectNumber);
+                    getValue(objectNumber, callback);
                     
-                    var udpPort = 1234;
-                    var udpHost = "192.168.2.101";
-
-                    var message = "get " + objectNumber;
-
-                    var socket = dgram.createSocket("udp4");
-                    socket.bind(0, "192.168.2.100");
-
-                    socket.send(message, 0, message.length, udpPort, udpHost);
-
-                    socket.on("message", function(msg, rinfo) {
-                        console.log("in callback"); 
-                        callback(0,msg);
-                    }.bind(this));
-
                     platform.log("Normale exit");
-                    callback(null,platform.receivedValue);
+                    //callback(null,1);
                 });
 
                 info.setCharacteristic(Characteristic.SerialNumber, "Lamp");
@@ -248,29 +232,33 @@ function sendValue(objectNummer, value)
 }
 
 /**
- * Get the value for the object from sim-knx over udp
- *
- * @param      Int  objectNumber  The object number
- * @return     Int  The value for the object.
- */
-OliKnx_Platform.prototype.getValue = function(objectNumber)
+* Get the value for the object from sim-knx over udp
+*
+* @param      Int  objectNumber  The object number
+* @return     Int  The value for the object.
+*/
+function getValue(objectNumber, callback)
 {
     var udpPort = 1234;
-    var udpHost = "192.168.2.101";
+    var udpHost = "192.168.2.100";
 
     var message = "get " + objectNumber;
 
     var socket = dgram.createSocket("udp4");
-    socket.bind(0, "192.168.2.100");
+    socket.bind(0, "192.168.2.101");
 
     socket.send(message, 0, message.length, udpPort, udpHost);
 
-    socket.on("message", (msg, rinfo) => {
-        console.log("in callback");
-        callback(0,msg);
-    });
+    socket.on("message", makeResponseHandler(callback));
 }
 
+function makeResponseHandler(callback) {
+    return function(msg, rinfo) {
+        // Deal with response
+        console.log("In responsehandler: " + msg);
+        callback(null, parseInt(msg));
+    }
+}
 
 /**
  * We add a new homekit object based on the object from the config file
