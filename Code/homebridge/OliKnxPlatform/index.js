@@ -115,10 +115,10 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                         platform.sendValue(objectNumber, value);
                         callback();
                     })
-                    .on('get', function(callback) {
-                        platform.log("Get licht");
-                        callback(null,1);
-                    });
+                    /*.on('get', function(callback) {
+                        platform.log("Get licht");                      // !!!! todo -> absoluut object koppelen aan schakelobject!
+                        platform.askValue(objectNumber,callback);
+                    });*/
 
                     accessory.getService(Service.Lightbulb)
                     .getCharacteristic(Characteristic.Brightness)
@@ -129,7 +129,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     })
                     .on('get', function(callback) {
                         platform.log("Get dimming");
-                        callback(null, 50);
+                        platform.askValue(objectNumber, callback);
                     });
 
                     info.setCharacteristic(Characteristic.SerialNumber, "Dimmer");
@@ -149,7 +149,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     .getCharacteristic(Characteristic.CurrentPosition)
                     .on('get', function(callback) {
                         platform.log("Getting current pos");
-                        callback(null, 50);
+                        platform.askValue(objectNumber, callback);
                     })
                     .on('set', function(value, callback) {
                         platform.log("Setting current pos to " + value);
