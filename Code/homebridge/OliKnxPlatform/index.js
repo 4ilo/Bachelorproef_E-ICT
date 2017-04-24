@@ -70,7 +70,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
     var objectNumber;
 
     // Get the object number based on the Uname
-    if((objectNumber = isAvailable(accessory.context.objectUname, this.jsonObjects)))
+    if((objectNumber = this.isAvailable(accessory.context.objectUname)))
     {
 
         // Accessery is just being initialised, or stil exists in cache after reboot
@@ -89,13 +89,13 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                 .getCharacteristic(Characteristic.On)
                 .on('set', function(value, callback) {
                     platform.log("Set licht -> " + value);
-                    sendValue(objectNumber, value);
+                    platform.sendValue(objectNumber, value);
                     callback();
                 })
                 .on('get', function(callback) {
 
                     platform.log("Get licht");
-                    getValue(objectNumber, callback);       // Get the value over udp from sim-knx
+                    platform.askValue(objectNumber, callback);       // Get the value over udp from sim-knx
                 });
 
                 info.setCharacteristic(Characteristic.SerialNumber, "Lamp");
@@ -112,7 +112,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     .getCharacteristic(Characteristic.On)
                     .on('set', function(value, callback) {
                         platform.log("Set licht -> " + value);
-                        sendValue(objectNumber, value);
+                        platform.sendValue(objectNumber, value);
                         callback();
                     })
                     .on('get', function(callback) {
@@ -124,7 +124,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     .getCharacteristic(Characteristic.Brightness)
                     .on('set', function(value, callback) {
                         platform.log("Dimming to " + value);
-                        sendValue(objectNumber, value);
+                        platform.sendValue(objectNumber, value);
                         callback();
                     })
                     .on('get', function(callback) {
@@ -141,7 +141,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     .getCharacteristic(Characteristic.TargetPosition)
                     .on('set', function(value, callback) {
                         platform.log("Set target pos to " + value);
-                        sendValue(objectNumber, value);
+                        platform.sendValue(objectNumber, value);
                         callback();
                     });
 
@@ -153,7 +153,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     })
                     .on('set', function(value, callback) {
                         platform.log("Setting current pos to " + value);
-                        sendValue(objectNumber, value);
+                        platform.sendValue(objectNumber, value);
                         callback();
                     })
                 }
@@ -194,14 +194,13 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
  * Check if the object in de config file matches with a specific uname
  *
  * @param      {String}            uname    The Uniqe name for an object
- * @param      {Json}              objects  The objects from the config file
  * @return     {(boolean|nummer)}  objectnumber if available, False otherwise.
  */
-function isAvailable(uname, objects) 
+OliKnx_Platform.prototype.isAvailable = function(uname) 
 {
-    for(var i = 0; i < objects.length; i++)
+    for(var i = 0; i < this.jsonObjects.length; i++)
     {
-        if(objects[i].uname == uname && objects[i].homekit == true)
+        if(this.jsonObjects[i].uname == uname && this.jsonObjects[i].homekit == true)
         {
             return i+1;     // Return the current object number, it could be changed in de config file
         }
@@ -216,10 +215,10 @@ function isAvailable(uname, objects)
  * @param      int  objectNummer  The object nummer
  * @param      int  value         The value
  */
-function sendValue(objectNummer, value)
+OliKnx_Platform.prototype.sendValue = function(objectNummer, value)
 {
-    var udpPort = 1234;
-    var udpHost = "192.168.2.101";
+    var udpPort = this.config.knxUdpPort;
+    var udpHost = this.config.knxUdpHost;
 
     var message =  "set " + objectNummer + " " + value;
     var socket = dgram.createSocket("udp4");
@@ -232,19 +231,19 @@ function sendValue(objectNummer, value)
 * @param      Int  objectNumber  The object number
 * @return     Int  The value for the object.
 */
-function getValue(objectNumber, callback)
+OliKnx_Platform.prototype.askValue = function(objectNumber, callback)
 {
-    var udpPort = 1234;
-    var udpHost = "192.168.2.100";
+    var udpPort = this.config.knxUdpPort;
+    var udpHost = this.config.knxUdpHost;
 
     var message = "get " + objectNumber;
 
     var socket = dgram.createSocket("udp4");
-    socket.bind(0, "192.168.2.101");
-
-    socket.send(message, 0, message.length, udpPort, udpHost);
+    socket.bind(0, this.config.homebridgeHost);
 
     socket.on("message", makeResponseHandler(callback));
+
+    socket.send(message, 0, message.length, udpPort, udpHost);
 }
 
 /**
@@ -290,10 +289,6 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
         this.log("CommunicatieObject toevoegen: " + object.homekitNaam);
 
         var newAccessory = new Accessory(object.homekitNaam, uuid);
-        // newAccessory.on('identify', function(paired, callback) {
-        //     //platform.log(accessory.displayName, "Identify!!!");
-        //     callback();
-        // });
 
         // We save some information in the object for later use
         newAccessory.context.objectType = object.Type;
