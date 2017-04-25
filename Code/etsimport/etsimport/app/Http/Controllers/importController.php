@@ -18,6 +18,17 @@ class ImportController extends Controller
         return view("home");
     }
 
+
+    public function selectLinks()
+    {
+        $json_file = file_get_contents("config.json");
+        $json = json_decode($json_file,true);
+
+        $objects = $json["objects"];
+
+        return view("selectLinks",compact("objects"));
+    }
+
     /**
      * Save the file the user tries to upload
      *
@@ -126,15 +137,36 @@ class ImportController extends Controller
                     "homekit" => $homekit,
                     "homekitNaam" => $homekitNaam,
                     "uname" => $uname,
-                    "Soort" => $soort
+                    "Soort" => $soort,
+                    "SchakelObject" => "0"
                 ]);
         }
 
         $this->save_json($objects, "config.json");
 
+        return redirect("link");
+
+    }
+
+    public function linkObjects(Request $request)
+    {
+        $links = $request->all();
+
+        $json_file = file_get_contents("config.json");
+        $json = json_decode($json_file,true);
+
+        foreach ($json["objects"] as &$object) 
+        {
+            if(isset($links[$object["uname"]]))     // Check if the object needs to be linked
+            {
+                $object["SchakelObject"] = $links[$object["uname"]]["schakel"];     // Add schakelObject to the dimmer
+            }
+        }
+
+        $this->save_json($json, "config.json");
+        
         Session::flash('message', 'De configuratie is succesvol opgeslagen in config.json');
         return redirect("/");
-
     }
 
     //

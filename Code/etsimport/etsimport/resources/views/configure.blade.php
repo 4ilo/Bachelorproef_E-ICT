@@ -35,6 +35,7 @@
 				<th>Homekit naam</th>
 				<th>Homekit</th>
 				<th>Soort</th>
+				<th>SchakelObject (bij dimmer)</th>
 				<th>Feedback</th>
 			</tr>
 
@@ -75,6 +76,21 @@
 						</div>
 
 					</td>
+					{{-- <td>
+						@if($type == "DPST-5-1")
+							<div class="field">
+								<span class="select">
+									<select name="{{ $keuze }}[schakel]">
+										@foreach($selected as $keuzeSchakel => $typeSchakel)
+											@if($typeSchakel == "DPST-1-1")
+												<option value="">{{ $keuzeSchakel }}</option>
+											@endif
+										@endforeach
+									</select>
+								</span>
+							</div>
+						@endif
+					</td> --}}
 					<td></td>
 				</tr>
 			@endforeach
