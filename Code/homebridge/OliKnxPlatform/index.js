@@ -213,6 +213,12 @@ OliKnx_Platform.prototype.isAvailable = function(uname)
     return false;
 }
 
+/**
+ * Get the number of an object in the sim_knx config file
+ *
+ * @param      {<type>}            uname   The uniqe name of an object
+ * @return     {(boolean|nummer)}  objectnumber if available, False otherwise.
+ */
 OliKnx_Platform.prototype.objectNumber = function(uname)
 {
     for(var i = 0; i < this.jsonObjects.length; i++)
@@ -245,8 +251,9 @@ OliKnx_Platform.prototype.sendValue = function(objectNummer, value)
 /**
 * Get the value for the object from sim-knx over udp
 *
-* @param      Int  objectNumber  The object number
-* @return     Int  The value for the object.
+* @param      Int       objectNumber    The object number
+* @param      Object    service         Conditional service object, only used with blinds control
+* @return     Int                       The value for the object.
 */
 OliKnx_Platform.prototype.askValue = function(objectNumber, callback, service = 0)
 {
@@ -267,6 +274,7 @@ OliKnx_Platform.prototype.askValue = function(objectNumber, callback, service = 
  * Function creates responsehandler for socket.on that can use the homebridge callback function when finiched
  *
  * @param      {Function}  callback  A homebridge provided callback function
+ * @param      Object      service   Conditional service object, only used with blinds control
  * @return     {<type>}    The callback that will be passed to the socket.on method
  */
 function makeResponseHandler(callback, service) 
