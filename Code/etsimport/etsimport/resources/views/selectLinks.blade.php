@@ -58,20 +58,20 @@
 								</span>
 							</div>
 						</td>
-						{{-- <td>
+						<td>
 							<div class="field">
 								<span class="select">
 									<select name="{{ $object["uname"] }}[feedback]">
 										<option selected="selected" value="0">Geen Feedback</option>
 										@foreach($objects as $feedbackObject)
-											@if($schakelObject["Type"] == 3)
+											@if($schakelObject["Type"] == 5)
 												<option value="{{ $feedbackObject["uname"] }}">{{ $feedbackObject["Naam"] }}</option>
 											@endif
 										@endforeach
 									</select>
 								</span>
 							</div>
-						</td> --}}
+						</td>
 					</tr>
 				@endif
 					

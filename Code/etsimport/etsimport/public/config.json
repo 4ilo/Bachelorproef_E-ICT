@@ -28,7 +28,8 @@
             "homekitNaam": "Licht living",
             "uname": "lichtlivingabsoluut_3_122",
             "Soort": "Dimmer",
-            "SchakelObject": "lichtliving_1_113"
+            "SchakelObject": "lichtliving_1_113",
+            "FeedbackObject": "lichtlivingfeedback_5_141"
         },
         {
             "Naam": "Rolluik kamer absoluut",
@@ -38,6 +39,27 @@
             "homekitNaam": "Rolluik kamer",
             "uname": "rolluikkamerabsoluut_3_231",
             "Soort": "Rolluik",
+            "SchakelObject": "0",
+            "FeedbackObject": "rolluikkamerfeedback_5_241"
+        },
+        {
+            "Naam": "Licht living feedback",
+            "Type": 5,
+            "SendAddr": "1\/4\/1",
+            "homekit": false,
+            "homekitNaam": "Licht living feedback",
+            "uname": "lichtlivingfeedback_5_141",
+            "Soort": "Feedback",
+            "SchakelObject": "0"
+        },
+        {
+            "Naam": "Rolluik kamer feedback",
+            "Type": 5,
+            "SendAddr": "2\/4\/1",
+            "homekit": false,
+            "homekitNaam": "Rolluik kamer feedback",
+            "uname": "rolluikkamerfeedback_5_241",
+            "Soort": "Feedback",
             "SchakelObject": "0"
         }
     ]

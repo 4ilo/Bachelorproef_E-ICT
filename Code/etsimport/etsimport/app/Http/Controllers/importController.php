@@ -62,9 +62,67 @@ class ImportController extends Controller
 
         $hoofdGroepen = $this->getHoofdGroepen();
 
-         // dd($hoofdGroepen);
-
         return view("select",compact("hoofdGroepen"));
+    }
+
+    public function selectFeedback()
+    {
+        $configfile = storage_path("app") . "/config.xml";
+
+        if(!file_exists($configfile))
+        {
+            return redirect("/");
+        }
+
+        $hoofdGroepen = $this->getHoofdGroepen();
+
+        return view("selectFeedback",compact("hoofdGroepen"));
+    }
+
+    public function saveFeedback(Request $request)
+    {
+        $feedbackObjects = $request->except(["_token"]);
+
+        $json_file = file_get_contents("config.json");      // Open existing config.json file
+        $json = json_decode($json_file,true);
+
+        $subsubgroepen = $this->getsubsubgroepen();
+
+        foreach ($subsubgroepen as $groepObject) 
+        {
+            if(in_array($groepObject["Address"], $feedbackObjects))
+            {
+                $naam = str_replace("_", " ", $groepObject["Name"]) . " feedback";
+                $homekitNaam = $naam;
+                $SendAddr = $groepObject["Address"];
+                $homekit = false;
+                $soort = "Feedback";
+                $type = 5;              // Feedback
+
+                $uname = strtolower(str_replace(" ", "", $naam));       // We maken een unieke naam in formaat naam_type_sendaddr
+                $uname .= "_" . $type;
+                $uname .= "_" . str_replace("/", "", $SendAddr);
+
+
+                array_push($json["objects"], 
+                [
+                    "Naam" => $naam,
+                    "Type" => $type,            // We maken het nieuwe object
+                    "SendAddr" => $SendAddr,
+                    "homekit" => $homekit,
+                    "homekitNaam" => $homekitNaam,
+                    "uname" => $uname,
+                    "Soort" => $soort,
+                    "SchakelObject" => "0",
+                    "FeedbackObject" => "0"
+                ]);
+
+            }
+        }
+
+        $this->save_json($json, "config.json");
+        return redirect("link");
+
     }
 
     public function saveAddr(Request $request)
@@ -138,13 +196,14 @@ class ImportController extends Controller
                     "homekitNaam" => $homekitNaam,
                     "uname" => $uname,
                     "Soort" => $soort,
-                    "SchakelObject" => "0"
+                    "SchakelObject" => "0",
+                    "FeedbackObject" => "0"
                 ]);
         }
 
         $this->save_json($objects, "config.json");
 
-        return redirect("link");
+        return redirect("feedback");
 
     }
 
@@ -160,6 +219,7 @@ class ImportController extends Controller
             if(isset($links[$object["uname"]]))     // Check if the object needs to be linked
             {
                 $object["SchakelObject"] = $links[$object["uname"]]["schakel"];     // Add schakelObject to the dimmer
+                $object["FeedbackObject"] = $links[$object["uname"]]["feedback"];
             }
         }
 
