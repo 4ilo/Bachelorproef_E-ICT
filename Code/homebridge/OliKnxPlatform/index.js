@@ -107,18 +107,23 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                 
                 if(accessory.context.objectSoort == "Dimmer")
                 {
+                    // We zoeken het bijhorende schakelobject voor de dimmer
+                    var schakelObject = this.objectNumber(accessory.context.object.SchakelObject);
+                    if(schakelObject == false) { schakelObject = objectNumber };
+                    this.log("Dimmer schakel: " + schakelObject);
+
                     // Dimmer object --> maakt gebruik van percentages!!
                     accessory.getService(Service.Lightbulb)
                     .getCharacteristic(Characteristic.On)
                     .on('set', function(value, callback) {
                         platform.log("Set licht -> " + value);
-                        platform.sendValue(objectNumber, value);
+                        platform.sendValue(schakelObject, value);
                         callback();
                     })
-                    /*.on('get', function(callback) {
-                        platform.log("Get licht");                      // !!!! todo -> absoluut object koppelen aan schakelobject
-                        platform.askValue(objectNumber,callback);
-                    });*/
+                    .on('get', function(callback) {
+                        platform.log("Get licht");            
+                        platform.askValue(schakelObject,callback);
+                    });
 
                     accessory.getService(Service.Lightbulb)
                     .getCharacteristic(Characteristic.Brightness)
@@ -200,6 +205,19 @@ OliKnx_Platform.prototype.isAvailable = function(uname)
     for(var i = 0; i < this.jsonObjects.length; i++)
     {
         if(this.jsonObjects[i].uname == uname && this.jsonObjects[i].homekit == true)
+        {
+            return i+1;     // Return the current object number, it could be changed in de config file
+        }
+    }
+
+    return false;
+}
+
+OliKnx_Platform.prototype.objectNumber = function(uname)
+{
+    for(var i = 0; i < this.jsonObjects.length; i++)
+    {
+        if(this.jsonObjects[i].uname == uname)
         {
             return i+1;     // Return the current object number, it could be changed in de config file
         }
@@ -302,6 +320,7 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
         newAccessory.context.objectNumber = objectNumber;
         newAccessory.context.objectUname = object.uname;
         newAccessory.context.objectSoort = object.Soort;
+        newAccessory.context.object = object;
 
         // Add info to the objects
         newAccessory.getService(Service.AccessoryInformation)
