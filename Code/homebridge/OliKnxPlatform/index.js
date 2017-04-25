@@ -153,11 +153,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     service.getCharacteristic(Characteristic.CurrentPosition)
                     .on('get', function(callback) {
                         platform.log("Getting current pos");
-                        service.setCharacteristic(Characteristic.CurrentPosition, 30);
-                        service.setCharacteristic(Characteristic.PositionState, Characteristic.PositionState.STOPPED);
-                        //service.setCharacteristic(Characteristic.TargetPosition, 30);
-                        //platform.askValue(objectNumber, callback);
-                        callback(null,30);
+                        platform.askValue(objectNumber, callback, service);
                     });
                 }
                 
@@ -234,7 +230,7 @@ OliKnx_Platform.prototype.sendValue = function(objectNummer, value)
 * @param      Int  objectNumber  The object number
 * @return     Int  The value for the object.
 */
-OliKnx_Platform.prototype.askValue = function(objectNumber, callback)
+OliKnx_Platform.prototype.askValue = function(objectNumber, callback, service = 0)
 {
     var udpPort = this.config.knxUdpPort;
     var udpHost = this.config.knxUdpHost;
@@ -244,7 +240,7 @@ OliKnx_Platform.prototype.askValue = function(objectNumber, callback)
     var socket = dgram.createSocket("udp4");
     socket.bind(0, this.config.homebridgeHost);
 
-    socket.on("message", makeResponseHandler(callback));
+    socket.on("message", makeResponseHandler(callback, service));
 
     socket.send(message, 0, message.length, udpPort, udpHost);
 }
@@ -255,11 +251,19 @@ OliKnx_Platform.prototype.askValue = function(objectNumber, callback)
  * @param      {Function}  callback  A homebridge provided callback function
  * @return     {<type>}    The callback that will be passed to the socket.on method
  */
-function makeResponseHandler(callback) 
+function makeResponseHandler(callback, service) 
 {
     return function(msg, rinfo) 
     {
         // Deal with response here
+        
+        if(service != 0)        // For blinds we have to set the targetPos in order to work properly
+        {
+            service.setCharacteristic(Characteristic.PositionState, Characteristic.PositionState.STOPPED);
+            service.setCharacteristic(Characteristic.CurrentPosition, parseInt(msg));
+            service.setCharacteristic(Characteristic.TargetPosition, parseInt(msg));
+        }
+
         var value = parseInt(msg);
         callback(null,  value);         // Return value to homebridge
     }
