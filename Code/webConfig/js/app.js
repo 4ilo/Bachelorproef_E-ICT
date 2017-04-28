@@ -26,7 +26,8 @@ var app = new Vue({
 				case 2: return "Dimmer relatief";
 				case 3: return "Dimmer absoluut";
 				case 4: return "Scene";
-				case 5: return "Rolluik absoluut";
+				case 5: return "Feedback absoluut";
+				case 6: return "Rolluik absoluut";
 			}
 		},
 

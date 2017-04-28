@@ -29,7 +29,7 @@
             "homekit": false,
             "homekitNaam": "Licht living",
             "uname": "lichtliving_1_113",
-            "Soort": "0",
+            "Soort": "Lamp",
             "SchakelObject": "0",
             "FeedbackObject": "0"
         },
@@ -41,8 +41,8 @@
             "homekitNaam": "Licht living",
             "uname": "lichtlivingabsoluut_3_122",
             "Soort": "Dimmer",
-            "SchakelObject": "lichtliving_1_113",
-            "FeedbackObject": "lichtlivingfeedback_5_141"
+            "SchakelObject": "0",
+            "FeedbackObject": "0"
         },
         {
             "Naam": "Rolluik kamer absoluut",
@@ -52,28 +52,6 @@
             "homekitNaam": "Rolluik kamer",
             "uname": "rolluikkamerabsoluut_3_231",
             "Soort": "Rolluik",
-            "SchakelObject": "0",
-            "FeedbackObject": "rolluikkamerfeedback_5_241"
-        },
-        {
-            "Naam": "Licht keuken feedback",
-            "Type": 5,
-            "SendAddr": "1\/3\/1",
-            "homekit": false,
-            "homekitNaam": "Licht keuken feedback",
-            "uname": "lichtkeukenfeedback_5_131",
-            "Soort": "Feedback",
-            "SchakelObject": "0",
-            "FeedbackObject": "0"
-        },
-        {
-            "Naam": "Licht kamer feedback",
-            "Type": 5,
-            "SendAddr": "1\/3\/2",
-            "homekit": false,
-            "homekitNaam": "Licht kamer feedback",
-            "uname": "lichtkamerfeedback_5_132",
-            "Soort": "Feedback",
             "SchakelObject": "0",
             "FeedbackObject": "0"
         },
@@ -89,12 +67,12 @@
             "FeedbackObject": "0"
         },
         {
-            "Naam": "Rolluik kamer feedback",
+            "Naam": "Rolluik kamer absoluut feedback",
             "Type": 5,
-            "SendAddr": "2\/4\/1",
+            "SendAddr": "2\/3\/1",
             "homekit": false,
-            "homekitNaam": "Rolluik kamer feedback",
-            "uname": "rolluikkamerfeedback_5_241",
+            "homekitNaam": "Rolluik kamer absoluut feedback",
+            "uname": "rolluikkamerabsoluutfeedback_5_231",
             "Soort": "Feedback",
             "SchakelObject": "0",
             "FeedbackObject": "0"

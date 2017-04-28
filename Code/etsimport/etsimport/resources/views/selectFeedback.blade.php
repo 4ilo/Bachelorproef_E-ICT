@@ -22,8 +22,8 @@
 
 @section("content")
 
-	<h1 class="title">Selecteer de feedback adressen:</h1>
-	<h2 class="subtitle"> Selecteer GEEN schakeladressen</h2>
+	<h1 class="title">Selecteer de feedback adressen (Niet nodig voor boolean objecten):</h1>
+	<h2 class="subtitle"> Selecteer GEEN schakeladressen.</h2>
 	<div class="notification">
 
 	<form action="feedback" method="post">

@@ -43,7 +43,7 @@
 				$soort = "Dimmer";
 				break;
 
-			case 5:
+			case 6:
 				$soort = "Rolluik";			// Rolluik en dimmer zijn hetzelfde type, maar een andere soort in homebridge
 				$data["Type"] = 3;
 				break;
@@ -65,7 +65,9 @@
 				"homekit" => $data["homekit"],
 				"homekitNaam" => $data["Naam"],
 				"uname" => $uname,
-				"Soort" => $soort
+				"Soort" => $soort,
+				"SchakelObject" => "0",
+                "FeedbackObject" => "0"
 			]);
 
 		send_json($json);

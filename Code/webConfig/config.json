@@ -7,7 +7,9 @@
             "homekit": true,
             "homekitNaam": "Licht keuken",
             "uname": "lichtkeuken_1_111",
-            "Soort": "Lamp"
+            "Soort": "Lamp",
+            "SchakelObject": "0",
+            "FeedbackObject": "0"
         },
         {
             "Naam": "Licht kamer",
@@ -16,52 +18,86 @@
             "homekit": true,
             "homekitNaam": "Licht kamer",
             "uname": "lichtkamer_1_112",
-            "Soort": "Lamp"
+            "Soort": "Lamp",
+            "SchakelObject": "0",
+            "FeedbackObject": "0"
         },
         {
             "Naam": "Licht living",
             "Type": 1,
             "SendAddr": "1\/1\/3",
-            "homekit": true,
+            "homekit": false,
             "homekitNaam": "Licht living",
             "uname": "lichtliving_1_113",
-            "Soort": "Lamp"
-        },
-        {
-            "Naam": "Licht Living relatief",
-            "Type": 2,
-            "SendAddr": "1\/2\/1",
-            "homekit": false,
-            "homekitNaam": "Licht Living relatief",
-            "uname": "lichtlivingrelatief_2_121",
-            "Soort": "0"
+            "Soort": "0",
+            "SchakelObject": "0",
+            "FeedbackObject": "0"
         },
         {
             "Naam": "Licht living absoluut",
             "Type": 3,
             "SendAddr": "1\/2\/2",
             "homekit": true,
-            "homekitNaam": "Licht living absoluut",
+            "homekitNaam": "Licht living",
             "uname": "lichtlivingabsoluut_3_122",
-            "Soort": "Dimmer"
-        },
-        {
-            "Naam": "Rolluik kamer",
-            "Type": 1,
-            "SendAddr": "2\/1\/1",
-            "homekit": false,
-            "homekitNaam": "Rolluik kamer",
-            "uname": "rolluikkamer_1_211",
-            "Soort": "0"
+            "Soort": "Dimmer",
+            "SchakelObject": "lichtliving_1_113",
+            "FeedbackObject": "lichtlivingfeedback_5_141"
         },
         {
             "Naam": "Rolluik kamer absoluut",
             "Type": 3,
             "SendAddr": "2\/3\/1",
             "homekit": true,
-            "homekitNaam": "Rolluik kamer absoluut",
+            "homekitNaam": "Rolluik kamer",
             "uname": "rolluikkamerabsoluut_3_231",
-            "Soort": "Rolluik"
+            "Soort": "Rolluik",
+            "SchakelObject": "0",
+            "FeedbackObject": "rolluikkamerfeedback_5_241"
+        },
+        {
+            "Naam": "Licht keuken feedback",
+            "Type": 5,
+            "SendAddr": "1\/3\/1",
+            "homekit": false,
+            "homekitNaam": "Licht keuken feedback",
+            "uname": "lichtkeukenfeedback_5_131",
+            "Soort": "Feedback",
+            "SchakelObject": "0",
+            "FeedbackObject": "0"
+        },
+        {
+            "Naam": "Licht kamer feedback",
+            "Type": 5,
+            "SendAddr": "1\/3\/2",
+            "homekit": false,
+            "homekitNaam": "Licht kamer feedback",
+            "uname": "lichtkamerfeedback_5_132",
+            "Soort": "Feedback",
+            "SchakelObject": "0",
+            "FeedbackObject": "0"
+        },
+        {
+            "Naam": "Licht living feedback",
+            "Type": 5,
+            "SendAddr": "1\/4\/1",
+            "homekit": false,
+            "homekitNaam": "Licht living feedback",
+            "uname": "lichtlivingfeedback_5_141",
+            "Soort": "Feedback",
+            "SchakelObject": "0",
+            "FeedbackObject": "0"
+        },
+        {
+            "Naam": "Rolluik kamer feedback",
+            "Type": 5,
+            "SendAddr": "2\/4\/1",
+            "homekit": false,
+            "homekitNaam": "Rolluik kamer feedback",
+            "uname": "rolluikkamerfeedback_5_241",
+            "Soort": "Feedback",
+            "SchakelObject": "0",
+            "FeedbackObject": "0"
         }
     ]
-}
+}   

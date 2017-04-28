@@ -23,6 +23,7 @@
 @section("content")
 
 	<h1 class="title">Welke objecten moeten ingenomen worden in homeKit?</h1>
+	<h2 class="subtitle">Bij dimmer enkel het absolute object nemen.</h2>
 	<div class="notification">
 
 	<form action="save" method="post">
