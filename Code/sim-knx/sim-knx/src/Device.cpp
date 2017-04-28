@@ -130,8 +130,16 @@ void Device::addObjects(string file)
                 m_objects[i] = GenerateObject::absoluteValue(i + 1);
                 break;
 
+            case FEEDBACKPERC:
+                m_objects[i] = GenerateObject::absoluteValue(i + 1);
+                break;
+
             case SCENE:
                 m_objects[i] = GenerateObject::scene(i + 1);
+                break;
+
+            default:
+                m_objects[i] = GenerateObject::boolean(i + 1);
                 break;
         }
 

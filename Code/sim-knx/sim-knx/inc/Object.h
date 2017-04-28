@@ -9,6 +9,7 @@
 #define DIMMER 2
 #define PERCENTAGE 3
 #define SCENE 4
+#define FEEDBACKPERC 5
 
 #include <string>
 #include <algorithm>

@@ -112,6 +112,11 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     if(schakelObject == false) { schakelObject = objectNumber };
                     this.log("Dimmer schakel: " + schakelObject);
 
+                    // We zoeken het bijhorende feedbackObject voor de dimmer
+                    var feedbackObject = this.objectNumber(accessory.context.object.FeedbackObject);
+                    if(feedbackObject == false) { feedbackObject = objectNumber };
+                    this.log("Dimmer feedback: " + feedbackObject);
+
                     // Dimmer object --> maakt gebruik van percentages!!
                     accessory.getService(Service.Lightbulb)
                     .getCharacteristic(Characteristic.On)
@@ -134,13 +139,19 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     })
                     .on('get', function(callback) {
                         platform.log("Get dimming");
-                        platform.askValue(objectNumber, callback);
+                        platform.askValue(feedbackObject, callback);
                     });
 
                     info.setCharacteristic(Characteristic.SerialNumber, "Dimmer");
                 }
                 else if(accessory.context.objectSoort == "Rolluik")
                 {
+
+                    // We zoeken het bijhorende feedbackObject voor het rolluik
+                    var feedbackObject = this.objectNumber(accessory.context.object.FeedbackObject);
+                    if(feedbackObject == false) { feedbackObject = objectNumber };
+                    this.log("Rolluik feedback: " + feedbackObject);
+
                     // Absoluute rolluik sturing
                     var service = accessory.getService(Service.WindowCovering);
                     
@@ -158,7 +169,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     service.getCharacteristic(Characteristic.CurrentPosition)
                     .on('get', function(callback) {
                         platform.log("Getting current pos");
-                        platform.askValue(objectNumber, callback, service);
+                        platform.askValue(feedbackObject, callback, service);
                     });
                 }
                 
