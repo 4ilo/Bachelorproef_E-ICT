@@ -8,12 +8,17 @@ use Illuminate\Support\Facades\Session;
 class ImportController extends Controller
 {
 
+    public function landing()
+    {
+        return view("landing");
+    }
+
     /**
      * Show the index view to upload the file
      *
      * @return     view  The home view
      */
-    public function index()
+    public function start()
     {
         return view("home");
     }

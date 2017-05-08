@@ -11,7 +11,11 @@
 |
 */
 
-Route::get("/","importController@index");
+
+Route::get("/","importController@landing");
+
+
+Route::get("start","importController@start");
 Route::post("upload","importController@upload");
 
 Route::get("import","importController@showAdressen");
