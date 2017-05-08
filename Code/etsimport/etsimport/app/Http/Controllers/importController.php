@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Session;
 class ImportController extends Controller
 {
 
+    /**
+     * Show the landing page
+     *
+     * @return   view   Landing page view
+     */
     public function landing()
     {
         return view("landing");
@@ -26,7 +31,7 @@ class ImportController extends Controller
 
     public function selectLinks()
     {
-        $json_file = file_get_contents("config.json");
+        $json_file = file_get_contents("/etc/KNX-iot/config.json");
         $json = json_decode($json_file,true);
 
         $objects = $json["objects"];
@@ -88,7 +93,7 @@ class ImportController extends Controller
     {
         $feedbackObjects = $request->except(["_token"]);
 
-        $json_file = file_get_contents("config.json");      // Open existing config.json file
+        $json_file = file_get_contents("/etc/KNX-iot/config.json");      // Open existing config.json file
         $json = json_decode($json_file,true);
 
         $subsubgroepen = $this->getsubsubgroepen();
@@ -125,7 +130,7 @@ class ImportController extends Controller
             }
         }
 
-        $this->save_json($json, "config.json");
+        $this->save_json($json, "/etc/KNX-iot/config.json");
         return redirect("link");
 
     }
@@ -206,7 +211,7 @@ class ImportController extends Controller
                 ]);
         }
 
-        $this->save_json($objects, "config.json");
+        $this->save_json($objects, "/etc/KNX-iot/config.json");
 
         return redirect("feedback");
 
@@ -216,7 +221,7 @@ class ImportController extends Controller
     {
         $links = $request->all();
 
-        $json_file = file_get_contents("config.json");
+        $json_file = file_get_contents("/etc/KNX-iot/config.json");
         $json = json_decode($json_file,true);
 
         foreach ($json["objects"] as &$object) 
@@ -228,7 +233,7 @@ class ImportController extends Controller
             }
         }
 
-        $this->save_json($json, "config.json");
+        $this->save_json($json, "/etc/KNX-iot/config.json");
         
         Session::flash('message', 'De configuratie is succesvol opgeslagen in config.json');
         return redirect("/");

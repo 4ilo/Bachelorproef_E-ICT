@@ -1,7 +1,7 @@
 <?php
 
 
-	$configfile = "config.json";
+	$configfile = "/etc/KNX-iot/config.json";
 	
 	// Open de json file
 	$json_file = file_get_contents($configfile);
