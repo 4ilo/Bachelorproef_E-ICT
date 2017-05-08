@@ -6,5 +6,5 @@ Todo:
 -	homebridge + sim_knx log in file steken + log level verminderen
 -	Homebridge aanpassen voor siri 
 - 	Scriptie afwerken
-- 	configuratie verplaatsen naar /etc/sim_knx/...
+- 	configuratie verplaatsen naar /etc/sim_knx/...	
 -	Extra high level apps maken
