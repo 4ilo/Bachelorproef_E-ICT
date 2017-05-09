@@ -47,7 +47,7 @@ int main(int argc, char * argv[])
     struct sockaddr_in remaddr;
     socklen_t addrlen = sizeof(remaddr);
     int recvlen;
-    char buffer[50];
+    char buffer[50] = "";
 
     vector<string> request;
 

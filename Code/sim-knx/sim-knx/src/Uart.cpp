@@ -89,6 +89,8 @@ string Uart::readData(int timeout)
         read(m_file, &tmp, 1);
         if(tmp != '\n')
         {
+//            tmp = '1';
+//            stop = 1;
             data += tmp;
         }
         else

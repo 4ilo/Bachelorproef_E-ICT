@@ -132,6 +132,7 @@ Response Commando::get(void)
 
     string data;
     data = m_uart->readData(100);     // Read data with 1s timeout
+    cout << "read " << data << " from UART." << endl;
     m_response.parse(data);
 
     return m_response;
