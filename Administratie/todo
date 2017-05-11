@@ -1,10 +1,10 @@
 Todo:
 
--	Ets-import + webconfig + webpage op target zetten met apache
+-	Ets-import + webconfig + webpage op target zetten met apache	ok
 -	Probleem zoeken met antwoorden van de bus
 -	Autostart van homebridge en sim_knx
 -	homebridge + sim_knx log in file steken + log level verminderen
 -	Homebridge aanpassen voor siri 
 - 	Scriptie afwerken
-- 	configuratie verplaatsen naar /etc/sim_knx/...	
+- 	configuratie verplaatsen naar /etc/sim_knx/...	ok
 -	Extra high level apps maken

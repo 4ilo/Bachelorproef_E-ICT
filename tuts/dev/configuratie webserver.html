@@ -1014,133 +1014,63 @@ body .markdown-body
     page-break-after: avoid;
   }
 }
-</style><title>nieuw project</title></head><body><article class="markdown-body"><h1 id="aanmaken-van-een-configuratie-file"><a name="user-content-aanmaken-van-een-configuratie-file" href="#aanmaken-van-een-configuratie-file" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Aanmaken van een configuratie file</h1>
-<p>Het aanmaken van een configuratiefile kan gebeuren op 2 verschillende manieren:</p>
-<ul>
-<li><a href="#via-de-ets-import-tool">Via de ETS import tool</a></li>
-<li><a href="#via-de-web-configuratie-tool">Via de web configuratie tool</a></li>
-<li><a href="#manueel-via-config-file">Manueel via config file</a></li>
-</ul>
-<h2 id="via-de-ets-import-tool"><a name="user-content-via-de-ets-import-tool" href="#via-de-ets-import-tool" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Via de ETS import tool</h2>
-<p>De ETS import webtool is een webservice die op basis van een export van een werkend ETS project een config.json file aanmaakt dat gebruikt kan worden om uw KNX-IoT installatie te besturen via een webservice. </p>
-<p>Inhoud:</p>
+</style><title>configuratie webserver</title></head><body><article class="markdown-body"><h1 id="configuratie-van-de-webserver-de-webapps"><a name="user-content-configuratie-van-de-webserver-de-webapps" href="#configuratie-van-de-webserver-de-webapps" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Configuratie van de webserver &amp; de webapp&rsquo;s</h1>
+<p>Dit stappenplan moet een uitleg vormen van hoe de webserver geconfigureerd is en de websites die draaien juist geladen worden.<br />
+Volgende dingen worden er even besproken:</p>
 <ol>
-<li><a href="#aanmaken-van-ets-project">Aanmaken van ETS project</a></li>
-<li><a href="#exporteren-van-de-groep-adressen">Exporteren van de groep adressen</a></li>
-<li><a href="">Openen van de ETS import tool</a></li>
+<li><a href="#geinstalleerde-pakketten">Geinstalleerde pakketten</a></li>
+<li><a href="#configuratie-van-apache">Configuratie van apache</a></li>
+<li><a href="">Folderstructuur</a></li>
 </ol>
-<h3 id="aanmaken-van-ets-project"><a name="user-content-aanmaken-van-ets-project" href="#aanmaken-van-ets-project" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Aanmaken van ETS project</h3>
-<p>Voor het aanmaken van een KNX ETS project wordt er verwezen naar 1 van de KNX gecertificeerde cursusen. We gaan er hier vanuit dat u weet hoe een correct project aangemaakt en in gebruik genomen wordt. Er zijn wel een paar opmerkingen/tips om het importeren zo makkelijk mogelijk te laten verlopen:</p>
+<h2 id="geinstalleerde-pakketten"><a name="user-content-geinstalleerde-pakketten" href="#geinstalleerde-pakketten" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Geinstalleerde pakketten</h2>
+<p>Om alle webservices te laten werken zijn er een aantal pakketten nodig:</p>
+<ul>
+<li>Apache 2</li>
+<li>PHP 5.6.4 of hoger</li>
+</ul>
+<p>Installeer deze pakketen op uw platform om door te kunnen gaan met deze uitleg.<br />
+Hier wordt er gewerkt op een Debian systeem.</p>
+<h3 id="configuratie-van-apache"><a name="user-content-configuratie-van-apache" href="#configuratie-van-apache" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Configuratie van apache</h3>
+<p>De apache config files bevinden zich op <code>/etc/apache2</code></p>
 <ul>
 <li>
-<p>Gebruik een juist gestructureerde groep adressen structuur: <br />
-<img alt="alt text" src="/home/olivier/Documents/School/Bachelorproef/tuts/fotos/gstructuur.png" title="Groep adressen structuur" /></p>
-</li>
-<li>
-<p>Geef groep adressen niet exact dezelfde naam, doe het bijvoorbeeld zoals volgt:<br />
-<img alt="alt text" src="/home/olivier/Documents/School/Bachelorproef/tuts/fotos/gnaam.png" title="Namen van groep adressen" /></p>
-</li>
-<li>
-<p>Geef elk groep adres het juiste type als dit niet automatisch gebeurd:<br />
-<img alt="alt text" src="/home/olivier/Documents/School/Bachelorproef/tuts/fotos/gtype.png" title="Type van groep adressen" /></p>
-</li>
-<li>Toegelaten types zijn:<ul>
-<li>1.001</li>
-<li>3.007</li>
-<li>5.001</li>
-</ul>
-</li>
-</ul>
-<h3 id="exporteren-van-de-groep-adressen"><a name="user-content-exporteren-van-de-groep-adressen" href="#exporteren-van-de-groep-adressen" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Exporteren van de groep adressen</h3>
-<p>Als het hele ETS project klaar is en voldoet aan bovenstaande tips, kan het geëxporteerd worden.</p>
-<ul>
-<li>
-<p>Open het &ldquo;Group Addresses&rdquo; paneel in ETS en selecteer de hoogste groep:<br />
-<img alt="alt text" src="/home/olivier/Documents/School/Bachelorproef/tuts/fotos/hoofdgroep.png" title="Selecteer de hoofdgroep" /></p>
-</li>
-<li>
-<p>Selecteer in de menubalk Edit -&gt; Export &ldquo;Group Addresses&rdquo;:<br />
-<img alt="alt text" src="/home/olivier/Documents/School/Bachelorproef/tuts/fotos/export.png" title="Selecteer de export tool" /></p>
-</li>
-<li>
-<p>Zorg dat het formaat op XML staat en kies een locatie om op te slaan:<br />
-<img alt="alt text" src="/home/olivier/Documents/School/Bachelorproef/tuts/fotos/export2.png" title="Kies XML als output" /></p>
-</li>
-</ul>
-<h3 id="openen-van-de-ets-import-tool"><a name="user-content-openen-van-de-ets-import-tool" href="#openen-van-de-ets-import-tool" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Openen van de ETS import tool</h3>
-<p>De ETS import tool kan geopend worden via de landing page op de locale webserver:</p>
-<ul>
-<li>Zoek het ip-address van uw KNX-IoT bord</li>
-<li>
-<p>Surf naar:<br />
-<pre><code>&lt;ip-addr&gt;:80
-</code></pre></p>
-</li>
-<li>
-<p>Klik op import:<br />
-<img alt="alt text" src="/home/olivier/Documents/School/Bachelorproef/tuts/fotos/landingPage.png" title="Open ETS import" /></p>
-</li>
-<li>
-<p>Volg alle instructies en de configuratie is voltooid.</p>
-</li>
-</ul>
-<h2 id="via-de-web-configuratie-tool"><a name="user-content-via-de-web-configuratie-tool" href="#via-de-web-configuratie-tool" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Via de web configuratie tool</h2>
-<p>De web configuratie tool kan gebruikt worden om zelf nieuwe objecten aan te maken in de config.json file, maar ook om wijzigingen aan te brengen of objecten te verwijderen.</p>
-<ul>
-<li>Zoek het ip-address van uw KNX-IoT bord</li>
-<li>
-<p>Surf naar:<br />
-<pre><code>&lt;ip-addr&gt;:80
-</code></pre></p>
-</li>
-<li>
-<p>Klik op configure:<br />
-<img alt="alt text" src="/home/olivier/Documents/School/Bachelorproef/tuts/fotos/configure.png" title="Open web config" /></p>
-</li>
-</ul>
-<h2 id="manueel-via-config-file"><a name="user-content-manueel-via-config-file" href="#manueel-via-config-file" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Manueel via config file</h2>
-<p>Deze methode is enkel aan te raden als je exact weet hoe JSON files werken en het systeem ze zal interpreteren. Een verkeerde aanpassing kan lijden tot een onbruikbare config.json file. Als dit het geval is dient er opnieuw 1 aangemaakt te worden via de ets-import.</p>
-<ul>
-<li>De config file kan geopend worden met een simpele texteditor: </li>
-</ul>
-<p><pre><code>nano /ets/KNX-iot/config.json
+<p>Pas de <code>/etc/apache2/sites-available/000-default.conf</code> virtualhost file aan zodat deze eruitziet als volgt:<br />
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/etsimport/public
+
+    Alias /webconfig /var/www/webconfig
+    Alias /webpage /var/www/webpage
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+
 </code></pre><br />
-- De structuur voor een nieuwe node ziet er uit als volgt:</p>
-<pre><code>{
-    &quot;Naam&quot;: &quot;Licht keuken&quot;,         -&gt; Naam voor user identificatie
-    &quot;Type&quot;: 1,                      -&gt; Type op de bus (kijk hieronder voor alle types)
-    &quot;SendAddr&quot;: &quot;1\/1\/1&quot;,          -&gt; Het groep adres in de KNX installatie
-    &quot;homekit&quot;: true,                -&gt; Zichtbaarheid in homekit
-    &quot;homekitNaam&quot;: &quot;Licht keuken&quot;,  -&gt; De naam dat homekit zal gebruiken
-    &quot;uname&quot;: &quot;lichtkeuken_1_111&quot;,   -&gt; Unieke naam voor elk object (kijk hieronder voor de opbouw!!)
-    &quot;Soort&quot;: &quot;Lamp&quot;,                -&gt; Soort accessoire voor homekit (Lamp, Dimmer of Rolluik)
-    &quot;SchakelObject&quot;: &quot;0&quot;,           -&gt; Uname van schakelobject bij dimmer 
-    &quot;FeedbackObject&quot;: &quot;0&quot;           -&gt; Uname van feedback bij dimmer en rolluik
-},
-</code></pre>
-
+Belangrijk hierbij is het aanpassen van de documentRoot en het toevoegen van de 2 Aliassen</p>
 <ul>
-<li>
-<p>De mogelijke types zijn:</p>
-<ul>
-<li>1: Bool</li>
-<li>2: Relatieve dimmer</li>
-<li>3: Absoluute dimmer</li>
-<li>4: Scene</li>
-<li>5: Absoluut rolluik</li>
+<li>Documentroot wijst naar het ETS config Laravel project met de landing page</li>
+<li>De 2 Aliassen wijzen naar de 2 andere puur html pagina&rsquo;s met de configuratie en de besturing</li>
 </ul>
 </li>
 <li>
-<p>Een uname wordt volgens volgende methode opgebouwd:</p>
+<p>Pas in de <code>/etc/apache2/apache2.conf</code> file <code>AllowOverride None</code> aan naar <code>All</code> zodat je dit krijgt:<br />
+<pre><code>&lt;Directory /var/www/&gt;
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+&lt;/Directory&gt;
+
+</code></pre></p>
 </li>
 </ul>
-<pre><code>Naam in lowercase zonder spaties
-+
-het type
-+
-het groeps adres zonder /
-
-Alles aaneen gezet met _
-
-vb: lichtkeuken_1_111
-</code></pre></article></body></html>
+<h2 id="folderstructuur"><a name="user-content-folderstructuur" href="#folderstructuur" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Folderstructuur</h2>
+<p>De folderstructuur in <code>/var/www</code> ziet eruit als volgt:</p>
+<ul>
+<li>html<ul>
+<li>etsimport (777)</li>
+</ul>
+</li>
+<li>webconfig (755)</li>
+<li>webpage (755)</li>
+</ul></article></body></html>

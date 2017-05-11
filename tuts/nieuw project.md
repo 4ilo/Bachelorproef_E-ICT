@@ -3,7 +3,8 @@
 Het aanmaken van een configuratiefile kan gebeuren op 2 verschillende manieren:
 
 - [Via de ETS import tool](#via-de-ets-import-tool)
-- [Manueel via de web configuratie tool]()
+- [Via de web configuratie tool](#via-de-web-configuratie-tool)
+- [Manueel via config file](#manueel-via-config-file)
 
 ## Via de ETS import tool
 
@@ -54,12 +55,74 @@ Als het hele ETS project klaar is en voldoet aan bovenstaande tips, kan het geë
 De ETS import tool kan geopend worden via de landing page op de locale webserver:
 
 - Zoek het ip-address van uw KNX-IoT bord
-
 - Surf naar:
-
 ```
 <ip-addr>:80
 ```
 
 - Klik op import:
 ![alt text](./fotos/landingPage.png "Open ETS import")
+
+- Volg alle instructies en de configuratie is voltooid.
+
+
+## Via de web configuratie tool
+
+De web configuratie tool kan gebruikt worden om zelf nieuwe objecten aan te maken in de config.json file, maar ook om wijzigingen aan te brengen of objecten te verwijderen.
+
+- Zoek het ip-address van uw KNX-IoT bord
+- Surf naar:
+```
+<ip-addr>:80
+```
+
+- Klik op configure:
+![alt text](./fotos/configure.png "Open web config")
+
+
+## Manueel via config file
+
+Deze methode is enkel aan te raden als je exact weet hoe JSON files werken en het systeem ze zal interpreteren. Een verkeerde aanpassing kan lijden tot een onbruikbare config.json file. Als dit het geval is dient er opnieuw 1 aangemaakt te worden via de ets-import.
+
+
+- De config file kan geopend worden met een simpele texteditor: 
+
+```
+nano /ets/KNX-iot/config.json
+```
+- De structuur voor een nieuwe node ziet er uit als volgt:
+
+```
+{
+    "Naam": "Licht keuken",			-> Naam voor user identificatie
+    "Type": 1,						-> Type op de bus (kijk hieronder voor alle types)
+    "SendAddr": "1\/1\/1",			-> Het groep adres in de KNX installatie
+    "homekit": true,				-> Zichtbaarheid in homekit
+    "homekitNaam": "Licht keuken",	-> De naam dat homekit zal gebruiken
+    "uname": "lichtkeuken_1_111",	-> Unieke naam voor elk object (kijk hieronder voor de opbouw!!)
+    "Soort": "Lamp",				-> Soort accessoire voor homekit (Lamp, Dimmer of Rolluik)
+    "SchakelObject": "0",			-> Uname van schakelobject bij dimmer 
+    "FeedbackObject": "0"			-> Uname van feedback bij dimmer en rolluik
+},
+```
+
+- De mogelijke types zijn:
+	- 1: Bool
+	- 2: Relatieve dimmer
+	- 3: Absoluute dimmer
+	- 4: Scene
+	- 5: Absoluut rolluik
+
+- Een uname wordt volgens volgende methode opgebouwd:
+
+```
+Naam in lowercase zonder spaties
++
+het type
++
+het groeps adres zonder /
+
+Alles aaneen gezet met _
+
+vb: lichtkeuken_1_111
+```
