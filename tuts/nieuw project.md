@@ -14,7 +14,7 @@ Inhoud:
 
 1. [Aanmaken van ETS project](#aanmaken-van-ets-project)
 2. [Exporteren van de groep adressen](#exporteren-van-de-groep-adressen)
-3. [Openen van de ETS import tool]()
+3. [Openen van de ETS import tool](#openen-van-de-ETS-import-tool)
 
 
 ### Aanmaken van ETS project

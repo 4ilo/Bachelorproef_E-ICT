@@ -1,0 +1,37 @@
+# KNX-IoT koppelen aan IOS via HomeKit
+
+Met deze uitleg moet je instaat zijn om je iphone te koppelen aan een geconfigureerde KNX-IoT installatie.
+
+## Voorwaarden
+
+- Uw IOS device moet minstens op versie 8 zijn en homekit ondersteunen.
+
+## Instellen van Homekit
+
+- Activeer uw KNX-IoT device en zet HomeKit aan via de webinterface
+
+```
+????
+```
+
+- Wacht een minuutje om alles op te laten starten
+
+- Zorg dat uw KNX-IoT verbonden is met uw internet netwerk door de kabel in te steken
+
+- Zorg dat uw IOS device verbonden is met internet via wifi
+
+- Open de Homekit app op uw device
+
+- Klik op "voeg accessoire toe":
+![alt text](./fotos/homekit1.png "Accessoire toevoegen")
+
+- Selecteer het "KNX-IoT" accessoire uit de lijst:
+![alt text](./fotos/homekit2.png "KNX-IoT accessoire kiezen")
+
+- Klik op "Voer code handmatig in" en type volgende code: `031-45-154`:
+![alt text](./fotos/homekit3.png "Code ingeven")
+
+- Klik een aantal keer op volgende, en voeg elk accessoire toe aan de juiste ruimte.
+
+- Als alles gelukt is ziet het er nu uit als volgt en ben je klaar om het te gebruiken:
+![alt text](./fotos/homekit5.png "Alles klaar")
