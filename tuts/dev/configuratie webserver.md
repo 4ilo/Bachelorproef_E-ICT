@@ -5,7 +5,7 @@ Volgende dingen worden er even besproken:
 
 1. [Geinstalleerde pakketten](#geinstalleerde-pakketten)
 2. [Configuratie van apache](#configuratie-van-apache)
-3. [Folderstructuur]()
+3. [Folderstructuur](#folderstructuur)
 
 ## Geinstalleerde pakketten
 
@@ -18,7 +18,7 @@ Installeer deze pakketen op uw platform om door te kunnen gaan met deze uitleg.
 Hier wordt er gewerkt op een Debian systeem.
 
 
-### Configuratie van apache 
+## Configuratie van apache 
 
 De apache config files bevinden zich op `/etc/apache2`
 
