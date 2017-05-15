@@ -10,9 +10,7 @@ Met deze uitleg moet je instaat zijn om je iphone te koppelen aan een geconfigur
 
 - Activeer uw KNX-IoT device en zet HomeKit aan via de webinterface
 
-```
-????
-```
+
 
 - Wacht een minuutje om alles op te laten starten
 
