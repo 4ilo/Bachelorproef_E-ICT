@@ -23,13 +23,14 @@ Voor het aanmaken van een KNX ETS project wordt er verwezen naar 1 van de KNX ge
 
 
 - Gebruik een juist gestructureerde groep adressen structuur: 
-![alt text](./fotos/gstructuur.png "Groep adressen structuur")
+![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/gstructuur.png "Groep adressen structuur")
+
 
 - Geef groep adressen niet exact dezelfde naam, doe het bijvoorbeeld zoals volgt:
-![alt text](./fotos/gnaam.png "Namen van groep adressen")
+![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/gnaam.png "Namen van groep adressen")
 
 - Geef elk groep adres het juiste type als dit niet automatisch gebeurd:
-![alt text](./fotos/gtype.png "Type van groep adressen")
+![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/gtype.png "Type van groep adressen")
 - Toegelaten types zijn:
 	- 1.001
 	- 3.007
@@ -41,13 +42,13 @@ Voor het aanmaken van een KNX ETS project wordt er verwezen naar 1 van de KNX ge
 Als het hele ETS project klaar is en voldoet aan bovenstaande tips, kan het geëxporteerd worden.
 
 - Open het "Group Addresses" paneel in ETS en selecteer de hoogste groep:
-![alt text](./fotos/hoofdgroep.png "Selecteer de hoofdgroep")
+![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/hoofdgroep.png "Selecteer de hoofdgroep")
 
 - Selecteer in de menubalk Edit -> Export "Group Addresses":
-![alt text](./fotos/export.png "Selecteer de export tool")
+![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/export.png "Selecteer de export tool")
 
 - Zorg dat het formaat op XML staat en kies een locatie om op te slaan:
-![alt text](./fotos/export2.png "Kies XML als output")
+![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/export2.png "Kies XML als output")
 
 
 ### Openen van de ETS import tool
@@ -61,7 +62,7 @@ De ETS import tool kan geopend worden via de landing page op de locale webserver
 ```
 
 - Klik op import:
-![alt text](./fotos/landingPage.png "Open ETS import")
+![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/landingPage.png "Open ETS import")
 
 - Volg alle instructies en de configuratie is voltooid.
 
@@ -77,7 +78,7 @@ De web configuratie tool kan gebruikt worden om zelf nieuwe objecten aan te make
 ```
 
 - Klik op configure:
-![alt text](./fotos/configure.png "Open web config")
+![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/configure.png"Open web config")
 
 
 ## Manueel via config file

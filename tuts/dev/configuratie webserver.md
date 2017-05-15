@@ -34,7 +34,6 @@ De apache config files bevinden zich op `/etc/apache2`
 	ErrorLog ${APACHE_LOG_DIR}/error.log
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
-
 ```
 Belangrijk hierbij is het aanpassen van de documentRoot en het toevoegen van de 2 Aliassen
 	- Documentroot wijst naar het ETS config Laravel project met de landing page
@@ -48,7 +47,6 @@ Belangrijk hierbij is het aanpassen van de documentRoot en het toevoegen van de 
         AllowOverride All
         Require all granted
 </Directory>
-
 ```
 
 ## Folderstructuur
