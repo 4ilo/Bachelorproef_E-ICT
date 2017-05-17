@@ -22,7 +22,8 @@ Inhoud:
 Voor het aanmaken van een KNX ETS project wordt er verwezen naar 1 van de KNX gecertificeerde cursusen. We gaan er hier vanuit dat u weet hoe een correct project aangemaakt en in gebruik genomen wordt. Er zijn wel een paar opmerkingen/tips om het importeren zo makkelijk mogelijk te laten verlopen:
 
 
-- Gebruik een juist gestructureerde groep adressen structuur: 
+- Gebruik een juist gestructureerde groep adressen structuur:
+<br/>
 ![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/gstructuur.png "Groep adressen structuur")
 
 
@@ -45,9 +46,11 @@ Als het hele ETS project klaar is en voldoet aan bovenstaande tips, kan het geë
 ![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/hoofdgroep.png "Selecteer de hoofdgroep")
 
 - Selecteer in de menubalk Edit -> Export "Group Addresses":
+<br/>
 ![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/export.png "Selecteer de export tool")
 
 - Zorg dat het formaat op XML staat en kies een locatie om op te slaan:
+<br/>
 ![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/export2.png "Kies XML als output")
 
 
@@ -61,7 +64,9 @@ De ETS import tool kan geopend worden via de landing page op de locale webserver
 <ip-addr>:80
 ```
 
+<br/>
 - Klik op import:
+<br/>
 ![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/landingPage.png "Open ETS import")
 
 - Volg alle instructies en de configuratie is voltooid.
@@ -78,7 +83,8 @@ De web configuratie tool kan gebruikt worden om zelf nieuwe objecten aan te make
 ```
 
 - Klik op configure:
-![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/configure.png"Open web config")
+<br/>
+![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/configure.png "Open web config")
 
 
 ## Manueel via config file
