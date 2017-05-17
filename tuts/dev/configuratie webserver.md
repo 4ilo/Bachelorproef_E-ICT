@@ -22,7 +22,7 @@ Hier wordt er gewerkt op een Debian systeem.
 
 De apache config files bevinden zich op `/etc/apache2`
 
-- Pas de `/etc/apache2/sites-available/000-default.conf` virtualhost file aan zodat deze eruitziet als volgt:
+- Pas de `/etc/apache2/sites-available/000-default.conf` virtualhost file aan zodat deze er uitziet als volgt:
 ```
 <VirtualHost *:80>
 	ServerAdmin webmaster@localhost
@@ -35,8 +35,8 @@ De apache config files bevinden zich op `/etc/apache2`
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
-Belangrijk hierbij is het aanpassen van de documentRoot en het toevoegen van de 2 Aliassen
-	- Documentroot wijst naar het ETS config Laravel project met de landing page
+Belangrijk hierbij is het aanpassen van de DocumentRoot en het toevoegen van de 2 Aliassen
+	- DocumentRoot wijst naar het ETS config Laravel project met de landing page
 	- De 2 Aliassen wijzen naar de 2 andere puur html pagina's met de configuratie en de besturing
 
 

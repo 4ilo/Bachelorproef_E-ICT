@@ -1,6 +1,6 @@
 # Installeren van Homebridge
 
-Homebridge is een Node.js server appicatie dat binnen je eigen netwerk een IOS HomeKit app kan emuleren. Het heeft onderstuening voor custom plugins.
+Homebridge is een Node.js server appicatie dat binnen je eigen netwerk een IOS HomeKit app kan emuleren. Het heeft ondersteuning voor custom plugins.
 
 Het open source project is te vinden op github: [https://github.com/nfarina/homebridge](https://github.com/nfarina/homebridge)
 

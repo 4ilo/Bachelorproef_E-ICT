@@ -29,7 +29,7 @@ Voor het aanmaken van een KNX ETS project wordt er verwezen naar 1 van de KNX ge
 - Geef groep adressen niet exact dezelfde naam, doe het bijvoorbeeld zoals volgt:
 ![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/gnaam.png "Namen van groep adressen")
 
-- Geef elk groep adres het juiste type als dit niet automatisch gebeurd:
+- Geef elk groep adres het juiste type als dit niet automatisch gebeurt:
 ![alt text](https://raw.githubusercontent.com/4ilo/Bachelorproef_E-ICT/master/tuts/fotos/gtype.png "Type van groep adressen")
 - Toegelaten types zijn:
 	- 1.001
