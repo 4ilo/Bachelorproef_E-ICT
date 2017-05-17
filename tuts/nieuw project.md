@@ -97,6 +97,8 @@ Deze methode is enkel aan te raden als je exact weet hoe JSON files werken en he
 ```
 nano /ets/KNX-iot/config.json
 ```
+
+
 - De structuur voor een nieuwe node ziet er uit als volgt:
 
 ```
@@ -113,12 +115,14 @@ nano /ets/KNX-iot/config.json
 },
 ```
 
+
 - De mogelijke types zijn:
 	- 1: Bool
 	- 2: Relatieve dimmer
 	- 3: Absoluute dimmer
 	- 4: Scene
 	- 5: Absoluut rolluik
+
 
 - Een uname wordt volgens volgende methode opgebouwd:
 
