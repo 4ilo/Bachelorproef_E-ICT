@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.2)
+project(sim_knx)
+
+#add_definitions(-DDEBUG_UART=1)
+
+set(CMAKE_CXX_STANDARD 11)
+
+set(SOURCE_FILES main.cpp src/Commando.cpp inc/Commando.h src/Response.cpp inc/Response.h src/Object.cpp inc/Object.h inc/commands.h src/Uart.cpp inc/Uart.h src/Device.cpp inc/Device.h src/GenerateObject.cpp inc/GenerateObject.h src/udpRequest.cpp inc/udpRequest.h)
+add_executable(sim_knx ${SOURCE_FILES})
+add_library(sim_knx_source ${SOURCE_FILES})

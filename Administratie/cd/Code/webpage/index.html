@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Voorbeeld webapplicatie</title>
+
+	<link rel="stylesheet" type="text/css" href="style/bulma.min.css">
+</head>
+<body>
+
+<div id="app">
+	
+	<section class="hero is-dark">
+	  <div class="hero-body">
+	    <div class="container">
+	      <h1 class="title">
+	        Voorbeeld webApplicatie
+	      </h1>
+	      <h2 class="subtitle">
+	        Sim-knx demo
+	      </h2>
+	    </div>
+	  </div>
+	</section>
+
+	<div class="container">
+
+		<h1 class="title">Test</h1>
+		<div class="notification">
+	    	
+		<table class="table">
+			
+			<tr>
+				<td>Licht living</td>
+				<td>{{ status.Living }}</td>
+				<td>
+					<button class="button is-success" @click="send(1,1)">Aan</button>
+				</td>
+				<td>
+					<button class="button is-danger" @click="send(1,0)">uit</button>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Licht keuken</td>
+				<td>{{ status.Keuken }}</td>
+				<td>
+					<button class="button is-success" @click="send(2,1)">Aan</button>
+				</td>
+				<td>
+					<button class="button is-danger" @click="send(2,0)">uit</button>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Alles uit</td>
+				<td>#status</td>
+				<td>
+					<button class="button is-success" @click="send(3,0)">Aan</button>
+				</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>Dim licht keuken</td>
+				<td>#status</td>
+				<td>
+					<button class="button is-success" @click="dim(4,1,4)">Aan</button>
+				</td>
+				<td>
+					<button class="button is-danger" @click="dim(4,0,4)">uit</button>
+				</td>
+			</tr>
+
+			<tr>
+				<td>Scene 1</td>
+				<td>#status</td>
+				<td>
+					<button class="button is-success" @click="scene(5,1)">Stuur</button>
+				</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>GetBool</td>
+				<td>#status</td>
+				<td>
+					<button class="button is-success" @click="get(1)">Get</button>
+				</td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>GetStatuses</td>
+				<td>#status</td>
+				<td>
+					<button class="button is-success" @click="getStatuses()">Get</button>
+				</td>
+				<td></td>
+			</tr>
+
+		</table>
+
+	  	</div>
+	</div>
+
+</div>
+
+<script src="js/vue.js"></script>
+<script src="js/axios.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
