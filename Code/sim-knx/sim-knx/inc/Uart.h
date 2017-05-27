@@ -5,11 +5,11 @@
 #ifndef SIM_KNX_UART_H
 #define SIM_KNX_UART_H
 
-//#include <sys/ioctl.h>
 #include <termios.h>
 #include <iostream>
 #include <unistd.h>
 #include <fcntl.h>
+#include <cstring>
 #include <string>
 #include <time.h>
 

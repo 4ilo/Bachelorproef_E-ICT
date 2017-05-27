@@ -35,24 +35,32 @@ Uart::Uart(string device, int speed, int pariteit)
  */
 void Uart::setAttributes(void)
 {
-    //tcflush(m_file,TCIOFLUSH);
 
     struct termios tty;
+
+    memset(&tty, 0, sizeof(tty));
+    if(tcgetattr(m_file, &tty) != 0)
+    {
+        cerr << "Cannot get attributes form tty." << endl;
+    }
 
     cfsetospeed(&tty, m_speed);		// Set rx baud
     cfsetispeed(&tty, m_speed);		// Set tx baud
 
     tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8;		// Set 8-bit per transfer
 
-    tty.c_iflag &= ~(IXON | IXOFF | IXANY); 	// geen xon/xoff ctrl
+    tty.c_iflag &= ~IGNBRK;     // Disable break processing
+    tty.c_lflag = 0;            // No signal chars, no echo
+    tty.c_oflag = 0;            // No remappings, no delay
+    tty.c_cc[VMIN] = 1;         // 0,5s blocking mode
+    tty.c_cc[VTIME] = 5;
+    tty.c_iflag &= ~(IXON | IXOFF | IXANY);     // Shut off xon/xoff
+    tty.c_cflag |= (CLOCAL | CREAD);            // ignore modem controls
 
-    // We stellen de pariteit in
-    tty.c_cflag &= ~(PARENB | PARODD);
+    tty.c_cflag &= ~(PARENB | PARODD);      // pariteit
     tty.c_cflag |= m_pariteit;
     tty.c_cflag &= ~CSTOPB;
     tty.c_cflag &= ~CRTSCTS;
-    tty.c_cc[VMIN] = 1;     // 0,5s blocking mode
-    tty.c_cc[VTIME] = 0,5;
 
     if(tcsetattr(m_file, TCSANOW, &tty) != 0)
     {
@@ -89,8 +97,6 @@ string Uart::readData(int timeout)
         read(m_file, &tmp, 1);
         if(tmp != '\n')
         {
-//            tmp = '1';
-//            stop = 1;
             data += tmp;
         }
         else

@@ -89,7 +89,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                 .getCharacteristic(Characteristic.On)
                 .on('set', function(value, callback) {
                     platform.log("Set licht -> " + value);
-                    platform.sendValue(objectNumber, value);
+                    platform.sendValue(objectNumber, parseBool(value));
                     callback();
                 })
                 .on('get', function(callback) {
@@ -122,7 +122,7 @@ OliKnx_Platform.prototype.configureAccessory = function(accessory)
                     .getCharacteristic(Characteristic.On)
                     .on('set', function(value, callback) {
                         platform.log("Set licht -> " + value);
-                        platform.sendValue(schakelObject, value);
+                        platform.sendValue(schakelObject, parseBool(value));
                         callback();
                     })
                     .on('get', function(callback) {
@@ -370,6 +370,23 @@ OliKnx_Platform.prototype.addCommunicationObject = function(object, objectNumber
         this.configureAccessory(newAccessory);
         this.api.registerPlatformAccessories("homebridge-OliKnx_Platform", "OliKnx_Platform", [newAccessory]);
     }
+}
+
+
+/**
+ * Parse a value in format true/false to 1/0
+ *
+ * @param      {string}  value   The value
+ * @return     {number}  Value in 1 or 0
+ */
+function parseBool(value)
+{
+    if(value || value == "true" || value == "True")
+    {
+        return 1;
+    }
+
+    return 0;
 }
 
 //

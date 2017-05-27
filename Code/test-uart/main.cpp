@@ -12,13 +12,14 @@ int main(void)
 
     bool keuze;
     string commando;
+    string data;
 
     while(1)
     {
         m_uart = new Uart(SIM_KNX_UART, SIM_KNX_BAUD,0);
         cout << "Vraag(0) of verstuur(1)" << endl;
         cin >> keuze;
-        string data;
+
 
         if(keuze)
         {
