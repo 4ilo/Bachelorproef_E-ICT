@@ -1,0 +1,16 @@
+<?php
+
+	return [
+		"googleLogin" => "<email>@gmail.com",				// Gmail account voor het verzenden van email
+		"googlePass" => "<password>",
+
+		"subject" => "Activiteit waargenomen in huis.",
+		"sendTo" => "<email>@<domain>.com",					// De mail die verstuurd wordt
+		"body" => "Er is activiteit waargenomen in huis.",
+
+		"activityObject" => 1,		// Het object waarvan de status opgevraagd wordt
+		"activityStatus" => 1,		// De status waarop gereageerd moet worden
+	];
+	
+
+?>
