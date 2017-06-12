@@ -1,22 +1,39 @@
+#!/usr/bin/env python3.6
+
 import json
 import urllib.request as get
+import sys
+
 from config import *
+from SimKnx import SimKnx
 
-cityId = 2794118  # kontich
+def getWeather():
+    url = "http://api.openweathermap.org/data/2.5/weather" \
+          + "?id=" + str(cityId) \
+          + "&APPID=" + str(apiKey) \
+          + "&units=metric"
 
-url = "http://api.openweathermap.org/data/2.5/weather" \
-      + "?id=" + str(cityId) \
-      + "&APPID=" + str(apiKey) \
-      + "&units=metric"
+    rawData = get.urlopen(url).read()
 
-rawData = get.urlopen(url).read()
-# print(rawData)
+    # Decode json
+    return json.loads(rawData)
 
-# Decode json
-data = json.loads(rawData)
 
-# weather vars
-temp = data["main"]["temp"]
-weather = data["weather"][0]["main"]
+if(len(sys.argv) != 2):
+    data = getWeather()
 
-print("temp: %d°C, weer: %s" % (temp, weather))
+    # weather vars
+    temp = data["main"]["temp"]
+    weather = data["weather"][0]["main"]
+    wind = data["wind"]["speed"]
+
+else:
+    wind = int(sys.argv[1])
+
+print("wind: %d m/s" % wind)
+
+SimKnx = SimKnx()
+
+if (wind >= 10):
+    SimKnx.setintegerObject(5, 100)     # We sturen rolluik naar beneden
+

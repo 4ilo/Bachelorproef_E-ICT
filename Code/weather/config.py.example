@@ -1,0 +1,2 @@
+apiKey = "<OpenWeatherMap API key>"
+cityId = <id>  # The id for your prefered city from OpenWeatherMap
