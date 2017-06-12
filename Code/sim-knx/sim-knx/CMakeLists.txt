@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 project(sim_knx)
 
-#add_definitions(-DDEBUG_UART=1)
+add_definitions(-DDEBUG_UART=1)
 
 set(CMAKE_CXX_STANDARD 11)
 
