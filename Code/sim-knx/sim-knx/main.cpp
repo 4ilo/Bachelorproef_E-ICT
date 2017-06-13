@@ -22,8 +22,10 @@ int main(int argc, char * argv[])
     {
         portNumber = atoi(argv[1]);
         configFileName = argv[2];
+        cout << "Poortnummer: " << portNumber << " Config file: " << configFileName << endl;
 
     } else {
+        cout << "Geen poortnummer en config file gespecifierd. De defaults worden gebruikt." << endl;
         portNumber = 1234;
         configFileName = "config.json";
     }
