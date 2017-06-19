@@ -24,79 +24,50 @@
 
 	<div class="container">
 
-		<h1 class="title">Test</h1>
+		<h1 class="title">Besturing:</h1>
 		<div class="notification">
 	    	
 		<table class="table">
 			
 			<tr>
 				<td>Licht living</td>
-				<td>{{ status.Living }}</td>
-				<td>
-					<button class="button is-success" @click="send(1,1)">Aan</button>
-				</td>
-				<td>
-					<button class="button is-danger" @click="send(1,0)">uit</button>
-				</td>
-			</tr>
-
-			<tr>
-				<td>Licht keuken</td>
-				<td>{{ status.Keuken }}</td>
 				<td>
 					<button class="button is-success" @click="send(2,1)">Aan</button>
 				</td>
 				<td>
-					<button class="button is-danger" @click="send(2,0)">uit</button>
+					<button class="button is-danger" @click="dim(2,0)">Uit</button>
 				</td>
 			</tr>
 
 			<tr>
-				<td>Alles uit</td>
-				<td>#status</td>
+				<td>Licht keuken Dimmer</td>
 				<td>
-					<button class="button is-success" @click="send(3,0)">Aan</button>
-				</td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>Dim licht keuken</td>
-				<td>#status</td>
-				<td>
-					<button class="button is-success" @click="dim(4,1,4)">Aan</button>
+					<button class="button is-success" @click="dim(8,1,4)">Dim Aan</button>
 				</td>
 				<td>
-					<button class="button is-danger" @click="dim(4,0,4)">uit</button>
+					<button class="button is-danger" @click="dim(8,0,4)">Dim Uit</button>
 				</td>
 			</tr>
 
 			<tr>
-				<td>Scene 1</td>
-				<td>#status</td>
+				<td>Licht kamer</td>
 				<td>
-					<button class="button is-success" @click="scene(5,1)">Stuur</button>
+					<button class="button is-success" @click="send(3,1)">Aan</button>
 				</td>
-				<td></td>
-			</tr>
+				<td>
+					<button class="button is-danger" @click="send(3,0)">Uit</button>
+				</td>
+			</tr>			
 
 			<tr>
-				<td>GetBool</td>
-				<td>#status</td>
+				<td>Rolluik Living</td>
 				<td>
-					<button class="button is-success" @click="get(1)">Get</button>
+					<button class="button is-success" @click="send(5,100)">Omhoog</button>
 				</td>
-				<td></td>
-			</tr>
-
-			<tr>
-				<td>GetStatuses</td>
-				<td>#status</td>
 				<td>
-					<button class="button is-success" @click="getStatuses()">Get</button>
+					<button class="button is-danger" @click="send(5,0)">Omlaag</button>
 				</td>
-				<td></td>
-			</tr>
+			</tr>	
 
 		</table>
 
